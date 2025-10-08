@@ -415,11 +415,11 @@ class ModernBottomNav {
 
   navigateToPage(page) {
     const routes = {
-      'beranda': '#',
+      'beranda': 'index.html',
       'profil': 'profil.html',
       'wisata': 'wisata.html',
       'layanan': 'Layanan.html',
-      'berita': '#'
+      'informasi': 'informasi.html'
     };
 
     if (page === 'berita') {
