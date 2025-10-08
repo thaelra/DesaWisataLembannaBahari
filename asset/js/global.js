@@ -454,41 +454,59 @@ window.akomodasiData = [
 // Data untuk Kuliner
 window.kulinerData = [
     {
-        name: "Ikan Bakar Mandala",
-        desc: "Ikan segar yang dibakar dengan bumbu khas lokal",
-        img: "asset/img/wisata andalah/pantai-andalan-1.jpeg",
+        name: "Beppata",
+        desc: "Beppata hadir sejak tahun 2016 sebagai wujud kecintaan pemilik terhadap kue-kue tradisional khas Bugis-Makassar. Nama “Beppata” diambil dari bahasa lokal …",
+        img: "asset/img/wisata andalah/beppata.jpeg",
         price: 45000
     },
     {
-        name: "Coto Makassar",
-        desc: "Sup daging sapi khas Makassar dengan bumbu rempah",
-        img: "asset/img/wisata andalah/pantai-mandala-2.jpeg",
+        name: "Abyan Cookies",
+        desc: "SAbyan Cookies lahir pada tahun 2020 di masa pandemi, ketika banyak orang beralih ke usaha rumahan untuk tetap produktif. Berawal …",
+        img: "asset/img/wisata andalah/abyan-cookies.jpeg",
         price: 25000
     },
     {
-        name: "Pisang Epe",
-        desc: "Pisang yang dibakar dengan gula merah dan santan",
-        img: "asset/img/wisata andalah/pantai-mandala-3.jpeg",
+        name: "Donat Andalan",
+        desc: "Donat Andalan mulai dirintis pada tahun 2018 sebagai usaha rumahan kecil yang digagas oleh seorang ibu rumah tangga yang gemar …",
+        img: "asset/img/wisata andalah/donat-andalan.jpeg",
         price: 15000
     },
     {
-        name: "Es Pisang Ijo",
-        desc: "Minuman segar dengan pisang hijau dan santan",
-        img: "asset/img/wisata andalah/pantai-mandala-4.jpeg",
-        price: 12000
-    },
-    {
-        name: "Nasi Kuning",
-        desc: "Nasi kuning dengan lauk pauk khas Sulawesi Selatan",
-        img: "asset/img/wisata andalah/pantai-mandala-5.webp",
+        name: "Beppa tu Ara",
+        desc: "Beppa tu Ara berdiri pada tahun 2014 dengan tujuan utama melestarikan resep kue tradisional Bugis-Makassar yang diwariskan turun-temurun. Pemilik usaha, …",
+        img: "asset/img/wisata andalah/beppa-tu-ara.jpeg",
         price: 20000
     },
     {
-        name: "Sop Konro",
-        desc: "Sup iga sapi dengan bumbu khas yang menggugah selera",
-        img: "asset/img/wisata andalah/pantai-mandala-6.webp",
+        name: "Nurda Traditional Cake",
+        desc: "Nurda Traditional Cake berdiri pada tahun 2015 dengan tujuan melestarikan kue-kue tradisional Bugis-Makassar yang mulai jarang ditemui. Pemilik, Nurda, mewarisi …",
+        img: "asset/img/wisata andalah/nurda.jpeg",
         price: 30000
-    }
+    },
+    {
+        name: "DZ Seleraku",
+        desc: "DZ Seleraku berdiri pada tahun 2019 dengan semangat menghadirkan makanan lokal khas Sulawesi dalam bentuk yang lebih modern. Awalnya, pemilik …",
+        img: "asset/img/wisata andalah/DZ-seleraku.jpeg",
+        price: 25000
+    },
+    {
+        name: "Cendol Kenangan",
+        desc: "Usaha ini dimulai pada tahun 2017 dengan gerobak sederhana di depan rumah. Awalnya hanya menawarkan cendol tradisional dengan gula aren dan …",
+        img: "asset/img/wisata andalah/cendol-kenangan.jpeg",
+        price: 30000
+    },
+    {
+        name: "Keripik Pisang Mama Abi",
+        desc: "Keripik Pisang Mama Abi dirintis pada tahun 2017 dari hasil olahan pisang kebun keluarga.Berawal dari produksi sederhana dengan wajan …",
+        img: "asset/img/wisata andalah/keripik-pisang.jpeg",
+        price: 30000
+    },
+    {
+        name: "Aaz Cake",
+        desc: "Aaz Cake berdiri pada tahun 2020 dengan semangat menghadirkan kue modern berkualitas untuk berbagai kalangan. Pemilik yang memiliki latar belakang …",
+        img: "asset/img/wisata andalah/aaz-cake.jpeg",
+        price: 25000
+    },
 
 ];
 

@@ -10,6 +10,7 @@ function getCardsPerPage() {
     // Tablet: 2 kolom x 2 baris
     if (window.matchMedia('(max-width: 768px)').matches) return 1;
     // Desktop: ubah jadi 3 kolom x 2 baris (6 kartu per slide)
+    if (window.matchMedia('(max-width: 1024px)').matches) return 1;
     return 6;
 }
 
