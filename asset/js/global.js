@@ -89,7 +89,7 @@ window.atraksiData = [
 window.akomodasiData = [
     {
         name: "Villa Mandala",
-        desc_short: "Villa Mandala merupakan penginapan yang terletak tepat di tepi pantai, sehingga menghadirkan suasana yang tenang dengan panorama laut yang indah.",
+        desc_short: "Villa Mandala adalah penginapan yang memiliki panorama laut yang indah.",
         desc_full: [
             "Villa Mandala merupakan penginapan yang terletak tepat di tepi pantai, sehingga menghadirkan suasana yang tenang dengan panorama laut yang indah.",
             "Untuk harga, tersedia beberapa pilihan sesuai kebutuhan:",
@@ -409,7 +409,7 @@ window.akomodasiData = [
     },
     {
         name: "Villa Mattoanging",
-        desc_short: "Nikmati pengalaman menginap nyaman dengan pemandangan indah di Villa Tebing Mattoanging.",
+        desc_short: "Nikmati pengalaman menginap nyaman di Villa Tebing Mattoanging.",
         desc_full: ["Kami menyediakan beberapa pilihan kamar dan villa sesuai kebutuhan, mulai dari pasangan, keluarga kecil, hingga rombongan besar",
             "Standard Room I",
             "Rp350K (2=3 org) | Rp500K (2-5 org)",

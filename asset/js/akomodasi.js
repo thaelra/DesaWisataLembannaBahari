@@ -6,9 +6,9 @@ const AKOMODASI_WHATSAPP_NUMBER = window.AKOMODASI_WHATSAPP_NUMBER || '628123456
 // Tentukan jumlah kartu per halaman secara responsif
 function getCardsPerPage() {
     // Mobile kecil: 1 kolom x 2 baris
-    if (window.matchMedia('(max-width: 480px)').matches) return 2;
+    if (window.matchMedia('(max-width: 480px)').matches) return 1;
     // Tablet: 2 kolom x 2 baris
-    if (window.matchMedia('(max-width: 768px)').matches) return 4;
+    if (window.matchMedia('(max-width: 768px)').matches) return 1;
     // Desktop: ubah jadi 3 kolom x 2 baris (6 kartu per slide)
     return 6;
 }
@@ -237,25 +237,14 @@ function ensureAkomodasiModal() {
         });
         
         closeBtn.addEventListener('click', () => {
-            // play close animation
-            modal.classList.add('is-closing');
-            const content = modal.querySelector('.modal-content');
-            if (content) content.classList.add('is-closing');
-            
             // clear auto-rotate if any
             if (modal.dataset.akSlideInterval) {
                 try { clearInterval(Number(modal.dataset.akSlideInterval)); } catch (e) {}
                 delete modal.dataset.akSlideInterval;
             }
             
-            const onEnd = () => {
-                modal.removeEventListener('animationend', onEnd);
-                modal.classList.remove('is-closing');
-                if (content) content.classList.remove('is-closing');
-                closeModal();
-            };
-            
-            modal.addEventListener('animationend', onEnd);
+            // directly close modal without animation for now
+            closeModal();
         });
         
         // Tambahkan akses keyboard
