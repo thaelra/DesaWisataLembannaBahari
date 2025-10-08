@@ -242,23 +242,128 @@
             </div>
         </section>
         
-        <section class="atraksi-section" id="atraksi-wisata">
-            <h2 class="atraksi-title"><span>Atraksi Wisata</span></h2>
-            <div class="atraksi-search">
-                <input type="text" id="atraksiSearchInput" placeholder="Cari atraksi..." aria-label="Cari atraksi" />
-                <button type="button" id="atraksiSearchBtn">SEARCH</button>
-            </div>
-            <button class="atraksi-prev" aria-label="Sebelumnya">
-                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
-            </button>
-            <div class="atraksi-viewport">
-                <div class="atraksi-track">
-                    <!-- Konten atraksi akan dibangun oleh JS -->
+        <!-- Atraksi Wisata Section -->
+        <section class="atraksi-wisata-section" id="atraksi-wisata">
+            <h2 class="atraksi-title"><span>Atraksi & Budaya</span></h2>
+            <p class="atraksi-subtitle">Jelajahi Kekayaan Tradisi dan Budaya Desa Lembanna</p>
+            
+            <div class="atraksi-container">
+                <!-- Atraksi 1 - Assulo Juk'u -->
+                <div class="atraksi-item" data-aos="fade-right">
+                    <div class="atraksi-content">
+                        <div class="atraksi-image-wrapper">
+                            <img src="asset/img/profil-desa/Assulo Juk'u di Mandala Ria.jpg" alt="Assulo Juk'u" class="atraksi-image">
+                            <div class="atraksi-badge">Tradisi Turun Temurun</div>
+                        </div>
+                        <div class="atraksi-info">
+                            <div class="atraksi-number">01</div>
+                            <h3 class="atraksi-name">Assulo Juk'u</h3>
+                            <div class="atraksi-divider"></div>
+                            <p class="atraksi-description">
+                                Ritual tradisional nelayan Bugis Makassar yang dilakukan sebelum melaut. Upacara ini merupakan wujud syukur dan permohonan keselamatan kepada sang pencipta, diiringi doa-doa dan sesaji khas masyarakat pesisir.
+                            </p>
+                            <div class="atraksi-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Setiap Musim Melaut</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Pantai Mandala</span>
+                                </div>
+                            </div>
+                            <button class="atraksi-btn" onclick="showAtraksiDetail('assulo')">Pelajari Lebih Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atraksi 2 - Pembuatan Perahu Pinisi -->
+                <div class="atraksi-item atraksi-reverse" data-aos="fade-left">
+                    <div class="atraksi-content">
+                        <div class="atraksi-info">
+                            <div class="atraksi-number">02</div>
+                            <h3 class="atraksi-name">Warisan Pembuatan Perahu Pinisi</h3>
+                            <div class="atraksi-divider"></div>
+                            <p class="atraksi-description">
+                                Seni pembuatan perahu Pinisi yang telah diakui UNESCO sebagai warisan budaya takbenda. Desa Lembanna merupakan salah satu tempat bersejarah dalam tradisi pembuatan kapal legendaris ini, dengan teknik turun-temurun yang masih dilestarikan.
+                            </p>
+                            <div class="atraksi-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-award"></i>
+                                    <span>UNESCO Heritage</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-hammer"></i>
+                                    <span>Keterampilan Tradisional</span>
+                                </div>
+                            </div>
+                            <button class="atraksi-btn" onclick="showAtraksiDetail('pinisi')">Pelajari Lebih Lanjut</button>
+                        </div>
+                        <div class="atraksi-image-wrapper">
+                            <img src="asset/img/profil-desa/penghargaan-unesco.png" alt="Pinisi UNESCO" class="atraksi-image">
+                            <div class="atraksi-badge">UNESCO Heritage</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atraksi 3 - Tari Pakarena -->
+                <div class="atraksi-item" data-aos="fade-right">
+                    <div class="atraksi-content">
+                        <div class="atraksi-image-wrapper">
+                            <img src="asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (1).jpeg" alt="Tari Pakarena" class="atraksi-image">
+                            <div class="atraksi-badge">Seni Tari Tradisional</div>
+                        </div>
+                        <div class="atraksi-info">
+                            <div class="atraksi-number">03</div>
+                            <h3 class="atraksi-name">Tari Pakarena</h3>
+                            <div class="atraksi-divider"></div>
+                            <p class="atraksi-description">
+                                Tarian klasik Bugis-Makassar yang anggun dan penuh makna filosofis. Gerakan lemah gemulai penari mencerminkan kesopanan dan keanggunan wanita Bugis. Tari ini sering ditampilkan dalam acara adat dan penyambutan tamu kehormatan.
+                            </p>
+                            <div class="atraksi-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-music"></i>
+                                    <span>Musik Tradisional</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>Pertunjukan Kelompok</span>
+                                </div>
+                            </div>
+                            <button class="atraksi-btn" onclick="showAtraksiDetail('pakarena')">Pelajari Lebih Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atraksi 4 - Festival Bahari -->
+                <div class="atraksi-item atraksi-reverse" data-aos="fade-left">
+                    <div class="atraksi-content">
+                        <div class="atraksi-info">
+                            <div class="atraksi-number">04</div>
+                            <h3 class="atraksi-name">Festival Bahari Lembanna</h3>
+                            <div class="atraksi-divider"></div>
+                            <p class="atraksi-description">
+                                Festival tahunan yang memadukan berbagai kegiatan maritim dan budaya lokal. Acara ini menampilkan lomba perahu tradisional, pameran hasil laut, kuliner khas, pertunjukan seni budaya, dan berbagai aktivitas yang merayakan kehidupan masyarakat pesisir.
+                            </p>
+                            <div class="atraksi-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>Event Tahunan</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-trophy"></i>
+                                    <span>Lomba & Kompetisi</span>
+                                </div>
+                            </div>
+                            <button class="atraksi-btn" onclick="showAtraksiDetail('festival')">Pelajari Lebih Lanjut</button>
+                        </div>
+                        <div class="atraksi-image-wrapper">
+                            <img src="asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (4).jpeg" alt="Festival Bahari" class="atraksi-image">
+                            <div class="atraksi-badge">Festival Tahunan</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button class="atraksi-next" aria-label="Berikutnya">
-               <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="40px" fill="#133E87"><path d="M673-446.67H160v-66.67h513l-240-240L480-800l320 320-320 320-47-46.67 240-240Z"/></svg>
-            </button>
         </section>
 
         <!-- Akomodasi Section -->

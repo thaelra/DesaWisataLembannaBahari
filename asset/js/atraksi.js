@@ -1,550 +1,243 @@
-// atraksi.js
-// Fungsionalitas untuk bagian Atraksi Wisata
+/**
+ * Atraksi Wisata Section JavaScript
+ * Handles scroll animations and interactions for cultural attractions
+ */
 
-const ATRAKSI_WHATSAPP_NUMBER = window.ATRAKSI_WHATSAPP_NUMBER || '6281234567890'; // Ganti sesuai nomor WA Anda
-
-// Format harga dengan satuan
-function formatPrice(num, unit) {
-    const n = Number(num || 0);
-    const str = n.toLocaleString('id-ID');
-    return `Rp ${str}${unit ? ` / ${unit}` : ''}`;
-}
-
-function initializeAtraksi() {
-    const atraksiTrack = document.querySelector('.atraksi-track');
-    if (!atraksiTrack) {
-        console.error('Atraksi track tidak ditemukan!');
-        return;
-    }
-
-    buildAtraksiCards(atraksiTrack);
-    setupAtraksiSlider();
-    bindAtraksiCardClicks();
-    bindAtraksiSearch();
-    ensureAtraksiModal();
-}
-
-function buildAtraksiCards(container) {
-    container.innerHTML = ''; // Bersihkan konten lama
-
-    const cardsPerPage = 6; // 3 kolom x 2 baris
-    const totalPages = Math.ceil(window.atraksiData.length / cardsPerPage);
-
-    for (let p = 0; p < totalPages; p++) {
-        const pageDiv = document.createElement('div');
-        pageDiv.className = 'atraksi-page';
-
-        const gridDiv = document.createElement('div');
-        gridDiv.className = 'atraksi-grid';
-
-        const startIndex = p * cardsPerPage;
-        const endIndex = Math.min(startIndex + cardsPerPage, window.atraksiData.length);
-
-        for (let i = startIndex; i < endIndex; i++) {
-            const data = window.atraksiData[i];
-            const card = document.createElement('div');
-            card.className = 'atraksi-card';
-            card.dataset.atraksiName = data.name;
-            card.dataset.atraksiDesc = data.desc;
-            card.dataset.atraksiImg = data.img;
-            card.dataset.atraksiPrice = data.price;
-            card.dataset.atraksiUnit = data.unit;
-
-            card.innerHTML = `
-                <div class="image-container">
-                    <img src="${data.img}" alt="${data.name}">
-                </div>
-                <div class="atraksi-info">
-                    <h3 class="atraksi-name">${data.name}</h3>
-                    <p class="atraksi-description">${data.desc}</p>
-                </div>
-                <div class="atraksi-overlay">
-                    <div class="atraksi-price">${formatPrice(data.price, data.unit)}</div>
-                    <div class="atraksi-actions">
-                        <button class="btn-detail">Detail</button>
-                        <button class="btn-pesan">Pesan</button>
-                    </div>
-                </div>
-            `;
-            gridDiv.appendChild(card);
-
-            // Initialize smooth image rotation for this card
-            initializeAtraksiImageRotation(card, data);
-        }
-        pageDiv.appendChild(gridDiv);
-        container.appendChild(pageDiv);
-    }
-}
-
-function setupAtraksiSlider() {
-    const atraksiTrack = document.querySelector('.atraksi-track');
-    const prevBtn = document.querySelector('.atraksi-prev');
-    const nextBtn = document.querySelector('.atraksi-next');
-
-    if (!atraksiTrack || !prevBtn || !nextBtn) {
-        console.error('Elemen slider atraksi tidak ditemukan!');
-        return;
-    }
-
-    const totalPages = atraksiTrack.children.length;
-    let currentPage = 0;
-
-    function updateSliderPosition() {
-        atraksiTrack.style.transform = `translateX(-${currentPage * 100}%)`;
-        prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === totalPages - 1;
-    }
-
-    prevBtn.addEventListener('click', () => {
-        if (currentPage > 0) {
-            currentPage--;
-            updateSliderPosition();
-        }
-    });
-
-    nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages - 1) {
-            currentPage++;
-            updateSliderPosition();
-        }
-    });
-
-    updateSliderPosition();
-}
-
-function bindAtraksiCardClicks() {
-    document.querySelectorAll('.atraksi-card').forEach(card => {
-        // buka modal detail saat klik tombol Detail
-        card.querySelector('.btn-detail')?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openAtraksiDetailModal(card);
-        });
-
-        // buka WhatsApp saat klik tombol Pesan
-        card.querySelector('.btn-pesan')?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openAtraksiWhatsapp(card);
-        });
-
-        // klik kartu selain tombol juga buka detail
-        card.addEventListener('click', (e) => {
-            if (!(e.target instanceof HTMLElement) || !e.target.closest('.atraksi-actions')) {
-                openAtraksiDetailModal(card);
-            }
-        });
-    });
-}
-
-function ensureAtraksiModal() {
-    const modal = document.getElementById('atraksiDetailModal');
-    if (!modal) return;
-
-    // Tombol Kembali
-    const backBtn = document.getElementById('atraksiBackBtn');
-    if (backBtn) {
-        backBtn.addEventListener('click', () => {
-            const modalEl = document.getElementById('atraksiDetailModal');
-            if (!modalEl) return closeModal();
-
-            // play smooth closing animations
-            modalEl.classList.add('is-closing');
-            const content = modalEl.querySelector('.atraksi-modal-content');
-            if (content) content.classList.add('is-closing');
-
-            // clear slideshow interval if present
-            if (modalEl.dataset.slideInterval) {
-                try { clearInterval(Number(modalEl.dataset.slideInterval)); } catch (e) {}
-                delete modalEl.dataset.slideInterval;
-            }
-
-            // wait for animation end, then close and cleanup
-            const onAnimEnd = () => {
-                modalEl.removeEventListener('animationend', onAnimEnd);
-                modalEl.classList.remove('is-closing');
-                if (content) content.classList.remove('is-closing');
-                closeModal();
-            };
-            modalEl.addEventListener('animationend', onAnimEnd);
-        });
-    }
-
-    // Tombol Tutup
-    const closeBtn = document.getElementById('atraksiDetailModalCloseBtn');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            // clear slideshow interval if present
-            if (modal && modal.dataset.slideInterval) {
-                try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
-                delete modal.dataset.slideInterval;
-            }
-            // also animate close
-            modal.classList.add('is-closing');
-            const content = modal.querySelector('.atraksi-modal-content');
-            if (content) content.classList.add('is-closing');
-            const onAnimEnd = () => {
-                modal.removeEventListener('animationend', onAnimEnd);
-                modal.classList.remove('is-closing');
-                if (content) content.classList.remove('is-closing');
-                closeModal();
-            };
-            modal.addEventListener('animationend', onAnimEnd);
-        });
-    }
-
-    // Tombol Pesan sekarang di modal
-    const pesanBtn = document.getElementById('atraksiPesanBtn');
-    if (pesanBtn) {
-        pesanBtn.addEventListener('click', () => {
-            const activeCardId = modal.dataset.activeCardId;
-            const card = document.querySelector(`.atraksi-card[data-uid="${activeCardId}"]`);
-            if (card) {
-                openAtraksiWhatsapp(card);
-            }
-        });
-    }
-    // Bind a single overlay handler that stops propagation and handles outside-click
-    if (!modal.dataset.overlayHandlerBound) {
-        modal.addEventListener('click', (e) => {
-            // stop bubbling to document-level handler
-            e.stopPropagation();
-            if (modal.dataset && modal.dataset.openGuard === '1') return;
-            if (e.target === modal && getComputedStyle(modal).display !== 'none') {
-                if (modal.dataset.slideInterval) {
-                    try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e2) {}
-                    delete modal.dataset.slideInterval;
-                }
-                closeModal();
-            }
-        });
-        modal.dataset.overlayHandlerBound = '1';
-    }
-}
-
-function openAtraksiDetailModal(card) {
-    const modal = document.getElementById('atraksiDetailModal');
-    if (!modal) return;
-
-    const title = card.dataset.atraksiName || '';
-    const desc = card.dataset.atraksiDesc || '';
-    const price = card.dataset.atraksiPrice || 0;
-    const unit = card.dataset.atraksiUnit || '';
-
-    modal.querySelector('.modal-title').textContent = title;
-    modal.querySelector('.modal-location').textContent = 'Lembanabahari, Bulukumba';
-    modal.querySelector('.modal-description').textContent = desc;
-    modal.querySelector('#atraksiOpeningHours').textContent = '08:00 - 18:00';
-    modal.querySelector('#atraksiPrice').textContent = formatPrice(price, unit);
-
-    // Gambar utama dan grid thumbnail
-    const data = window.atraksiData.find(a => a.name.toLowerCase() === title.toLowerCase());
-    const images = (data?.images && data.images.length) ? data.images : [card.dataset.atraksiImg].filter(Boolean);
-
-    const mainImage = modal.querySelector('.main-image');
-    const imageGridContainer = modal.querySelector('.image-grid');
-    imageGridContainer.innerHTML = '';
-
-    if (images.length > 0) {
-        mainImage.style.opacity = '0';
-        const handleInitial = () => {
-            mainImage.removeEventListener('load', handleInitial);
-            mainImage.classList.remove('is-entering');
-            // trigger enter animation
-            void mainImage.offsetWidth;
-            mainImage.classList.add('is-entering');
-            requestAnimationFrame(() => { mainImage.style.opacity = '1'; });
-        };
-        mainImage.addEventListener('load', handleInitial);
-        mainImage.src = images[0];
-        mainImage.alt = title + ' - Main Image';
-    } else {
-        mainImage.src = '';
-        mainImage.alt = 'Main Atraksi Image';
-    }
-
-    images.forEach((src, idx) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `${title} image ${idx + 1}`;
-        img.className = 'grid-image';
-        img.loading = 'lazy';
-        img.addEventListener('click', () => {
-            mainImage.style.opacity = '0';
-            const onLoad = () => {
-                mainImage.removeEventListener('load', onLoad);
-                mainImage.classList.remove('is-entering');
-                void mainImage.offsetWidth; // restart animation
-                mainImage.classList.add('is-entering');
-                requestAnimationFrame(() => { mainImage.style.opacity = '1'; });
-            };
-            mainImage.addEventListener('load', onLoad);
-            mainImage.src = src;
-            mainImage.alt = `${title} image ${idx + 1}`;
-            imageGridContainer.querySelectorAll('.grid-image').forEach(thumb => thumb.classList.remove('active'));
-            img.classList.add('active');
-        });
-        imageGridContainer.appendChild(img);
-    });
-
-    // Set thumbnail pertama aktif
-    const firstThumbnail = imageGridContainer.querySelector('.grid-image');
-    if (firstThumbnail) firstThumbnail.classList.add('active');
-
-    // Fasilitas
-    const facilitiesContainer = modal.querySelector('#atraksiFacilities');
-    facilitiesContainer.innerHTML = '';
-    if (data && data.facilities && data.facilities.length) {
-        data.facilities.forEach(facility => {
-            const div = document.createElement('div');
-            div.textContent = facility;
-            facilitiesContainer.appendChild(div);
-        });
-    }
-
-    // Tandai kartu aktif untuk tombol pesan
-    const uid = Math.random().toString(36).slice(2);
-    card.dataset.uid = uid;
-    modal.dataset.activeCardId = uid;
-
-    // Clear previous slideshow if any
-    if (modal.dataset.slideInterval) {
-        try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
-        delete modal.dataset.slideInterval;
-    }
-
-    // Auto-rotate main image every 2s with smooth fade
-    let idxImg = 0;
-    if (images.length > 1) {
-        const intervalId = setInterval(() => {
-            idxImg = (idxImg + 1) % images.length;
-            const nextSrc = images[idxImg];
-            mainImage.style.opacity = '0';
-            const onLoad = () => {
-                mainImage.removeEventListener('load', onLoad);
-                mainImage.classList.remove('is-entering');
-                void mainImage.offsetWidth;
-                mainImage.classList.add('is-entering');
-                requestAnimationFrame(() => { mainImage.style.opacity = '1'; });
-            };
-            mainImage.addEventListener('load', onLoad);
-            mainImage.src = nextSrc;
-            // update active thumb
-            const thumbs = Array.from(imageGridContainer.querySelectorAll('.grid-image'));
-            thumbs.forEach(t => t.classList.remove('active'));
-            const activeThumb = thumbs[idxImg];
-            if (activeThumb) activeThumb.classList.add('active');
-        }, 2000);
-        modal.dataset.slideInterval = String(intervalId);
-    }
-
-    // show modal
-    modal.style.display = 'flex';
-    // Guard against immediate outside-click close right after opening
-    modal.dataset.openGuard = '1';
-    modal.dataset.justOpenedAt = String(Date.now());
-    setTimeout(() => { try { delete modal.dataset.openGuard; } catch (e) {} }, 500);
-    document.body.style.overflow = 'hidden';
-
-    // Overlay click is handled in ensureAtraksiModal()
-}
-
-function openAtraksiWhatsapp(card) {
-    const name = card.dataset.atraksiName || 'Atraksi';
-    const price = formatPrice(card.dataset.atraksiPrice, card.dataset.atraksiUnit);
-    const text = encodeURIComponent(
-        `Halo, saya ingin memesan:\n- Atraksi: ${name}\n- Harga: ${price}\n\nMohon info ketersediaan pada tanggal ...`
-    );
-    const waUrl = `https://wa.me/${ATRAKSI_WHATSAPP_NUMBER}?text=${text}`;
-    window.open(waUrl, '_blank');
-}
-
-function bindAtraksiSearch() {
-    const input = document.getElementById('atraksiSearchInput');
-    const searchBtn = document.getElementById('atraksiSearchBtn');
-    const atraksiTrack = document.querySelector('.atraksi-track');
-
-    if (!input || !searchBtn || !atraksiTrack) return;
-
-    const performSearch = () => {
-        const q = input.value.toLowerCase();
-        const filteredData = window.atraksiData.filter(data =>
-            data.name.toLowerCase().includes(q) || data.desc.toLowerCase().includes(q)
-        );
-
-        if (filteredData.length === 0) {
-            atraksiTrack.innerHTML = '<div style="text-align:center; width:100%; padding:20px; color:var(--light-color);">Tidak ada atraksi ditemukan.</div>';
-            document.querySelector('.atraksi-prev').disabled = true;
-            document.querySelector('.atraksi-next').disabled = true;
-            return;
-        }
-
-        // Bangun ulang kartu atraksi yang difilter
-        const container = atraksiTrack;
-        container.innerHTML = '';
-
-        const cardsPerPage = 6;
-        const totalPages = Math.ceil(filteredData.length / cardsPerPage);
-
-        for (let p = 0; p < totalPages; p++) {
-            const pageDiv = document.createElement('div');
-            pageDiv.className = 'atraksi-page';
-
-            const gridDiv = document.createElement('div');
-            gridDiv.className = 'atraksi-grid';
-
-            const startIndex = p * cardsPerPage;
-            const endIndex = Math.min(startIndex + cardsPerPage, filteredData.length);
-
-            for (let i = startIndex; i < endIndex; i++) {
-                const data = filteredData[i];
-                const card = document.createElement('div');
-                card.className = 'atraksi-card';
-                card.dataset.atraksiName = data.name;
-                card.dataset.atraksiDesc = data.desc;
-                card.dataset.atraksiImg = data.img;
-                card.dataset.atraksiPrice = data.price;
-                card.dataset.atraksiUnit = data.unit;
-
-                card.innerHTML = `
-                    <img src="${data.img}" alt="${data.name}">
-                    <div class="atraksi-info">
-                        <h3 class="atraksi-name">${data.name}</h3>
-                        <p class="atraksi-description">${data.desc}</p>
-                    </div>
-                    <div class="atraksi-overlay">
-                        <div class="atraksi-price">${formatPrice(data.price, data.unit)}</div>
-                        <div class="atraksi-actions">
-                            <button class="btn-detail">Detail</button>
-                            <button class="btn-pesan">Pesan</button>
-                        </div>
-                    </div>
-                `;
-                gridDiv.appendChild(card);
-            }
-            pageDiv.appendChild(gridDiv);
-            container.appendChild(pageDiv);
-        }
-
-        bindAtraksiCardClicks();
-        setupAtraksiSlider();
+// Intersection Observer for scroll animations
+function initAtraksiAnimations() {
+    const atraksiItems = document.querySelectorAll('.atraksi-item');
+    
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
     };
-
-    input.addEventListener('input', performSearch);
-    searchBtn.addEventListener('click', performSearch);
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add delay based on index for staggered animation
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 150);
+                
+                // Unobserve after animation to prevent re-triggering
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    atraksiItems.forEach(item => {
+        observer.observe(item);
+    });
 }
 
-// Image rotation function for atraksi cards
-function initializeAtraksiImageRotation(card, data) {
-    const imageContainer = card.querySelector('.image-container');
-    if (!imageContainer || !data.images || data.images.length <= 1) return;
-
-    // Create rotating images
-    const images = data.images.slice(0, 4); // Use up to 4 images
-    if (images.length < 2) return;
-
-    // Save existing overlay elements before clearing
-    const atraksiInfo = card.querySelector('.atraksi-info');
-    const atraksiOverlay = card.querySelector('.atraksi-overlay');
-
-    // Clear only the image container content
-    const existingImg = imageContainer.querySelector('img');
-    if (existingImg) {
-        existingImg.remove();
+// Detailed information for each atraksi
+const atraksiData = {
+    assulo: {
+        title: "Assulo Juk'u",
+        subtitle: "Ritual Tradisional Nelayan Bugis Makassar",
+        description: `
+            <p><strong>Assulo Juk'u</strong> adalah ritual sakral yang telah dilakukan turun-temurun oleh masyarakat nelayan Bugis Makassar di Desa Lembanna. Upacara ini dilaksanakan sebagai bentuk rasa syukur kepada Sang Pencipta dan permohonan keselamatan sebelum para nelayan melaut.</p>
+            
+            <h3>Makna dan Filosofi</h3>
+            <p>Ritual ini mencerminkan kearifan lokal masyarakat pesisir yang sangat menghargai laut sebagai sumber kehidupan. Melalui Assulo Juk'u, masyarakat mengajarkan nilai-nilai spiritual dan keseimbangan dengan alam.</p>
+            
+            <h3>Prosesi Ritual</h3>
+            <ul>
+                <li>Pembacaan doa-doa tradisional</li>
+                <li>Penyajian sesaji khas masyarakat pesisir</li>
+                <li>Prosesi ke tepi pantai</li>
+                <li>Pelepasan perahu dengan harapan keselamatan</li>
+            </ul>
+            
+            <h3>Waktu Pelaksanaan</h3>
+            <p>Ritual ini dilakukan pada awal musim melaut, biasanya setelah musim angin barat berakhir dan laut kembali tenang.</p>
+            
+            <h3>Nilai Budaya</h3>
+            <p>Assulo Juk'u menjadi bukti nyata bagaimana masyarakat Lembanna menjaga tradisi nenek moyang sambil tetap menjalankan kehidupan modern sebagai desa wisata.</p>
+        `,
+        image: "asset/img/profil-desa/Assulo Juk'u di Mandala Ria.jpg"
+    },
+    pinisi: {
+        title: "Warisan Pembuatan Perahu Pinisi",
+        subtitle: "UNESCO Intangible Cultural Heritage",
+        description: `
+            <p><strong>Pembuatan Perahu Pinisi</strong> adalah seni kerajinan kapal tradisional yang telah diakui UNESCO sebagai warisan budaya takbenda manusia. Desa Lembanna memiliki sejarah panjang dalam tradisi pembuatan kapal legendaris ini.</p>
+            
+            <h3>Pengakuan UNESCO</h3>
+            <p>Pada tahun 2017, UNESCO secara resmi mengakui pembuatan perahu Pinisi sebagai warisan budaya takbenda yang harus dilestarikan. Ini menempatkan tradisi Bugis-Makassar setara dengan warisan budaya dunia lainnya.</p>
+            
+            <h3>Teknik Pembuatan</h3>
+            <ul>
+                <li>Tanpa menggunakan gambar teknik formal</li>
+                <li>Pengetahuan turun-temurun dari generasi ke generasi</li>
+                <li>Pemilihan kayu khusus dengan ritual tersendiri</li>
+                <li>Proses pembuatan bisa memakan waktu berbulan-bulan</li>
+                <li>Setiap detail memiliki makna filosofis</li>
+            </ul>
+            
+            <h3>Keunikan Pinisi</h3>
+            <p>Perahu Pinisi bukan sekadar kapal, tetapi simbol ketangguhan dan jiwa petualang masyarakat Bugis-Makassar. Kapal ini mampu berlayar hingga ke berbagai negara, membuktikan kecanggihan teknologi maritim nusantara.</p>
+            
+            <h3>Pelestarian Tradisi</h3>
+            <p>Desa Lembanna aktif dalam upaya pelestarian pengetahuan pembuatan Pinisi, termasuk mengadakan workshop dan demonstrasi untuk generasi muda dan wisatawan.</p>
+        `,
+        image: "asset/img/profil-desa/penghargaan-unesco.png"
+    },
+    pakarena: {
+        title: "Tari Pakarena",
+        subtitle: "Tarian Klasik Bugis-Makassar",
+        description: `
+            <p><strong>Tari Pakarena</strong> adalah tarian klasik yang mencerminkan keanggunan dan kesopanan wanita Bugis-Makassar. Setiap gerakan dalam tarian ini sarat dengan makna filosofis dan nilai-nilai luhur.</p>
+            
+            <h3>Sejarah dan Asal-usul</h3>
+            <p>Konon, Tari Pakarena berasal dari kisah bidadari kahyangan yang turun ke bumi. Gerakan-gerakannya yang lemah gemulai mencerminkan keanggunan dan kelemahlembutan yang menjadi ciri khas wanita Bugis.</p>
+            
+            <h3>Karakteristik Gerakan</h3>
+            <ul>
+                <li>Gerakan tangan yang lembut dan terukur</li>
+                <li>Langkah kaki yang halus dan sopan</li>
+                <li>Pandangan mata yang rendah, menunjukkan kesopanan</li>
+                <li>Penggunaan kipas sebagai properti utama</li>
+                <li>Irama yang mengikuti musik tradisional</li>
+            </ul>
+            
+            <h3>Makna Filosofis</h3>
+            <p>Setiap gerakan dalam Tari Pakarena mengandung makna mendalam tentang nilai-nilai kesopanan, kerendahan hati, dan keanggunan yang harus dimiliki seorang wanita dalam budaya Bugis-Makassar.</p>
+            
+            <h3>Kostum dan Musik</h3>
+            <p>Penari mengenakan baju bodo, pakaian tradisional khas Bugis-Makassar, dengan warna-warna yang melambangkan strata sosial. Musik pengiring menggunakan alat musik tradisional seperti gendang, suling, dan kecapi.</p>
+            
+            <h3>Pertunjukan</h3>
+            <p>Tari Pakarena sering ditampilkan dalam acara-acara adat, penyambutan tamu kehormatan, dan festival budaya di Desa Lembanna.</p>
+        `,
+        image: "asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (1).jpeg"
+    },
+    festival: {
+        title: "Festival Bahari Lembanna",
+        subtitle: "Perayaan Budaya Maritim Tahunan",
+        description: `
+            <p><strong>Festival Bahari Lembanna</strong> adalah acara tahunan yang memadukan berbagai kegiatan maritim, budaya, dan wisata. Festival ini menjadi ajang memperkenalkan kekayaan budaya dan potensi wisata Desa Lembanna.</p>
+            
+            <h3>Rangkaian Acara</h3>
+            <ul>
+                <li><strong>Lomba Perahu Tradisional:</strong> Kompetisi antar desa dengan perahu khas Bugis-Makassar</li>
+                <li><strong>Pameran Hasil Laut:</strong> Showcase produk-produk unggulan masyarakat pesisir</li>
+                <li><strong>Kuliner Nusantara:</strong> Festival makanan khas dengan menu-menu seafood tradisional</li>
+                <li><strong>Pertunjukan Seni:</strong> Tari Pakarena, musik tradisional, dan seni budaya lainnya</li>
+                <li><strong>Kompetisi Fotografi:</strong> Menangkap momen keindahan Lembanna</li>
+                <li><strong>Seminar Maritim:</strong> Diskusi tentang konservasi laut dan pengembangan pariwisata</li>
+            </ul>
+            
+            <h3>Tujuan Festival</h3>
+            <p>Festival ini bertujuan untuk:</p>
+            <ul>
+                <li>Melestarikan budaya maritim lokal</li>
+                <li>Meningkatkan kesadaran akan pentingnya konservasi laut</li>
+                <li>Mempromosikan potensi wisata Desa Lembanna</li>
+                <li>Memberdayakan ekonomi kreatif masyarakat</li>
+                <li>Mempererat tali silaturahmi antar komunitas</li>
+            </ul>
+            
+            <h3>Waktu Pelaksanaan</h3>
+            <p>Festival Bahari Lembanna biasanya diselenggarakan pada pertengahan tahun, bertepatan dengan musim kemarau ketika cuaca laut sedang bersahabat.</p>
+            
+            <h3>Partisipasi</h3>
+            <p>Festival ini terbuka untuk umum dan melibatkan seluruh lapisan masyarakat, dari anak-anak hingga dewasa, wisatawan lokal maupun mancanegara.</p>
+        `,
+        image: "asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (4).jpeg"
     }
+};
 
-    // Add rotating images to container with preload for smoother transitions
-    images.forEach((src, index) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = data.name + ' - Image ' + (index + 1);
-        img.className = 'rotating-image';
-        img.loading = 'eager'; // Preload images for smoother transitions
-        if (index === 0) img.classList.add('active');
-        imageContainer.appendChild(img);
-        
-        // Preload next image for smoother transition
-        if (index < images.length - 1) {
-            const nextImg = new Image();
-            nextImg.src = images[index + 1];
-        }
-    });
-
-    // Re-add the overlay elements if they were removed
-    if (atraksiInfo && !card.querySelector('.atraksi-info')) {
-        card.appendChild(atraksiInfo);
+// Show detailed modal for specific atraksi
+function showAtraksiDetail(atraksiKey) {
+    const data = atraksiData[atraksiKey];
+    
+    if (!data) {
+        console.error('Atraksi data not found:', atraksiKey);
+        return;
     }
-    if (atraksiOverlay && !card.querySelector('.atraksi-overlay')) {
-        card.appendChild(atraksiOverlay);
+    
+    // Create modal HTML
+    const modalHTML = `
+        <div class="atraksi-modal" id="atraksiModal">
+            <div class="atraksi-modal-overlay" onclick="closeAtraksiModal()"></div>
+            <div class="atraksi-modal-content">
+                <button class="atraksi-modal-close" onclick="closeAtraksiModal()" aria-label="Tutup">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="atraksi-modal-header">
+                    <img src="${data.image}" alt="${data.title}" class="atraksi-modal-image">
+                    <div class="atraksi-modal-title-wrapper">
+                        <h2 class="atraksi-modal-title">${data.title}</h2>
+                        <p class="atraksi-modal-subtitle">${data.subtitle}</p>
+                    </div>
+                </div>
+                <div class="atraksi-modal-body">
+                    ${data.description}
+                </div>
+                <div class="atraksi-modal-footer">
+                    <button class="atraksi-modal-btn" onclick="closeAtraksiModal()">Tutup</button>
+                    <button class="atraksi-modal-btn atraksi-modal-btn-primary" onclick="contactForBooking('${data.title}')">
+                        <i class="fas fa-phone"></i> Hubungi Kami
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Trigger animation
+    setTimeout(() => {
+        const modal = document.getElementById('atraksiModal');
+        if (modal) {
+            modal.classList.add('active');
+        }
+    }, 10);
+}
+
+// Close modal
+function closeAtraksiModal() {
+    const modal = document.getElementById('atraksiModal');
+    if (modal) {
+        modal.classList.remove('active');
+        
+        // Remove modal after animation
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = '';
+        }, 300);
     }
+}
 
-    let currentIndex = 0;
-    let rotationInterval = null;
+// Contact for booking
+function contactForBooking(atraksiName) {
+    const message = `Halo, saya tertarik untuk mengetahui lebih lanjut tentang ${atraksiName}. Bisakah Anda memberikan informasi lebih detail?`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = '6282191234567'; // Replace with actual WhatsApp number
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, '_blank');
+}
 
-    // Start rotation on hover
-    card.addEventListener('mouseenter', () => {
-        if (rotationInterval) clearInterval(rotationInterval);
-        
-        // Change image immediately on hover
-        const images = imageContainer.querySelectorAll('.rotating-image');
-        if (images.length > 1) {
-            const currentImg = images[currentIndex];
-            const nextIndex = (currentIndex + 1) % images.length;
-            const nextImg = images[nextIndex];
+// Close modal on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeAtraksiModal();
+    }
+});
 
-            // Add exit animation to current image
-            currentImg.classList.add('exiting');
-            currentImg.classList.remove('active');
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initAtraksiAnimations();
+});
 
-            // Add enter animation to next image
-            nextImg.classList.add('entering', 'active');
-            nextImg.classList.remove('next');
-
-            // Clean up classes after animation
-            setTimeout(() => {
-                currentImg.classList.remove('exiting');
-                nextImg.classList.remove('entering');
-            }, 600);
-
-            currentIndex = nextIndex;
-        }
-        
-        // Start continuous rotation every second
-        rotationInterval = setInterval(() => {
-            const images = imageContainer.querySelectorAll('.rotating-image');
-            const currentImg = images[currentIndex];
-            const nextIndex = (currentIndex + 1) % images.length;
-            const nextImg = images[nextIndex];
-
-            // Add exit animation to current image
-            currentImg.classList.add('exiting');
-            currentImg.classList.remove('active');
-
-            // Add enter animation to next image
-            nextImg.classList.add('entering', 'active');
-            nextImg.classList.remove('next');
-
-            // Clean up classes after animation
-            setTimeout(() => {
-                currentImg.classList.remove('exiting');
-                nextImg.classList.remove('entering');
-            }, 600);
-
-            currentIndex = nextIndex;
-        }, 1000); // Change every 1 second
-    });
-
-    // Stop rotation on mouse leave
-    card.addEventListener('mouseleave', () => {
-        if (rotationInterval) {
-            clearInterval(rotationInterval);
-            rotationInterval = null;
-        }
-
-        // Reset to first image
-        const images = imageContainer.querySelectorAll('.rotating-image');
-        images.forEach((img, index) => {
-            img.classList.remove('active', 'entering', 'exiting', 'next');
-            if (index === 0) img.classList.add('active');
-        });
-        currentIndex = 0;
-    });
+// Also initialize when section becomes visible (for dynamic loading)
+if (typeof window.initAtraksi === 'undefined') {
+    window.initAtraksi = initAtraksiAnimations;
 }
