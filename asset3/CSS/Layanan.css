@@ -1122,7 +1122,7 @@ body {
   );
   color: #e8e8e8;
   width: 100vw;
-  height: 790px;
+  height: auto;
   font-family: "Cormorant Garamond", serif;
   padding: 60px 0 30px 0;
   position: relative;
@@ -1211,114 +1211,6 @@ body {
   50% {
     transform: translateY(-12px) scale(1.08);
   }
-}
-
-.site-footer {
-  background: linear-gradient(
-    135deg,
-    #103478 0%,
-    var(--primary-color) 50%,
-    #0a2555 100%
-  );
-  color: #e8e8e8;
-  font-family: "Cormorant Garamond", serif;
-  padding: 60px 0 30px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.site-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerGrain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23footerGrain)"/></svg>');
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-  position: relative;
-  z-index: 2;
-}
-
-.footer-columns {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  padding-bottom: 40px;
-}
-
-.footer-column h3 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 25px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(
-    135deg,
-    #e8e8e8 0%,
-    rgba(255, 255, 255, 0.9) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.footer-column ul {
-  list-style: none;
-}
-
-.footer-column li {
-  margin-bottom: 12px;
-}
-
-.footer-column a {
-  color: inherit;
-  text-decoration: none;
-  font-size: 1.25rem;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-  position: relative;
-  display: inline-block;
-}
-
-.footer-column a::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: linear-gradient(
-    90deg,
-    var(--third-color) 0%,
-    var(--white-color) 100%
-  );
-  transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.footer-column a:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.footer-column a:hover::after {
-  width: 100%;
-}
-
-.footer-bottom {
-  text-align: right;
-  font-size: 1rem;
-  color: #e8e8e8;
-  opacity: 0.8;
-  padding-top: 30px;
-  border-top: 1px solid rgba(232, 232, 232, 0.15);
 }
 
 /* === Unified Bold Title Component (Layanan/UMKM pages) === */
@@ -1685,6 +1577,7 @@ h2.section-title::before,
 
   .layanan-page .footer-container {
     padding: 0 12px !important;
+    height: 110vh !important;
   }
 
   .layanan-page .footer-columns {
