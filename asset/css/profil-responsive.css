@@ -2737,8 +2737,966 @@ body.no-scroll {
     box-shadow: 0 10px 30px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.12);
     backdrop-filter: blur(16px) saturate(160%);
     -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+}
 
+/* =============================================
+   LARGE SCREENS (1280px - 1600px)
+   Enhanced typography and spacing for desktop
+   ============================================= */
+@media (min-width: 1280px) {
+  /* Root Variables - Increased sizes for large screens */
+  :root {
+    --fontXXL: 5.5rem;
+    --fontXL: 4.5rem;
+    --fontL: 2.8rem;
+    --fontB: 2rem;
+    --fontMM: 1.5rem;
+    --fontM: 1.2rem;
+    --fontS: 1rem;
+    --desktop-padding: 80px;
+    --desktop-gap: 40px;
+  }
 
+  /* === PROFILE HEADER === */
+  .profil-header {
+    margin-bottom: var(--desktop-gap);
+  }
+
+  .header-bg {
+    height: 500px;
+  }
+
+  .header-img {
+    height: 500px;
+    object-fit: cover;
+  }
+
+  .profil-title {
+    font-size: 3.8rem;
+    top: 200px;
+    padding: 0 var(--desktop-padding);
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  /* === NAVIGATION === */
+  .nav-atas {
+    padding: 0 var(--desktop-padding);
+  }
+
+  .nav-atas .logo img {
+    width: 70px;
+    height: 70px;
+    margin-top: 12px;
+  }
+
+  .nav-atas .logo-text {
+    margin-left: 12px;
+  }
+
+  .nav-atas .logo-text .desa {
+    font-size: 1.5rem;
+  }
+
+  .nav-atas .logo-text .kabupaten {
+    font-size: 1.15rem;
+  }
+
+  .profil-nav {
+    top: 450px;
+    padding: 0 50px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .profil-nav.floating {
+    max-width: 1600px;
+    padding: 0 60px;
+  }
+
+  .profil-nav ul {
+    gap: 35px;
+  }
+
+  .profil-nav a {
+    font-size: 1.4rem;
+    padding: 16px 24px;
+  }
+
+  /* === DATA DESA SECTION === */
+  .data-desa-section {
+    padding: var(--desktop-padding) 0;
+    min-height: 450px;
+  }
+
+  .data-desa-title {
+    font-size: 3rem;
+    margin: var(--desktop-gap) 0;
+    padding: 0 var(--desktop-padding);
+  }
+
+  .data-desa-grid {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--desktop-padding);
+    gap: 28px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .data-desa-box {
+    font-size: 1.3rem;
+    min-height: 120px;
+    padding: 28px;
+    border-radius: 18px;
+  }
+
+  .data-desa-box strong {
+    font-size: 2.2rem;
+    margin-bottom: 14px;
+  }
+
+  /* === TIMELINE SECTION === */
+  .timeline {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: var(--desktop-padding);
+  }
+
+  .timeline::after {
+    width: 8px;
+  }
+
+  .timeline-box {
+    padding: 30px 40px;
+    min-width: 380px;
+    border-radius: 20px;
+  }
+
+  .timeline-box::after {
+    width: 30px;
+    height: 30px;
+    border-width: 6px;
+  }
+
+  .timeline-box::before {
+    width: 24px;
+    height: 24px;
+    border-width: 6px;
+  }
+
+  .timeline-content {
+    max-width: 380px !important;
+    padding: 0 40px !important;
+    font-size: 1.15rem !important;
+    line-height: 1.7 !important;
+  }
+
+  .timeline-content h2 {
+    font-size: 2.2rem !important;
+    margin-bottom: 20px !important;
+  }
+
+  .c-right {
+    margin-right: -4rem !important;
+  }
+
+  .c-left {
+    margin-left: -4rem !important;
+  }
+
+  /* === GALLERY SECTION === */
+  .galeri-scroller {
+    max-width: 1400px;
+    height: 600px;
+    margin: var(--desktop-padding) auto;
+  }
+
+  .galeri-scroll {
+    width: 1400px;
+    height: 500px;
+  }
+
+  .gallery-slide {
+    width: 350px;
+    height: 420px;
+    border-radius: 20px;
+  }
+
+  .gallery-slide:nth-child(1) {
+    transform: translateX(-500px) translateZ(-200px) rotateY(20deg);
+  }
+
+  .gallery-slide:nth-child(2) {
+    transform: translateX(-250px) translateZ(-100px) rotateY(10deg);
+  }
+
+  .gallery-slide:nth-child(3) {
+    transform: translateX(0px) translateZ(0px) rotateY(0deg);
+  }
+
+  .gallery-slide:nth-child(4) {
+    transform: translateX(250px) translateZ(-100px) rotateY(-10deg);
+  }
+
+  .gallery-slide:nth-child(5) {
+    transform: translateX(500px) translateZ(-200px) rotateY(-20deg);
+  }
+
+  .galeri-ctrl {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border-width: 4px;
+  }
+
+  .slide-overlay h3 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .slide-overlay p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  /* === SECTION TITLES === */
+  .section-title {
+    font-size: 3.2rem;
+    margin: var(--desktop-padding) 0 var(--desktop-gap) 0;
+    padding: 0 var(--desktop-padding);
+  }
+
+  /* === VISI MISI SECTION === */
+  .vm-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--desktop-padding);
+    gap: var(--desktop-gap);
+  }
+
+  .vm-box {
+    padding: 50px;
+    border-radius: 24px;
+  }
+
+  .vm-box h2 {
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+  }
+
+  .vm-box p, .vm-box li {
+    font-size: 1.25rem;
+    line-height: 1.8;
+  }
+
+  /* === STRUKTUR ORGANISASI === */
+  .struktur-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--desktop-padding);
+  }
+
+  .struktur-card {
+    padding: 40px;
+    border-radius: 20px;
+  }
+
+  .struktur-card h3 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .struktur-card p {
+    font-size: 1.25rem;
+  }
+
+  .struktur-card .position {
+    font-size: 1.15rem;
+  }
+
+  /* === MILESTONE SECTION === */
+  .ms-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--desktop-padding);
+    gap: 35px;
+  }
+
+  .ms-tile {
+    padding: 40px;
+    border-radius: 24px;
+    min-height: 350px;
+  }
+
+  .ms-tile h3 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+
+  .ms-tile .year {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+  }
+
+  .ms-tile p {
+    font-size: 1.3rem;
+    line-height: 1.7;
+  }
+
+  .ms-tile:hover {
+    transform: translateY(-12px) scale(1.02);
+    min-height: 380px;
+  }
+
+  /* === CONTENT SECTIONS === */
+  .content-section {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: var(--desktop-padding);
+  }
+
+  .content-section h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+  }
+
+  .content-section p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+  }
+}
+
+/* =============================================
+   EXTRA LARGE SCREENS (1601px - 1920px)
+   Premium desktop experience
+   ============================================= */
+@media (min-width: 1601px) {
+  /* Root Variables - Further increased for XL screens */
+  :root {
+    --fontXXL: 6.5rem;
+    --fontXL: 5rem;
+    --fontL: 3.2rem;
+    --fontB: 2.3rem;
+    --fontMM: 1.7rem;
+    --fontM: 1.35rem;
+    --fontS: 1.1rem;
+    --desktop-padding: 120px;
+    --desktop-gap: 60px;
+  }
+
+  /* === PROFILE HEADER === */
+  .header-bg {
+    height: 600px;
+  }
+
+  .header-img {
+    height: 600px;
+  }
+
+  .profil-title {
+    font-size: 4.5rem;
+    top: 250px;
+  }
+
+  /* === NAVIGATION === */
+  .nav-atas .logo img {
+    width: 85px;
+    height: 85px;
+  }
+
+  .nav-atas .logo-text .desa {
+    font-size: 1.75rem;
+  }
+
+  .nav-atas .logo-text .kabupaten {
+    font-size: 1.3rem;
+  }
+
+  .profil-nav {
+    top: 540px;
+    padding: 0 70px;
+    max-width: 1920px;
+  }
+
+  .profil-nav.floating {
+    max-width: 1920px;
+    padding: 0 80px;
+  }
+
+  .profil-nav ul {
+    gap: 45px;
+  }
+
+  .profil-nav a {
+    font-size: 1.6rem;
+    padding: 18px 28px;
+  }
+
+  /* === DATA DESA SECTION === */
+  .data-desa-section {
+    padding: calc(var(--desktop-padding) * 1.2) 0;
+    min-height: 550px;
+  }
+
+  .data-desa-title {
+    font-size: 3.6rem;
+    margin: calc(var(--desktop-gap) * 1.2) 0;
+  }
+
+  .data-desa-grid {
+    max-width: 1920px;
+    gap: 35px;
+  }
+
+  .data-desa-box {
+    font-size: 1.5rem;
+    min-height: 140px;
+    padding: 35px;
+    border-radius: 22px;
+  }
+
+  .data-desa-box strong {
+    font-size: 2.6rem;
+    margin-bottom: 18px;
+  }
+
+  /* === TIMELINE SECTION === */
+  .timeline {
+    max-width: 1920px;
+    padding: calc(var(--desktop-padding) * 1.2);
+  }
+
+  .timeline::after {
+    width: 10px;
+  }
+
+  .timeline-box {
+    padding: 40px 50px;
+    min-width: 450px;
+    border-radius: 24px;
+  }
+
+  .timeline-box::after {
+    width: 36px;
+    height: 36px;
+    border-width: 7px;
+  }
+
+  .timeline-box::before {
+    width: 28px;
+    height: 28px;
+    border-width: 7px;
+  }
+
+  .timeline-content {
+    max-width: 450px !important;
+    padding: 0 50px !important;
+    font-size: 1.3rem !important;
+    line-height: 1.75 !important;
+  }
+
+  .timeline-content h2 {
+    font-size: 2.6rem !important;
+    margin-bottom: 24px !important;
+  }
+
+  .c-right {
+    margin-right: -5rem !important;
+  }
+
+  .c-left {
+    margin-left: -5rem !important;
+  }
+
+  /* === GALLERY SECTION === */
+  .galeri-scroller {
+    max-width: 1700px;
+    height: 700px;
+  }
+
+  .galeri-scroll {
+    width: 1700px;
+    height: 600px;
+  }
+
+  .gallery-slide {
+    width: 420px;
+    height: 500px;
+    border-radius: 24px;
+  }
+
+  .gallery-slide:nth-child(1) {
+    transform: translateX(-600px) translateZ(-240px) rotateY(20deg);
+  }
+
+  .gallery-slide:nth-child(2) {
+    transform: translateX(-300px) translateZ(-120px) rotateY(10deg);
+  }
+
+  .gallery-slide:nth-child(3) {
+    transform: translateX(0px) translateZ(0px) rotateY(0deg);
+  }
+
+  .gallery-slide:nth-child(4) {
+    transform: translateX(300px) translateZ(-120px) rotateY(-10deg);
+  }
+
+  .gallery-slide:nth-child(5) {
+    transform: translateX(600px) translateZ(-240px) rotateY(-20deg);
+  }
+
+  .galeri-ctrl {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+    border-width: 5px;
+  }
+
+  .slide-overlay h3 {
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+  }
+
+  .slide-overlay p {
+    font-size: 1.35rem;
+    line-height: 1.7;
+  }
+
+  /* === SECTION TITLES === */
+  .section-title {
+    font-size: 3.8rem;
+    margin: calc(var(--desktop-padding) * 1.2) 0 calc(var(--desktop-gap) * 1.2) 0;
+  }
+
+  /* === VISI MISI SECTION === */
+  .vm-content {
+    max-width: 1920px;
+  }
+
+  .vm-box {
+    padding: 60px;
+    border-radius: 28px;
+  }
+
+  .vm-box h2 {
+    font-size: 3.2rem;
+    margin-bottom: 35px;
+  }
+
+  .vm-box p, .vm-box li {
+    font-size: 1.4rem;
+    line-height: 1.85;
+  }
+
+  /* === STRUKTUR ORGANISASI === */
+  .struktur-container {
+    max-width: 1920px;
+  }
+
+  .struktur-card {
+    padding: 50px;
+    border-radius: 24px;
+  }
+
+  .struktur-card h3 {
+    font-size: 2.3rem;
+    margin-bottom: 18px;
+  }
+
+  .struktur-card p {
+    font-size: 1.4rem;
+  }
+
+  .struktur-card .position {
+    font-size: 1.3rem;
+  }
+
+  /* === MILESTONE SECTION === */
+  .ms-container {
+    max-width: 1920px;
+    gap: 45px;
+  }
+
+  .ms-tile {
+    padding: 50px;
+    border-radius: 28px;
+    min-height: 420px;
+  }
+
+  .ms-tile h3 {
+    font-size: 2.8rem;
+    margin-bottom: 24px;
+  }
+
+  .ms-tile .year {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+
+  .ms-tile p {
+    font-size: 1.45rem;
+    line-height: 1.75;
+  }
+
+  .ms-tile:hover {
+    transform: translateY(-14px) scale(1.02);
+    min-height: 450px;
+  }
+
+  /* === CONTENT SECTIONS === */
+  .content-section {
+    max-width: 1920px;
+    padding: calc(var(--desktop-padding) * 1.2);
+  }
+
+  .content-section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+  }
+
+  .content-section p {
+    font-size: 1.45rem;
+    line-height: 1.85;
+  }
+}
+
+/* =============================================
+   ULTRA LARGE SCREENS (1921px - 2560px)
+   4K and Ultra-wide display optimization
+   ============================================= */
+@media (min-width: 1921px) and (max-width: 2560px) {
+  /* Root Variables - Maximum sizes for ultra-large screens */
+  :root {
+    --fontXXL: 7.5rem;
+    --fontXL: 6rem;
+    --fontL: 3.8rem;
+    --fontB: 2.6rem;
+    --fontMM: 2rem;
+    --fontM: 1.5rem;
+    --fontS: 1.25rem;
+    --desktop-padding: 160px;
+    --desktop-gap: 80px;
+  }
+
+  /* === PROFILE HEADER === */
+  .header-bg {
+    height: 750px;
+  }
+
+  .header-img {
+    height: 750px;
+  }
+
+  .profil-title {
+    font-size: 5.5rem;
+    top: 320px;
+    text-shadow: 4px 4px 16px rgba(0, 0, 0, 0.7);
+  }
+
+  /* === NAVIGATION === */
+  .nav-atas {
+    padding: 0 var(--desktop-padding);
+  }
+
+  .nav-atas .logo img {
+    width: 100px;
+    height: 100px;
+    margin-top: 16px;
+  }
+
+  .nav-atas .logo-text {
+    margin-left: 16px;
+  }
+
+  .nav-atas .logo-text .desa {
+    font-size: 2.1rem;
+  }
+
+  .nav-atas .logo-text .kabupaten {
+    font-size: 1.55rem;
+  }
+
+  .profil-nav {
+    top: 680px;
+    padding: 0 90px;
+    max-width: 2400px;
+  }
+
+  .profil-nav.floating {
+    max-width: 2400px;
+    padding: 0 100px;
+  }
+
+  .profil-nav ul {
+    gap: 60px;
+  }
+
+  .profil-nav a {
+    font-size: 1.85rem;
+    padding: 22px 34px;
+    border-radius: 16px;
+  }
+
+  /* === DATA DESA SECTION === */
+  .data-desa-section {
+    padding: calc(var(--desktop-padding) * 1.3) 0;
+    min-height: 650px;
+  }
+
+  .data-desa-title {
+    font-size: 4.5rem;
+    margin: calc(var(--desktop-gap) * 1.3) 0;
+  }
+
+  .data-desa-grid {
+    max-width: 2400px;
+    gap: 45px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .data-desa-box {
+    font-size: 1.75rem;
+    min-height: 170px;
+    padding: 45px;
+    border-radius: 28px;
+  }
+
+  .data-desa-box strong {
+    font-size: 3.2rem;
+    margin-bottom: 22px;
+  }
+
+  /* === TIMELINE SECTION === */
+  .timeline {
+    max-width: 2400px;
+    padding: calc(var(--desktop-padding) * 1.3);
+  }
+
+  .timeline::after {
+    width: 12px;
+  }
+
+  .timeline-box {
+    padding: 50px 70px;
+    min-width: 550px;
+    border-radius: 30px;
+  }
+
+  .timeline-box::after {
+    width: 44px;
+    height: 44px;
+    border-width: 8px;
+  }
+
+  .timeline-box::before {
+    width: 34px;
+    height: 34px;
+    border-width: 8px;
+  }
+
+  .timeline-content {
+    max-width: 550px !important;
+    padding: 0 60px !important;
+    font-size: 1.55rem !important;
+    line-height: 1.85 !important;
+  }
+
+  .timeline-content h2 {
+    font-size: 3.2rem !important;
+    margin-bottom: 30px !important;
+  }
+
+  .c-right {
+    margin-right: -6rem !important;
+  }
+
+  .c-left {
+    margin-left: -6rem !important;
+  }
+
+  /* === GALLERY SECTION === */
+  .galeri-scroller {
+    max-width: 2000px;
+    height: 850px;
+    margin: calc(var(--desktop-padding) * 1.3) auto;
+  }
+
+  .galeri-scroll {
+    width: 2000px;
+    height: 750px;
+  }
+
+  .gallery-slide {
+    width: 500px;
+    height: 600px;
+    border-radius: 30px;
+  }
+
+  .gallery-slide:nth-child(1) {
+    transform: translateX(-700px) translateZ(-280px) rotateY(20deg);
+  }
+
+  .gallery-slide:nth-child(2) {
+    transform: translateX(-350px) translateZ(-140px) rotateY(10deg);
+  }
+
+  .gallery-slide:nth-child(3) {
+    transform: translateX(0px) translateZ(0px) rotateY(0deg);
+  }
+
+  .gallery-slide:nth-child(4) {
+    transform: translateX(350px) translateZ(-140px) rotateY(-10deg);
+  }
+
+  .gallery-slide:nth-child(5) {
+    transform: translateX(700px) translateZ(-280px) rotateY(-20deg);
+  }
+
+  .galeri-ctrl {
+    width: 85px;
+    height: 85px;
+    font-size: 34px;
+    border-width: 6px;
+  }
+
+  .slide-overlay h3 {
+    font-size: 2.8rem;
+    margin-bottom: 18px;
+  }
+
+  .slide-overlay p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+  }
+
+  /* === SECTION TITLES === */
+  .section-title {
+    font-size: 4.6rem;
+    margin: calc(var(--desktop-padding) * 1.3) 0 calc(var(--desktop-gap) * 1.3) 0;
+  }
+
+  /* === VISI MISI SECTION === */
+  .vm-content {
+    max-width: 2400px;
+    padding: 0 var(--desktop-padding);
+    gap: calc(var(--desktop-gap) * 1.2);
+  }
+
+  .vm-box {
+    padding: 80px;
+    border-radius: 32px;
+  }
+
+  .vm-box h2 {
+    font-size: 3.8rem;
+    margin-bottom: 45px;
+  }
+
+  .vm-box p, .vm-box li {
+    font-size: 1.65rem;
+    line-height: 1.95;
+    margin-bottom: 18px;
+  }
+
+  /* === STRUKTUR ORGANISASI === */
+  .struktur-container {
+    max-width: 2400px;
+    padding: 0 var(--desktop-padding);
+  }
+
+  .struktur-card {
+    padding: 65px;
+    border-radius: 30px;
+  }
+
+  .struktur-card h3 {
+    font-size: 2.7rem;
+    margin-bottom: 22px;
+  }
+
+  .struktur-card p {
+    font-size: 1.65rem;
+  }
+
+  .struktur-card .position {
+    font-size: 1.5rem;
+  }
+
+  /* === MILESTONE SECTION === */
+  .ms-container {
+    max-width: 2400px;
+    padding: 0 var(--desktop-padding);
+    gap: 60px;
+  }
+
+  .ms-tile {
+    padding: 70px;
+    border-radius: 34px;
+    min-height: 520px;
+  }
+
+  .ms-tile h3 {
+    font-size: 3.4rem;
+    margin-bottom: 30px;
+  }
+
+  .ms-tile .year {
+    font-size: 5rem;
+    margin-bottom: 26px;
+  }
+
+  .ms-tile p {
+    font-size: 1.7rem;
+    line-height: 1.85;
+  }
+
+  .ms-tile:hover {
+    transform: translateY(-18px) scale(1.03);
+    min-height: 560px;
+  }
+
+  /* === CONTENT SECTIONS === */
+  .content-section {
+    max-width: 2400px;
+    padding: calc(var(--desktop-padding) * 1.3);
+  }
+
+  .content-section h2 {
+    font-size: 4.2rem;
+    margin-bottom: 50px;
+  }
+
+  .content-section p {
+    font-size: 1.7rem;
+    line-height: 1.95;
+  }
+
+  /* === ADDITIONAL ELEMENTS === */
+  .card, .box, .panel {
+    border-radius: 28px;
+    padding: 50px;
+  }
+
+  button, .btn, .button {
+    font-size: 1.5rem;
+    padding: 18px 36px;
+    border-radius: 16px;
+  }
+
+  /* === TABLE ELEMENTS === */
+  table {
+    font-size: 1.5rem;
+  }
+
+  th, td {
+    padding: 20px 28px;
+  }
+
+  /* === FORM ELEMENTS === */
+  input, textarea, select {
+    font-size: 1.5rem;
+    padding: 16px 24px;
+    border-radius: 14px;
   }
 }
 
