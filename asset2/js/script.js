@@ -573,8 +573,8 @@ style.innerHTML = `
         border-radius: 50%;
         font-size: 20px;
         font-weight: bold;
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
         transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         box-shadow: 
             0 8px 25px rgba(19, 62, 135, 0.4),
@@ -692,13 +692,20 @@ style.innerHTML = `
     }
 
     /* Mobile responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
         #scrollToTopBtn {
             bottom: 20px;
             right: 20px;
-            width: 50px;
-            height: 50px;
+            bottom: 30px;
+            width: 55px;
+            height: 55px;
             font-size: 18px;
+        }
+    }
+
+    @media (max-width: 734px) {
+    #scrollToTopBtn{
+            bottom: 100px;
         }
     }
 `;

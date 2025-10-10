@@ -1368,7 +1368,6 @@ main::before {
     background: transparent;
     border-radius: 26px;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 8px 18px rgba(0, 0, 0, 0.15);
-    transform: translateX(40px);
 }
 
 #profil-desa .image-placeholder::after {
@@ -1854,7 +1853,7 @@ main::before {
 .features-section {
     background: linear-gradient(135deg, #D7E4F2 0%, #c5d6ef 50%, #D7E4F2 100%);
     position: relative;
-    padding: 60px 0;
+    padding: 20px 0;
 }
 
 .features-section::before {
@@ -1876,7 +1875,6 @@ main::before {
 
 #wisata .container {
     max-width: 1200px;
-    padding: 80px 40px;
 }
 
 #wisata::before {
@@ -1917,17 +1915,20 @@ main::before {
     margin: 0 auto;
     position: relative;
     z-index: 2;
+    margin-bottom: 40px;
 }
 
 .feature-item {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin-bottom: 120px;
+    margin-bottom: 30px;
+    margin-top: 30px;
     gap: 48px;
     position: relative;
     z-index: 1;
 }
+
 
 .feature-shape {
     width: 100%;
@@ -1989,6 +1990,13 @@ main::before {
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 1340px){
+    .feature-text{
+       margin-left: 20px;
+        margin-right: 20px;
+        }
 }
 
 .feature-text h2 {
@@ -3533,12 +3541,11 @@ body.menu-open { overflow: hidden; }
     }
 
     .container {
-        padding: 50px 20px;
+        padding: 30px 0;
     }
 
     .feature-item,
     .feature-item:nth-child(even) {
-        display: block;
         margin-bottom: 80px;
     }
 
@@ -3549,14 +3556,13 @@ body.menu-open { overflow: hidden; }
     .feature-shape {
         width: 100%;
         height: 280px;
-        transform: rotate(0deg) !important;
         margin-bottom: 25px;
     }
 
     .feature-text {
         max-width: 100%;
         text-align: center !important;
-        padding: 20px;
+        padding: 10px;
         border-radius: 16px;
     }
 
@@ -3579,9 +3585,8 @@ body.menu-open { overflow: hidden; }
     }
 
     .footer-columns {
-        grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
+        text-align: left;
     }
 
     .footer-bottom {
@@ -3841,11 +3846,148 @@ h2.section-title::before,
         text-align: center;
         line-height: 1.2;
     }
+
+    .site-footer {
+    padding: 40px 0 120px 0;
+    }
+
+    .site-footer {
+    padding: 40px 0 120px 0;
+    }
+}
+
+@media (max-width: 700px){
+        .feature-text h2 {
+        font-size: 1.5rem;
+    }
+    .feature-text p{
+        font-size: 1rem;
+    }
+
+    .feature-item, .feature-item:nth-child(even){
+        margin-bottom: 30px;
+    }
 }
 
 @media (max-width: 620px){
     .content-container{
         height: 900px;
+    }
+}
+
+/* ===== RESPONSIVE: MIN-WIDTH 601PX - SWAP ORDER FOR EVEN FEATURE ITEMS ===== */
+@media (min-width: 601px) {
+    /* Swap order for Tebing Batu Tongkarayya (2nd) and Gua Purbakala Passea (4th) */
+    .feature-item:nth-child(2),
+    .feature-item:nth-child(4) {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    
+    /* Adjust text alignment for swapped items */
+    .feature-item:nth-child(2) .feature-text,
+    .feature-item:nth-child(4) .feature-text {
+        text-align: right;
+    }
+    
+    /* Ensure proper alignment of the underline */
+    .feature-item:nth-child(2) .feature-text h2::before,
+    .feature-item:nth-child(4) .feature-text h2::before {
+        left: auto;
+        right: 0;
+    }
+}
+
+/* ===== RESPONSIVE: MAX-WIDTH 600PX - FEATURE ITEMS ===== */
+@media (max-width: 600px) {
+    /* Feature Item: Mobile-First Single Column Layout */
+    .feature-item {
+        display: flex !important;
+        flex-direction: column-reverse !important;
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        margin-bottom: 40px !important;
+        padding: 0 15px !important;
+        text-align: center !important;
+        align-items: center !important;
+    }
+    
+    .feature-item:nth-child(even),
+    .feature-item:nth-child(odd) {
+        display: flex !important;
+        flex-direction: column-reverse !important;
+        text-align: center !important;
+    }
+    
+    /* Feature Shape: Responsive & Clean */
+    .feature-shape {
+        width: 100% !important;
+        height: 240px !important;
+        border-radius: 16px !important;
+        transform: rotate(0deg) !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .feature-shape img {
+        border-radius: 16px !important;
+    }
+    
+    .feature-shape:hover {
+        transform: scale(1.03) !important;
+    }
+    
+    .feature-item:nth-child(odd) .feature-shape,
+    .feature-item:nth-child(even) .feature-shape {
+        transform: rotate(0deg) !important;
+    }
+    
+    .feature-item:nth-child(odd):hover .feature-shape,
+    .feature-item:nth-child(even):hover .feature-shape {
+        transform: scale(1.03) !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    /* Feature Text: Centered & Readable */
+    .feature-text {
+        border-radius: 16px !important;
+        text-align: center !important;
+        max-width: 100% !important;
+    }
+    
+    .feature-item:nth-child(odd) .feature-text,
+    .feature-item:nth-child(even) .feature-text {
+        text-align: center !important;
+    }
+    
+    .feature-text h2 {
+        font-size: 1.5rem !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .feature-text h2::before {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 50px !important;
+    }
+    
+    .feature-text p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        margin-top: 15px !important;
+    }
+    
+    /* Animation States: Mobile Optimized */
+    .feature-item.hidden {
+        transform: translateY(30px) scale(0.95) !important;
+        opacity: 0 !important;
+        transition: all 0.6s ease-out !important;
+    }
+    
+    .feature-item.show {
+        transform: translateY(0) scale(1) !important;
+        opacity: 1 !important;
+        transition: all 0.6s ease-out !important;
     }
 }
 
@@ -4066,38 +4208,16 @@ h2.section-title::before,
     .features-section {
         padding: 40px 0;
     }
-    
+    styles removed - using 600px media query instead */
     .container {
         padding: 40px 15px;
     }
+
+    .footer-column li {
+    margin-bottom: 0px;
+}
     
-    .feature-item {
-        margin-bottom: 60px;
-        gap: 25px;
-    }
-    
-    .feature-shape {
-        height: 240px;
-        border-radius: 20px;
-        margin-bottom: 20px;
-    }
-    
-    .feature-text {
-        padding: 16px 20px;
-        border-radius: 16px;
-    }
-    
-    .feature-text h2 {
-        font-size: 1.5rem !important;
-        margin-bottom: 10px !important;
-        line-height: 1.2 !important;
-    }
-    
-    .feature-text p {
-        font-size: 0.9rem !important;
-        margin-top: 12px !important;
-        line-height: 1.5 !important;
-    }
+    /* Feature-item styles removed - using 600px media query instead */
     
     /* === MAP SECTION === */
     .map-container {
@@ -4222,9 +4342,9 @@ h2.section-title::before,
     }
     
     .footer-columns {
-        grid-template-columns: 1fr;
+
         gap: 30px;
-        text-align: center;
+        text-align: left;
     }
     
     .footer-column h3 {
@@ -4342,13 +4462,7 @@ h2.section-title::before,
     }
     
     /* === ENSURE PROPER SPACING FOR MOBILE BOTTOM NAV === */
-    main {
-        padding-bottom: 80px; /* Space for mobile bottom nav */
-    }
     
-    .site-footer {
-        margin-bottom: 60px; /* Space for mobile bottom nav */
-    }
     
     /* === ADDITIONAL RESPONSIVE ENHANCEMENTS === */
     
@@ -4400,18 +4514,7 @@ h2.section-title::before,
         text-align: center;
     }
     
-    /* Better feature section layout */
-    .feature-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin-bottom: 50px;
-    }
-    
-    .feature-item:nth-child(even) {
-        flex-direction: column; /* Override alternating layout on mobile */
-    }
+    /* Feature section layout - using 600px media query styles */
     
     /* Improve navigation accessibility */
     .nav-links.active {
@@ -4422,9 +4525,9 @@ h2.section-title::before,
     /* Better modal handling */
     .modal {
         padding: 15px;
-    }
-    
-    .carousel-inner img {
+   - using 600px media query sty }
+ s   
+rousel-inner img {
         max-height: 60vh;
         object-fit: contain;
         border-radius: 8px;
@@ -4440,11 +4543,6 @@ h2.section-title::before,
         scroll-padding-top: 80px; /* Account for sticky nav */
     }
     
-    /* Improve header top section */
-    .header-top {
-        padding: 10px 0;
-        margin-bottom: 15px;
-    }
     
     /* Better wave animations for mobile */
     .cta-wave svg {
@@ -4462,12 +4560,12 @@ h2.section-title::before,
     
     .footer-column li {
         width: 100%;
-        text-align: center;
+        text-align: left;
     }
     
     .footer-column a {
         display: block;
-        padding: 8px 16px;
+        padding: 4px 8px;
         border-radius: 8px;
         transition: all 0.3s ease;
     }
@@ -4764,34 +4862,8 @@ h2.section-title::before,
         padding: 40px 15px;
     }
     
-    .feature-item {
-        margin-bottom: 60px;
-        gap: 25px;
-    }
-    
-    .feature-shape {
-        height: 240px;
-        border-radius: 20px;
-        margin-bottom: 20px;
-    }
-    
-    .feature-text {
-        padding: 16px 20px;
-        border-radius: 16px;
-    }
-    
-    .feature-text h2 {
-        font-size: 1.5rem !important;
-        margin-bottom: 10px !important;
-        line-height: 1.2 !important;
-    }
-    
-    .feature-text p {
-        font-size: 0.9rem !important;
-        margin-top: 12px !important;
-        line-height: 1.5 !important;
-    }
-    
+    /* Feature-item styles removed - using 600px media query instead */
+    styles removed - using 600px media query instead */
     /* === MAP SECTION === */
     .map-container {
         padding: 30px 15px;
@@ -4911,7 +4983,7 @@ h2.section-title::before,
     
     /* === FOOTER === */
     .site-footer {
-        padding: 40px 0 20px 0;
+        padding: 40px 0 120px 0;
     }
     
     .footer-container {
@@ -4919,19 +4991,20 @@ h2.section-title::before,
     }
     
     .footer-columns {
-        grid-template-columns: 1fr;
         gap: 30px;
-        text-align: center;
     }
     
-    .footer-column h3 {
-        font-size: 1.5rem;
+        @media (max-width: 360px) {
+            .footer-column h3 {
+        font-size: 1.1rem;
         margin-bottom: 20px;
     }
-    
+}
     .footer-column a {
-        font-size: 1.1rem;
+        font-size: 0.8rem;
     }
+}
+
     
     .footer-bottom {
         text-align: center;
@@ -5043,9 +5116,6 @@ h2.section-title::before,
         padding-bottom: 80px; /* Space for mobile bottom nav */
     }
     
-    .site-footer {
-        margin-bottom: 60px; /* Space for mobile bottom nav */
-    }
     
     /* === ADDITIONAL RESPONSIVE ENHANCEMENTS === */
     
@@ -5097,18 +5167,7 @@ h2.section-title::before,
         text-align: center;
     }
     
-    /* Better feature section layout */
-    .feature-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin-bottom: 50px;
-    }
-    
-    .feature-item:nth-child(even) {
-        flex-direction: column; /* Override alternating layout on mobile */
-    }
+    /* Feature section layout - using 600px media query styles */
     
     /* Improve navigation accessibility */
     .nav-links.active {
@@ -5118,8 +5177,7 @@ h2.section-title::before,
     
     /* Better modal handling */
     .modal {
-        padding: 15px;
-    }
+        paddi- using 600px media query styng: 15spx;
     
     .carousel-inner img {
         max-height: 60vh;
@@ -5319,96 +5377,3 @@ h2.section-title::before,
         margin-bottom: 15px;
     }
     
-    .cta-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 25px;
-    }
-    
-    .cta-btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-    }
-    
-    .cta-image-grid {
-        max-width: 250px;
-        gap: 10px;
-    }
-    
-    /* Footer */
-    .footer-column h3 {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-    }
-    
-    .footer-column a {
-        font-size: 1rem;
-        padding: 6px 12px;
-    }
-    
-    /* Mobile bottom nav */
-    .mobile-nav-item {
-        padding: 5px 6px;
-        min-width: 45px;
-    }
-    
-    .mobile-nav-icon {
-        width: 14px !important;
-        height: 14px !important;
-        margin-bottom: 2px !important;
-    }
-    
-    .mobile-nav-label {
-        font-size: 0.6rem;
-    }
-    
-    /* Floating info cards */
-    .floating-info-cards {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        justify-content: space-between !important;
-        gap: 4px !important;
-        padding: 0 10px !important;
-        margin-top: 15px !important;
-        overflow-x: auto !important;
-    }
-    
-    .info-card {
-        flex: 1 !important;
-        min-width: 75px !important;
-        max-width: 85px !important;
-        padding: 4px 6px !important;
-        border-radius: 10px !important;
-        text-align: center !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .card-icon {
-        font-size: 1.1em !important;
-    }
-    
-    .card-number {
-        font-size: 0.9em !important;
-        font-weight: 700 !important;
-    }
-    
-    .card-text {
-        font-size: 0.6em !important;
-        line-height: 1.1 !important;
-        word-wrap: break-word !important;
-    }
-}
-
-/* ===== LANDSCAPE ORIENTATION OPTIMIZATIONS ===== */
-@media (max-width: 400px) and (orientation: landscape) {
-    .header-container {
-        height: 100vh;
-        min-height: 400px;
-    }
-    
-    .header-content {
-        min-height: 50vh;
-        padding: 15px 0;
-    }
-
-}
