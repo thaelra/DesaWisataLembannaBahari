@@ -1211,6 +1211,77 @@
     }
 }
 
+/* QR Code Styles for Atraksi Modal */
+.atraksi-modal-body img[alt*="QR Code"] {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 25px auto;
+    object-fit: contain;
+    background: var(--white-color);
+    border: 3px solid var(--third-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(19, 62, 135, 0.15);
+    padding: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.atraksi-modal-body img[alt*="QR Code"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(19, 62, 135, 0.25);
+    border-color: var(--secondary-color);
+}
+
+/* QR Code section styling */
+.atraksi-modal-body h3:has(+ img[alt*="QR Code"]) {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 15px 0;
+    background: linear-gradient(135deg, var(--third-color), rgba(203, 220, 235, 0.3));
+    border-radius: 8px;
+    border: none;
+    border-left: 4px solid var(--secondary-color);
+    padding-left: 20px;
+}
+
+/* Mobile responsive for QR Code */
+@media (max-width: 768px) {
+    .atraksi-modal-body img[alt*="QR Code"] {
+        width: 160px;
+        height: 160px;
+        margin: 20px auto;
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .atraksi-modal-body h3:has(+ img[alt*="QR Code"]) {
+        font-size: 1.2rem;
+        margin-top: 30px;
+        padding: 12px 0;
+        padding-left: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .atraksi-modal-body img[alt*="QR Code"] {
+        width: 140px;
+        height: 140px;
+        margin: 15px auto;
+        padding: 10px;
+    }
+    
+    .atraksi-modal-body h3:has(+ img[alt*="QR Code"]) {
+        font-size: 1.1rem;
+        margin-top: 25px;
+        padding: 10px 0;
+        padding-left: 12px;
+    }
+}
+
 /* Remove decorative glow around titles */
 /* (previous ::before and keyframes removed for flat look) */
 .wisata-section p {
@@ -1451,6 +1522,83 @@
 #wisataModal .modal-header, #wisataModal .modal-header-overlay, #wisataModal #modalImage { pointer-events: none; }
 #wisataModal .modal-content, #wisataModal .modal-body, #wisataModal .close { pointer-events: auto; }
 @media (max-width: 600px){ #wisataModal .close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 24px; } }
+
+/* QR Code Section for Wisata Modal */
+#wisataModal .qr-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(96, 139, 193, 0.05), rgba(243, 243, 224, 0.1));
+    border: 1px solid rgba(96, 139, 193, 0.15);
+    border-radius: 12px;
+    text-align: center;
+}
+
+#wisataModal .qr-section h3 {
+    font-family: 'Playfair Display SC', serif;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    letter-spacing: 0.3px;
+}
+
+#wisataModal .qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+#wisataModal .qr-code {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border: 3px solid var(--secondary-color);
+    border-radius: 8px;
+    background: white;
+    padding: 8px;
+    box-shadow: 0 4px 12px rgba(96, 139, 193, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#wisataModal .qr-code:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(96, 139, 193, 0.3);
+}
+
+#wisataModal .qr-desc {
+    font-family: 'Karma', serif;
+    color: var(--primary-color);
+    font-size: var(--fontS);
+    font-weight: 600;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Responsive adjustments for QR section */
+@media (max-width: 600px) {
+    #wisataModal .qr-section {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    #wisataModal .qr-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+
+    #wisataModal .qr-code {
+        width: 160px;
+        height: 160px;
+        border-width: 2px;
+        padding: 6px;
+    }
+
+    #wisataModal .qr-desc {
+        font-size: 0.9rem;
+    }
+}
 
 @keyframes slideIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes slideOut { from { transform: translateY(0); opacity: 1; } to { transform: translateY(10px); opacity: 0; } }
@@ -4958,45 +5106,4 @@ h1, h2, h3 {
   inset: 10px;
   border-radius: 14px;
   border: 1px dashed rgba(19,62,135,0.25);
-  pointer-events: none;
-  z-index: 1;
- }
-
-.ak-viewport::after{
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 8px;
-  background: linear-gradient(90deg, rgba(19,62,135,0.06), rgba(96,139,193,0.12), rgba(19,62,135,0.06));
-  pointer-events: none;
-  z-index: 1;
-}
-/* Refine toolbar with gradient border pill */
-.toolbar-akomodasi{
-  background: linear-gradient(#fff,#fff) padding-box,
-              linear-gradient(135deg, var(--third-color), var(--secondary-color)) border-box;
-  border: 2px solid transparent; border-radius: 16px; padding: 10px; box-shadow: 0 8px 18px rgba(19,62,135,.14);
-}
-.toolbar-akomodasi button,
-.toolbar-akomodasi select,
-.toolbar-akomodasi input[type="text"]{ border: 2px solid transparent; border-radius: 12px; }
-.toolbar-akomodasi select,
-.toolbar-akomodasi input[type="text"]{
-  background: linear-gradient(#fff,#fff) padding-box,
-              linear-gradient(135deg, var(--third-color), var(--secondary-color)) border-box;
-}
-.toolbar-akomodasi button{ background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); color:#fff; box-shadow: 0 10px 22px rgba(19,62,135,.28); }
-.toolbar-akomodasi button:hover{ filter: brightness(1.05); }
-
-/* Cards: add subtle inner outline for crispness */
-.card-akomodasi,
-.akomodasi-section .card{
-  box-shadow: 0 12px 28px rgba(19,62,135,.14), inset 0 0 0 1px rgba(19,62,135,.08);
-}
-.akomodasi-section .card:hover,
-.card-akomodasi:hover{ box-shadow: 0 16px 34px rgba(19,62,135,.2), inset 0 0 0 1px rgba(19,62,135,.12); }
-
-/* Images: keep gentle zoom */
-.card-image-akomodasi{ position: relative; overflow:hidden; }
-.card-image-akomodasi img{ transition: transform .5s ease, filter .5s ease; }
-.card-akomodasi:hover .card-image-akomodasi img{ transform: scale(1.03); filter: saturate(1.05);}
+  pointer

@@ -205,10 +205,10 @@ window.akomodasiData = [
         ]
     },
     {
-        name: "Villa Bantilang Resort",
-        desc_short: "Villa Bantilang Resort berlantai dua dengan fasilitas lengkap.",
+        name: "Bantilang Resort",
+        desc_short: "Bantilang Resort berlantai dua dengan fasilitas lengkap.",
         desc_full: [
-            "Villa Bantilang Resort memiliki dua lantai dengan fasilitas lengkap.",
+            "Bantilang Resort memiliki dua lantai dengan fasilitas lengkap.",
             "Memiliki fasilitas AC serta kamar mandi dalam untuk kenyamanan tamu."],
         img: "asset/img/wisata andalah/akomodasi/villa-bantilan/01.jpeg",
         type: "villa",
@@ -249,27 +249,45 @@ window.akomodasiData = [
         ]
     },
     {
-        name: "Villa Paraikatte",
-        desc_short: "Villa Paraikatte menawarkan kombinasi kamar kipas dan AC.",
-        desc_full: [
-            "Lantai satu memiliki dua kamar dengan fasilitas kipas angin.",
-            "Lantai dua memiliki dua kamar dengan fasilitas AC untuk kenyamanan ekstra.",
-            "Kamar mandi/toilet tersedia di dalam."],
-        img: "asset/img/wisata andalah/akomodasi/villa-paraikatte/01.jpeg",
+        name: "Villa Mattoanging",
+        desc_short: "Nikmati pengalaman menginap nyaman di Villa Tebing Mattoanging.",
+        desc_full: ["Kami menyediakan beberapa pilihan kamar dan villa sesuai kebutuhan, mulai dari pasangan, keluarga kecil, hingga rombongan besar",
+            "Standard Room I",
+            "Rp350K (2=3 org) | Rp500K (2-5 org)",
+            "✔ Kamar dengan AC & kamar mandi dalam",
+            "Standard Room II",
+            "Rp350K (2-3 org) | Rp500K (2-5 org)",
+            "✔ Kamar dengan AC & kamar mandi dalam",
+            "Villa Segitiga",
+            "Rp1.000.000 (8-12 org)",
+            "✔ 2 lantai, 1 King bed + 3 Queen bed, AC & kamar mandi dalam"
+        ],
+        img: "",
         type: "villa",
-        location: "Lembanna, Bulukumba",
-        whatsapp: "6281523995861",
+        location: "Tebing Mattoanging",
+        whatsapp: "6285340421458",
         rating: 5,
-        stayInfo: "1 malam, 4 dewasa",
+        stayInfo: "1 malam, 2 dewasa",
+        images: [
+            "asset/img/wisata andalah/akomodasi/villa-mattoanging.jpg",
+            "asset/img/wisata andalah/akomodasi/villa-mattoanging-1.jpg",
+            "asset/img/wisata andalah/akomodasi/villa-mattoangin-2.jpg",
+            "asset/img/wisata andalah/akomodasi/villa-mattoangin-3.jpg",
+            "asset/img/wisata andalah/akomodasi/villa-mattoangin-4.jpg",
+            "asset/img/wisata andalah/akomodasi/villa-mattoangin-5.jpg",
+            "asset/img/wisata andalah/akomodasi/villa-mattoangin-6.jpg",
+        ],
         facilities: [
             {name: 'Kipas Angin', icon: 'fa-fan'},
             {name: 'AC', icon: 'fa-snowflake'},
-            {name: 'Kamar Mandi Dalam', icon: 'fa-bath'},
-            {name: 'Dua Lantai', icon: 'fa-stairs'}
-        ],
-        images: [
-            "asset/img/wisata andalah/akomodasi/villa-paraikatte/01.jpeg",
-            "asset/img/wisata andalah/akomodasi/villa-paraikatte/02.jpeg"
+            {name: 'Kamar Mandi Dalam', icon: 'fa-restroom'},
+            {name: 'Dapur Umum', icon: 'fa-utensils'},
+            {name: '4 WC umum', icon: 'fa-restroom'},
+            {name: 'Area Pembakaran Ikan', icon: 'fa-fish fa-fire-alt'},
+            {name: 'Area Camp', icon:'fa-campground'},
+            {name: 'Café', icon: 'fa-utensils'},
+            {name: 'Sound/Karaoke', icon: 'fa-music'},
+            {name: 'Parkir', icon: 'fa-parking'},
         ]
     },
     {
@@ -296,26 +314,6 @@ window.akomodasiData = [
             "asset/img/wisata andalah/akomodasi/villa-sibara.jpg",
             "asset/img/wisata andalah/akomodasi/villa-sibara-02.jpg",
             "asset/img/wisata andalah/akomodasi/villa-sibara-03.jpg"
-        ]
-    },
-    {
-        name: "Villa Sunrise",
-        desc_short: "Villa Sunrise menawarkan satu kamar full AC.",
-        desc_full: [
-            "Villa Sunrise memiliki satu kamar dengan fasilitas full AC.",
-            "Kamar mandi/toilet berada di dalam sehingga privasi terjaga."],
-        img: "asset/img/wisata andalah/akomodasi/villa-sunrise/01.jpeg",
-        type: "villa",
-        location: "Lembanna, Bulukumba",
-        whatsapp: "6285340633221",
-        rating: 5,
-        stayInfo: "1 malam, 2 dewasa",
-        facilities: [
-            {name: 'AC', icon: 'fa-snowflake'},
-            {name: 'Kamar Mandi Dalam', icon: 'fa-bath'},
-        ],
-        images: [
-            "asset/img/wisata andalah/akomodasi/villa-sunrise/01.jpeg"
         ]
     },
     {
@@ -408,45 +406,47 @@ window.akomodasiData = [
         ]
     },
     {
-        name: "Villa Mattoanging",
-        desc_short: "Nikmati pengalaman menginap nyaman di Villa Tebing Mattoanging.",
-        desc_full: ["Kami menyediakan beberapa pilihan kamar dan villa sesuai kebutuhan, mulai dari pasangan, keluarga kecil, hingga rombongan besar",
-            "Standard Room I",
-            "Rp350K (2=3 org) | Rp500K (2-5 org)",
-            "✔ Kamar dengan AC & kamar mandi dalam",
-            "Standard Room II",
-            "Rp350K (2-3 org) | Rp500K (2-5 org)",
-            "✔ Kamar dengan AC & kamar mandi dalam",
-            "Villa Segitiga",
-            "Rp1.000.000 (8-12 org)",
-            "✔ 2 lantai, 1 King bed + 3 Queen bed, AC & kamar mandi dalam"
-        ],
-        img: "",
+        name: "Villa Paraikatte",
+        desc_short: "Villa Paraikatte menawarkan kombinasi kamar kipas dan AC.",
+        desc_full: [
+            "Lantai satu memiliki dua kamar dengan fasilitas kipas angin.",
+            "Lantai dua memiliki dua kamar dengan fasilitas AC untuk kenyamanan ekstra.",
+            "Kamar mandi/toilet tersedia di dalam."],
+        img: "asset/img/wisata andalah/akomodasi/villa-paraikatte/01.jpeg",
         type: "villa",
-        location: "Tebing Mattoanging",
-        whatsapp: "6285340421458",
+        location: "Lembanna, Bulukumba",
+        whatsapp: "6281523995861",
         rating: 5,
-        stayInfo: "1 malam, 2 dewasa",
-        images: [
-            "asset/img/wisata andalah/akomodasi/villa-mattoanging.jpg",
-            "asset/img/wisata andalah/akomodasi/villa-mattoanging-1.jpg",
-            "asset/img/wisata andalah/akomodasi/villa-mattoangin-2.jpg",
-            "asset/img/wisata andalah/akomodasi/villa-mattoangin-3.jpg",
-            "asset/img/wisata andalah/akomodasi/villa-mattoangin-4.jpg",
-            "asset/img/wisata andalah/akomodasi/villa-mattoangin-5.jpg",
-            "asset/img/wisata andalah/akomodasi/villa-mattoangin-6.jpg",
-        ],
+        stayInfo: "1 malam, 4 dewasa",
         facilities: [
             {name: 'Kipas Angin', icon: 'fa-fan'},
             {name: 'AC', icon: 'fa-snowflake'},
-            {name: 'Kamar Mandi Dalam', icon: 'fa-restroom'},
-            {name: 'Dapur Umum', icon: 'fa-utensils'},
-            {name: '4 WC umum', icon: 'fa-restroom'},
-            {name: 'Area Pembakaran Ikan', icon: 'fa-fish fa-fire-alt'},
-            {name: 'Area Camp', icon:'fa-campground'},
-            {name: 'Café', icon: 'fa-utensils'},
-            {name: 'Sound/Karaoke', icon: 'fa-music'},
-            {name: 'Parkir', icon: 'fa-parking'},
+            {name: 'Kamar Mandi Dalam', icon: 'fa-bath'},
+            {name: 'Dua Lantai', icon: 'fa-stairs'}
+        ],
+        images: [
+            "asset/img/wisata andalah/akomodasi/villa-paraikatte/01.jpeg",
+            "asset/img/wisata andalah/akomodasi/villa-paraikatte/02.jpeg"
+        ]
+    },
+    {
+        name: "Villa Sunrise",
+        desc_short: "Villa Sunrise menawarkan satu kamar full AC.",
+        desc_full: [
+            "Villa Sunrise memiliki satu kamar dengan fasilitas full AC.",
+            "Kamar mandi/toilet berada di dalam sehingga privasi terjaga."],
+        img: "asset/img/wisata andalah/akomodasi/villa-sunrise/01.jpeg",
+        type: "villa",
+        location: "Lembanna, Bulukumba",
+        whatsapp: "6285340633221",
+        rating: 5,
+        stayInfo: "1 malam, 2 dewasa",
+        facilities: [
+            {name: 'AC', icon: 'fa-snowflake'},
+            {name: 'Kamar Mandi Dalam', icon: 'fa-bath'},
+        ],
+        images: [
+            "asset/img/wisata andalah/akomodasi/villa-sunrise/01.jpeg"
         ]
     }
 ];
