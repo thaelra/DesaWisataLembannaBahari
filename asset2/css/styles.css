@@ -47,6 +47,15 @@ body {
     transform: translateX(0);
 }
 
+.header-logo{
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+    backdrop-filter: blur(2px);
+    }
 /* Enhanced Header with Immersive Design */
 .header-container {
     height: calc(100vh + 60px); /* extend to cover nav overlap */
@@ -283,7 +292,7 @@ body {
 }
 
 .main-title h1 {
-    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    font-size: clamp(2.4rem, 3vw, 4rem);
     font-weight: 300;
     margin: 0;
     line-height: 1.05;
@@ -873,10 +882,6 @@ body {
     animation: edgePulse 3s ease-in-out infinite alternate;
 }
 
-.nav-wrapper.nav-sticky .logo a {
-    font-size: 1.5em;
-}
-
 .nav-wrapper.nav-sticky .nav-links a {
     padding: 8px 16px;
 }
@@ -1244,7 +1249,6 @@ main::before {
 }
 
 .content-container {
-    max-width: 1200px;
     height: 600px;
     margin: 0 auto;
     display: grid;
@@ -1358,9 +1362,35 @@ main::before {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
+@media (max-width: 1280px){
 #profil-desa .text-content p {
     font-size: 1.1em;
     line-height: 1.8;
+}
+
+}
+
+@media (min-width: 1280px){
+#profil-desa .text-content p {
+    font-size: 1.4em;
+    line-height: 1.8;
+}
+
+.nav-wrapper nav .logo a {
+    font-size: 1.4em;
+}
+}
+
+@media (min-width: 1920px){
+#profil-desa .text-content p {
+    font-size: 1.8em;
+    line-height: 1.8;
+}
+
+.nav-wrapper nav .logo a {
+    font-size: 2.5em;
+}
+
 }
 
 #profil-desa .image-placeholder {
@@ -1872,11 +1902,6 @@ main::before {
     position: relative;
     isolation: isolate;
 }
-
-#wisata .container {
-    max-width: 1200px;
-}
-
 #wisata::before {
     content: '';
     position: absolute;
@@ -1911,7 +1936,6 @@ main::before {
 }
 
 .container {
-    max-width: 960px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -2183,7 +2207,6 @@ main::before {
 }
 
 .cta-container {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
     display: grid;
@@ -3338,7 +3361,6 @@ body.menu-open { overflow: hidden; }
 }
 
 .footer-container {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
     position: relative;
@@ -4332,10 +4354,6 @@ h2.section-title::before,
         height: 80px;
     }
     
-    /* === FOOTER === */
-    .site-footer {
-        padding: 40px 0 20px 0;
-    }
     
     .footer-container {
         padding: 0 20px;
@@ -4982,7 +5000,7 @@ rousel-inner img {
     
     /* === FOOTER === */
     .site-footer {
-        padding: 40px 0 120px 0;
+        padding: 40px 0 160px 0;
     }
     
     .footer-container {
@@ -5376,3 +5394,603 @@ rousel-inner img {
         margin-bottom: 15px;
     }
     
+}
+
+/* =============================================
+   LARGE SCREENS (1280px - 1600px)
+   Enhanced typography and spacing for desktop
+   ============================================= */
+@media (min-width: 1280px) {
+    /* Root Variables - Increased sizes for large screens */
+    :root {
+        --fontXXL: 5.5rem;
+        --fontXL: 4.5rem;
+        --fontL: 2.8rem;
+        --fontB: 2rem;
+        --fontMM: 1.5rem;
+        --fontM: 1.2rem;
+        --fontS: 1rem;
+    }
+
+    .header-logo{
+        width: 100px;
+        height: 100px;
+    }
+
+    @media (max-width: 1280px){
+        .header-logo{
+            width: 80px;
+            height: 80px;
+        }
+     }
+    /* === HEADER SECTION === */
+    .header-container {
+        min-height: 800px;
+    }
+
+    .header-overlay {
+        padding: 30px 80px;
+    }
+
+    .header-content {
+        grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.8fr);
+        gap: 60px;
+        padding: 50px 0;
+
+
+    }
+
+    .header-title {
+        padding: 14px 20px;
+        border-radius: 18px;
+    }
+
+    .header-title .desa-name {
+        font-size: 1.6em;
+    }
+
+    .header-title .kabupaten-name {
+        font-size: 1.1em;
+    }
+
+    .main-title {
+        max-width: 1100px;
+        padding: 32px 40px;
+        border-radius: 24px;
+    }
+
+    .main-title h1 {
+        font-size: clamp(3rem, 8vw, 3rem);
+        letter-spacing: 4px;
+        line-height: 1.1;
+    }
+
+    .hero-tagline {
+        font-size: 1.35em;
+        padding: 14px 28px;
+        margin-top: 20px;
+        border-radius: 30px;
+    }
+
+    .hero-actions {
+        margin-top: 32px;
+        gap: 20px;
+    }
+
+    .hero-btn {
+        padding: 16px 36px;
+        font-size: 1.25rem;
+        min-width: 200px;
+        border-radius: 50px;
+    }
+
+
+
+    nav {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px 40px;
+    }
+
+    .logo img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .logo-text .desa {
+        font-size: 1.3rem;
+    }
+
+    .logo-text .kabupaten {
+        font-size: 1rem;
+    }
+
+    .nav-links {
+        gap: 40px;
+    }
+
+    .nav-links a {
+        font-size: 1.3rem;
+        padding: 12px 20px;
+    }
+
+    /* === MAIN CONTENT === */
+    main {
+        padding: 60px 80px 80px 80px;
+        margin: 0 auto;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 60px 40px;
+    }
+
+    /* === TEXT CONTENT === */
+    .text-content {
+        padding: 40px 50px;
+        border-radius: 20px;
+    }
+
+    .text-content h2 {
+        font-size: 2.8rem;
+        margin-bottom: 30px;
+    }
+
+    .text-content p {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        margin-bottom: 24px;
+    }
+
+    /* === FEATURE SECTION === */
+    .feature-text h2 {
+        font-size: 3rem !important;
+        margin-bottom: 30px !important;
+        line-height: 1.2 !important;
+    }
+
+    .feature-text p {
+        font-size: 1.3rem !important;
+        line-height: 1.8 !important;
+    }
+
+    .feature-shape {
+        height: 500px;
+        border-radius: 24px;
+    }
+
+    /* === CTA SECTION === */
+    .cta-section {
+        padding: 100px 80px 120px 80px;
+    }
+
+    .cta-title {
+        font-size: 3.5rem !important;
+        margin-bottom: 30px !important;
+        line-height: 1.2 !important;
+    }
+
+    .cta-subtitle {
+        font-size: 1.4rem;
+        margin-bottom: 40px;
+        line-height: 1.7;
+    }
+
+    .cta-btn {
+        padding: 18px 40px;
+        font-size: 1.25rem;
+        min-width: 220px;
+    }
+
+    /* === FOOTER === */
+    .site-footer {
+        padding: 80px 80px 40px 80px;
+    }
+
+    .footer-column h3 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    .footer-column a {
+        font-size: 1.15rem;
+    }
+
+    .footer-bottom {
+        font-size: 1.1rem;
+    }
+}
+
+/* =============================================
+   EXTRA LARGE SCREENS (1601px - 1920px)
+   Premium desktop experience
+   ============================================= */
+@media (min-width: 1601px) {
+    :root {
+        --fontXXL: 6.5rem;
+        --fontXL: 5rem;
+        --fontL: 3.2rem;
+        --fontB: 2.3rem;
+        --fontMM: 1.7rem;
+        --fontM: 1.35rem;
+        --fontS: 1.1rem;
+    }
+
+    .header-container {
+        min-height: 900px;
+    }
+
+    .header-overlay {
+        padding: 40px 120px;
+    }
+
+    .header-content {
+        gap: 80px;
+    }
+
+    .main-title h1 {
+        font-size: clamp(5rem, 9vw, 7.5rem);
+        letter-spacing: 5px;
+    }
+
+    .hero-tagline {
+        font-size: 1.5em;
+    }
+
+    .hero-btn {
+        padding: 20px 48px;
+        font-size: 1.4rem;
+        min-width: 240px;
+    }
+
+    .nav-wrapper {
+        padding: 0 120px;
+    }
+
+    nav {
+        max-width: 1600px;
+        padding: 24px 50px;
+    }
+
+    .logo img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .nav-links a {
+        font-size: 1.45rem;
+    }
+
+    main {
+        padding: 80px 120px 100px 120px;
+    }
+
+    .text-content h2 {
+        font-size: 3.2rem;
+    }
+
+    .text-content p {
+        font-size: 1.4rem;
+    }
+
+    .feature-text h2 {
+        font-size: 3.5rem !important;
+    }
+
+    .feature-text p {
+        font-size: 1.45rem !important;
+    }
+
+    .cta-title {
+        font-size: 4rem !important;
+    }
+
+    .cta-subtitle {
+        font-size: 1.55rem;
+    }
+
+    .cta-btn {
+        padding: 22px 48px;
+        font-size: 1.4rem;
+    }
+
+    .footer-column h3 {
+        font-size: 2rem;
+    }
+
+    .footer-column a {
+        font-size: 1.3rem;
+    }
+}
+
+/* =============================================
+   ULTRA LARGE SCREENS (1921px - 2560px)
+   4K and Ultra-wide display optimization
+   ============================================= */
+@media (min-width: 1921px) and (max-width: 2560px) {
+    :root {
+        --fontXXL: 7.5rem;
+        --fontXL: 6rem;
+        --fontL: 3.8rem;
+        --fontB: 2.6rem;
+        --fontMM: 2rem;
+        --fontM: 1.5rem;
+        --fontS: 1.25rem;
+    }
+
+    .header-container {
+        min-height: 1080px;
+    }
+
+    .header-overlay {
+        padding: 50px 150px;
+    }
+
+    .header-content {
+        gap: 100px;
+    }
+
+    .main-title h1 {
+        font-size: clamp(6rem, 10vw, 9rem);
+        letter-spacing: 6px;
+    }
+
+    .hero-tagline {
+        font-size: 1.75em;
+        padding: 20px 44px;
+    }
+
+    .hero-btn {
+        padding: 24px 56px;
+        font-size: 1.6rem;
+        min-width: 280px;
+    }
+
+    .nav-wrapper {
+        padding: 0 150px;
+    }
+
+    nav {
+        max-width: 2000px;
+        padding: 28px 60px;
+    }
+
+    .logo img {
+        width: 85px;
+        height: 85px;
+    }
+
+    .logo-text .desa {
+        font-size: 1.8rem;
+    }
+
+    .nav-links a {
+        font-size: 1.65rem;
+    }
+
+    main {
+        padding: 100px 150px 120px 150px;
+    }
+
+    .container {
+        max-width: 2000px;
+        padding: 100px 80px;
+    }
+
+    .text-content {
+        padding: 60px 90px;
+    }
+
+    .text-content h2 {
+        font-size: 3.8rem;
+    }
+
+    .text-content p {
+        font-size: 1.6rem;
+    }
+
+    .feature-text h2 {
+        font-size: 4.2rem !important;
+    }
+
+    .feature-text p {
+        font-size: 1.65rem !important;
+    }
+
+    .feature-shape {
+        height: 750px;
+    }
+
+    .cta-section {
+        padding: 150px 150px 180px 150px;
+    }
+
+    .cta-title {
+        font-size: 4.8rem !important;
+    }
+
+    .cta-subtitle {
+        font-size: 1.8rem;
+    }
+
+    .cta-btn {
+        padding: 26px 56px;
+        font-size: 1.6rem;
+        min-width: 300px;
+    }
+
+    .footer-column h3 {
+        font-size: 2.4rem;
+    }
+
+    .footer-column a {
+        font-size: 1.5rem;
+    }
+
+    .footer-bottom {
+        font-size: 1.35rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE: FLOATING INFO CARDS - LARGE SCREENS
+   ======================================== */
+
+/* Large Screens (1280px - 1600px) */
+@media (min-width: 1280px) and (max-width: 1600px) {
+    .floating-info-cards {
+        gap: 20px;
+    }
+
+    .info-card {
+        gap: 20px;
+        border-radius: 24px;
+        padding: 20px 26px;
+        min-width: 260px;
+    }
+
+    .card-icon {
+        font-size: 3.2em;
+    }
+
+    .card-number {
+        font-size: 2.6em;
+    }
+
+    .card-text {
+        font-size: 1.15em;
+    }
+
+    .scroll-indicator {
+        bottom: 40px;
+    }
+
+    .scroll-arrow span {
+        width: 24px;
+        height: 24px;
+        border-bottom: 3px solid var(--white-color);
+        border-right: 3px solid var(--white-color);
+    }
+
+    .scroll-text {
+        font-size: 1.1em;
+    }
+}
+
+/* Extra Large Screens (1601px - 1920px) */
+@media (min-width: 1601px) and (max-width: 1920px) {
+    .floating-info-cards {
+        gap: 24px;
+    }
+
+    .info-card {
+        gap: 24px;
+        border-radius: 28px;
+        padding: 24px 32px;
+        min-width: 300px;
+    }
+
+    .info-card:hover {
+        transform: translateX(0) scale(1.08);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-icon {
+        font-size: 3.8em;
+    }
+
+    .card-number {
+        font-size: 3.2em;
+    }
+
+    .card-text {
+        font-size: 1.3em;
+    }
+
+    .scroll-indicator {
+        bottom: 50px;
+        gap: 14px;
+    }
+
+    .scroll-arrow {
+        gap: 8px;
+    }
+
+    .scroll-arrow span {
+        width: 28px;
+        height: 28px;
+        border-bottom: 3px solid var(--white-color);
+        border-right: 3px solid var(--white-color);
+    }
+
+    .scroll-text {
+        font-size: 1.25em;
+    }
+}
+
+/* Ultra Large Screens (1921px - 2560px) - 4K Displays */
+@media (min-width: 1921px) and (max-width: 2560px) {
+    .floating-info-cards {
+        gap: 30px;
+    }
+
+    .info-card {
+        gap: 28px;
+        border-radius: 32px;
+        padding: 28px 38px;
+        min-width: 360px;
+        border: 2px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .info-card:hover {
+        transform: translateX(0) scale(1.1);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .card-icon {
+        font-size: 4.5em;
+    }
+
+    .card-number {
+        font-size: 3.8em;
+    }
+
+    .card-text {
+        font-size: 1.5em;
+        font-weight: 700;
+    }
+
+    .scroll-indicator {
+        bottom: 60px;
+        gap: 16px;
+    }
+
+    .scroll-arrow {
+        gap: 10px;
+    }
+
+    .scroll-arrow span {
+        width: 32px;
+        height: 32px;
+        border-bottom: 4px solid var(--white-color);
+        border-right: 4px solid var(--white-color);
+    }
+
+    .scroll-text {
+        font-size: 1.45em;
+        font-weight: 600;
+    }
+
+    /* Enhanced animations for larger screens */
+    @keyframes iconFloat {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+}
+

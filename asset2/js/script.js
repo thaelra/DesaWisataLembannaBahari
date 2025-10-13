@@ -708,5 +708,19 @@ style.innerHTML = `
             bottom: 100px;
         }
     }
+
+    @media (min-width: 1280px) {
+    #scrollToTopBtn{
+    width: 70px;
+        height: 70px;
+    }
+}
+
+    @media (min-width: 1920px) {
+    #scrollToTopBtn{
+    width: 100px;
+        height: 100px;
+}
+    }
 `;
 document.head.appendChild(style);
