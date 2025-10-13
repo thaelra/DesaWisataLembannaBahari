@@ -498,7 +498,7 @@ window.kulinerData = [
     {
         name: "Keripik Pisang Mama Abi",
         desc: "Keripik Pisang Mama Abi dirintis pada tahun 2017 dari hasil olahan pisang kebun keluarga.Berawal dari produksi sederhana dengan wajan …",
-        img: "asset/img/wisata andalah/keripik-pisang.jpeg",
+        img: "asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg",
         price: 30000
     },
     {
