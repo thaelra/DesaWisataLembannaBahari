@@ -297,15 +297,49 @@ setTimeout(initializeHamburgerMenu, 500);
 document.addEventListener('DOMContentLoaded', function () {
     // Ensure akomodasi modal lives under body (avoid being inside grid)
     const akModal = document.getElementById('modal');
-    // Highlight timeline row on hover
-    document.querySelectorAll('.timeline-row').forEach(function(row) {
-        row.addEventListener('mouseenter', function() {
-            row.classList.add('active');
-        });
-        row.addEventListener('mouseleave', function() {
-            row.classList.remove('active');
-        });
+    
+    // Timeline interaction handler - supports both hover (desktop) and click (mobile)
+    const timelineRows = document.querySelectorAll('.timeline-row');
+    const isMobile = window.matchMedia('(max-width: 600px)').matches;
+    
+    timelineRows.forEach(function(row) {
+        if (isMobile) {
+            // Mobile: Click to toggle
+            row.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Close all other timeline rows
+                timelineRows.forEach(function(otherRow) {
+                    if (otherRow !== row) {
+                        otherRow.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current row
+                row.classList.toggle('active');
+            });
+        } else {
+            // Desktop: Hover effect
+            row.addEventListener('mouseenter', function() {
+                row.classList.add('active');
+            });
+            row.addEventListener('mouseleave', function() {
+                row.classList.remove('active');
+            });
+        }
     });
+    
+    // Close timeline content when clicking outside on mobile
+    if (isMobile) {
+        document.addEventListener('click', function(e) {
+            const isTimelineClick = e.target.closest('.timeline-row');
+            if (!isTimelineClick) {
+                timelineRows.forEach(function(row) {
+                    row.classList.remove('active');
+                });
+            }
+        });
+    }
 
     // Animate timeline rows when they enter viewport
     const observer = new IntersectionObserver((entries) => {
@@ -706,33 +740,278 @@ document.addEventListener('DOMContentLoaded', function () {
         const nextBtn = document.getElementById('mapNext');
         let currentImages = [];
         let idx = 0;
-        function update(){ if(stage && counter && currentImages.length){ stage.src = currentImages[idx]; counter.textContent = (idx+1)+' / '+currentImages.length; } }
-        function open(panelIndex){ if(!modal) return;
+        
+        function update(){ 
+            if(stage && counter && currentImages.length){ 
+                stage.src = currentImages[idx]; 
+                counter.textContent = (idx+1)+' / '+currentImages.length; 
+            } 
+        }
+        
+        function open(panelIndex){ 
+            if(!modal) return;
             if(panelIndex === 0) currentImages = imagesPeta;
             else if(panelIndex === 1) currentImages = imagesEvakuasi;
             else if(panelIndex === 2) currentImages = imagesTsunami;
-            idx = 0; update(); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+            idx = 0; 
+            update(); 
+            modal.classList.add('open'); 
+            modal.setAttribute('aria-hidden','false'); 
+            document.body.style.overflow='hidden';
         }
-        function close(){ if(!modal) return; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-        function prev(){ if(currentImages.length > 1){ idx = (idx-1+currentImages.length)%currentImages.length; update(); } }
-        function next(){ if(currentImages.length > 1){ idx = (idx+1)%currentImages.length; update(); } }
-        document.querySelectorAll('#peta .peta-view-btn, #peta .peta-figure').forEach(btn=>{
-            btn.addEventListener('click', ()=>{
-                const i = Number(btn.getAttribute('data-index')) || 0;
+        
+        function close(){ 
+            if(!modal) return; 
+            modal.classList.remove('open'); 
+            modal.setAttribute('aria-hidden','true'); 
+            document.body.style.overflow=''; 
+        }
+        
+        function prev(){ 
+            if(currentImages.length > 1){ 
+                idx = (idx-1+currentImages.length)%currentImages.length; 
+                update(); 
+            } 
+        }
+        
+        function next(){ 
+            if(currentImages.length > 1){ 
+                idx = (idx+1)%currentImages.length; 
+                update(); 
+            } 
+        }
+        
+        // Make map images clickable - attach to buttons, figures, and images themselves
+        document.querySelectorAll('#peta .peta-view-btn, #peta .peta-figure, #peta .peta-img').forEach(element => {
+            element.style.cursor = 'pointer';
+            element.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Find the data-index from the element or its parent
+                let dataIndex = element.getAttribute('data-index');
+                if (!dataIndex && element.parentElement) {
+                    dataIndex = element.parentElement.getAttribute('data-index');
+                }
+                const i = Number(dataIndex) || 0;
                 open(i);
-            })
+            });
         });
+        
+        // Close button
         closeBtn && closeBtn.addEventListener('click', close);
+        
+        // Navigation buttons
         prevBtn && prevBtn.addEventListener('click', prev);
         nextBtn && nextBtn.addEventListener('click', next);
-        modal && modal.addEventListener('click', (e)=>{ if(e.target === modal) close(); });
-        document.addEventListener('keydown', (e)=>{ if(!modal || !modal.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+        
+        // Close when clicking outside the modal content (anywhere on the modal overlay)
+        modal && modal.addEventListener('click', (e) => { 
+            if (e.target === modal || e.target.classList.contains('map-modal-content')) {
+                close(); 
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => { 
+            if(!modal || !modal.classList.contains('open')) return; 
+            if(e.key === 'Escape') close(); 
+            if(e.key === 'ArrowLeft') prev(); 
+            if(e.key === 'ArrowRight') next(); 
+        });
 
     })();
 
 
+    // Facilities pane expand/collapse toggle (mobile only)
+    (function(){
+        const initFacilitiesToggle = () => {
+            const pane = document.querySelector('.facilities-pane');
+            if (!pane) return;
+            const grid = pane.querySelector('.facility-grid');
+            let btn = pane.querySelector('.facilities-toggle-btn');
+            const isMobile = window.innerWidth <= 900;
+
+            if (isMobile) {
+                if (!btn) {
+                    btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'facilities-toggle-btn';
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.setAttribute('aria-controls', 'facilityGrid');
+                    btn.textContent = 'Tampilkan semua';
+                    if (grid && grid.parentNode === pane) {
+                        grid.insertAdjacentElement('afterend', btn);
+                    } else {
+                        pane.appendChild(btn);
+                    }
+                    // Keep button visible at bottom of the pane on mobile
+                    btn.style.position = 'sticky';
+                    btn.style.bottom = '8px';
+                    btn.style.display = 'block';
+                    btn.style.margin = '10px auto 0';
+                    btn.style.zIndex = '2';
+
+                    btn.addEventListener('click', () => {
+                        const expanded = pane.classList.toggle('expanded');
+                        btn.setAttribute('aria-expanded', String(expanded));
+                        btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
+
+                        if (!expanded) {
+                            const rect = pane.getBoundingClientRect();
+                            const offsetTop = window.pageYOffset + rect.top - 80; // keep pane in view when collapsing
+                            window.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
+                        }
+                    });
+                }
+            } else {
+                if (btn) btn.remove();
+                pane.classList.remove('expanded');
+            }
+        };
+
+        // Ensure the grid has an id for aria-controls
+        const facilityGrid = document.querySelector('.facilities-pane .facility-grid');
+        if (facilityGrid && !facilityGrid.id) {
+            facilityGrid.id = 'facilityGrid';
+        }
+
+        initFacilitiesToggle();
+        window.addEventListener('resize', initFacilitiesToggle);
+    })();
+
     // Initialize carousel when page loads
     new Gallery3D();
+
+    // Map pane clickable functionality
+    const mapPane = document.querySelector('.map-pane');
+    const mapImage = document.querySelector('.map-image');
+    
+    if (mapPane && mapImage) {
+        // Add cursor pointer to indicate clickability
+        mapPane.style.cursor = 'pointer';
+        
+        // Create modal for full map image
+        const mapModal = document.createElement('div');
+        mapModal.id = 'fullMapModal';
+        mapModal.style.cssText = `
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        `;
+        
+        const mapModalContent = document.createElement('div');
+        mapModalContent.style.cssText = `
+            max-width: 100%;
+            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            cursor: default;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `;
+        
+        const fullMapImage = document.createElement('img');
+        fullMapImage.style.cssText = `
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        `;
+        
+        // Get the background image from the map-image element
+        const mapBackgroundImage = window.getComputedStyle(mapImage).backgroundImage;
+        const imageUrl = mapBackgroundImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+        fullMapImage.src = imageUrl;
+        fullMapImage.alt = 'Full Map View';
+        
+        mapModalContent.appendChild(fullMapImage);
+        mapModal.appendChild(mapModalContent);
+        document.body.appendChild(mapModal);
+        
+        // Open modal when map pane is clicked
+        mapPane.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            mapModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close modal when clicking anywhere on the modal
+        mapModal.addEventListener('click', function(e) {
+            if (e.target === mapModal || e.target === fullMapImage) {
+                mapModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mapModal.style.display === 'flex') {
+                mapModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Add responsive behavior
+        function updateModalResponsiveness() {
+            const isMobile = window.innerWidth <= 768;
+            const isTablet = window.innerWidth <= 1024;
+            
+            if (isMobile) {
+                mapModal.style.padding = '10px';
+                fullMapImage.style.borderRadius = '4px';
+            } else if (isTablet) {
+                mapModal.style.padding = '15px';
+                fullMapImage.style.borderRadius = '6px';
+            } else {
+                mapModal.style.padding = '20px';
+                fullMapImage.style.borderRadius = '8px';
+            }
+        }
+        
+        // Update on resize
+        window.addEventListener('resize', updateModalResponsiveness);
+        
+        // Initial responsive setup
+        updateModalResponsiveness();
+        
+        // Add touch support for mobile
+        let touchStartY = 0;
+        let touchStartX = 0;
+        
+        mapModal.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        mapModal.addEventListener('touchend', function(e) {
+            const touchEndY = e.changedTouches[0].clientY;
+            const touchEndX = e.changedTouches[0].clientX;
+            const deltaY = Math.abs(touchEndY - touchStartY);
+            const deltaX = Math.abs(touchEndX - touchStartX);
+            
+            // Close on swipe down or tap outside image
+            if (deltaY > 50 || (deltaX < 10 && deltaY < 10 && e.target === mapModal)) {
+                mapModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }, { passive: true });
+    }
 
 });
 

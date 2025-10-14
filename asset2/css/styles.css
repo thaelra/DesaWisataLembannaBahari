@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Playfair Display SC';
     scroll-behavior: smooth;
     scroll-margin-top: 5rem;
 }
@@ -27,10 +26,28 @@
 /* General Body Styles */
 body {
     margin: 0;
-    font-family: 'Karma', sans-serif;
+    font-family: 'Karma', serif;
 
     color: var(--primary-color);
     overflow-x: hidden;
+}
+
+/* Base typography: use Karma for general text; keep headers, titles, logos, and navbar in display fonts */
+body, p, li, a, span, small, label, input, textarea, button, figcaption {
+    font-family: 'Karma', serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.header-title, .header-title .desa-name, .header-title .kabupaten-name,
+.main-title h1 {
+    font-family: 'Playfair Display SC', serif;
+}
+
+/* Ensure navbar and logo keep display font */
+.nav-links a,
+.logo a,
+.nav-wrapper nav .logo a {
+    font-family: 'Playfair Display SC', serif;
 }
 
 /* Animation on scroll */

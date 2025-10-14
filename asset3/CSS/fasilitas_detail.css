@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Playfair Display SC";
   scroll-behavior: smooth;
   scroll-margin-top: 5rem;
 }
@@ -31,10 +30,25 @@
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Karma', serif;
   line-height: 1.6;
   color: var(--primary-color);
   background: var(--light-color);
+}
+
+/* Base typography for general text */
+body, p, li, a, span, small, label, input, textarea, button, figcaption {
+  font-family: 'Karma', serif;
+}
+
+/* Preserve display fonts for primary elements */
+h1, h2, h3, h4, h5, h6,
+.nav-link,
+.back-btn,
+.hero h1,
+.badge,
+.footer {
+  font-family: 'Playfair Display SC', serif;
 }
 
 /* Navbar */

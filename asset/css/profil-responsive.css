@@ -3,6 +3,81 @@
    ============================================= */
 
 /* Base responsive utilities */
+/* Center gallery scroller across all breakpoints */
+.galeri-scroller { margin-left: auto; margin-right: auto; display: block; }
+.galeri-scroll { margin-left: auto; margin-right: auto; display: block; }
+
+/* Multi-row support for profil-nav (two rows, 4 items per row) */
+.profil-nav ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 4px;
+  padding: 4px var(--nav-pad-x);
+}
+.profil-nav ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  position: relative; /* for divider positioning */
+}
+
+/* Increase width when not floating */
+.profil-nav:not(.floating) {
+  width: min(96vw, 1700px);
+  margin-inline: auto;
+}
+
+/* Vertical dividers between menu items for both floating and non-floating */
+.profil-nav ul li::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: -8px; /* half of column-gap to center divider */
+  width: 1px;
+  height: 70%;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255,255,255,0.45) 10%,
+    rgba(255,255,255,0.8) 50%,
+    rgba(255,255,255,0.45) 90%,
+    transparent 100%
+  );
+  opacity: 0.9;
+}
+/* Show dividers on all but last column per row (overrides older rules) */
+.profil-nav ul li:not(:nth-child(4n))::after { display: block; }
+/* Hide divider on last column items */
+.profil-nav ul li:nth-child(4n)::after { display: none !important; }
+
+/* Compact link sizing to reduce navbar height */
+.profil-nav a {
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  line-height: 1.2;
+}
+/* Remove slide animation when toggling floating */
+.profil-nav,
+.profil-nav.floating {
+  transition: width .35s ease, max-width .35s ease, padding .35s ease, border-radius .35s ease, box-shadow .25s ease, background .25s ease, filter .25s ease !important;
+}
+
+/* Smooth size morph variables and bindings */
+.profil-nav {
+  --nav-width: min(96vw, 1700px);
+  --nav-radius: 50px;
+  --nav-pad-x: 12px;
+  width: var(--nav-width);
+  border-radius: var(--nav-radius);
+}
+.profil-nav.floating {
+  --nav-width: min(98vw, 1500px);
+  --nav-radius: 24px;
+  --nav-pad-x: 16px;
+}
+/* Animate inner padding smoothly */
+.profil-nav ul { transition: padding .35s ease; }
 :root {
   --mobile-padding: 16px;
   --mobile-gap: 12px;
@@ -261,7 +336,7 @@
   .galeri-scroll {
     width: 280px;
     height: 220px;
-    left: 10px;
+    margin: 0 auto;
   }
   
   .gallery-slide {
@@ -331,13 +406,12 @@
   }
   
   .profil-nav {
-    width: 92vw;
     top: 210px;
+    bottom: auto;
     padding: 0 10px;
   }
   
   .profil-nav.floating {
-    width: auto;
     max-width: 94vw;
     top: 14px !important;
   }
@@ -477,6 +551,7 @@
   .profil-nav {
     width: 90vw;
     top: 260px;
+    bottom: auto;
     padding: 0 8px;
   }
   
@@ -521,16 +596,16 @@
     padding: 0 var(--tablet-padding);
   }
   .timeline-content {
-    max-width: 370px !important;
-    padding: 0 17px !important;
-    font-size: 0.6rem !important;
-    line-height: 1.4 !important;
+    max-width: 320px !important;
+    padding: 0 20px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
   }
 .c-right{
-  margin-right: -3.5rem !important;
+  margin-right: -1.5rem !important;
 }
 .c-left{
-  margin-left: -3.5rem !important;
+  margin-left: -1.5rem !important;
 }
 
 /* Gallery Responsive */
@@ -617,6 +692,7 @@
   .profil-nav {
     width: 95vw;
     top: 250px;
+    bottom: auto;
     padding: 0 8px;
   }
   
@@ -695,18 +771,18 @@
   }
   
   .timeline-content {
-    max-width: 150px !important;
-    padding: 0 15px !important;
-    font-size: 0.55rem !important;
-    line-height: 1.4 !important;
+    max-width: 280px !important;
+    padding: 0 18px !important;
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
   }
 
   .c-right {
-    margin-right: -3.5rem !important;
+    margin-right: -1.5rem !important;
   }
 
   .c-left {
-    margin-left: -4.5rem !important;
+    margin-left: -1.5rem !important;
   }
 
   /* Gallery Responsive */
@@ -718,7 +794,7 @@
   .galeri-scroll {
     width: 700px;
     height: 380px;
-    left: 25px;
+    margin: 0 auto;
   }
 
   .gallery-slide {
@@ -855,7 +931,8 @@
     transform: translateX(0);
   }
 
-  /* Mobile menu list styling - Completely Redesigned */
+  @media (max-width: 900px){
+    /* Mobile menu list styling - Completely Redesigned */
   .nav-links {
     display: none !important;
   }
@@ -863,6 +940,7 @@
   .menu-list {
     display: none !important;
   }
+}
 
   .mobile-menu-list {
     display: flex !important;
@@ -1178,10 +1256,56 @@
     margin-bottom: 8px !important;
   }
 
+  .facilities-pane .facility-grid {
+    grid-template-columns: 1fr; /* stack cards inside pane */
+    gap: 16px;
+}
+
+  /* Facilities pane mobile height control */
+  .facilities-pane {
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+  }
+  .facilities-pane.expanded {
+    max-height: none;
+    overflow: visible;
+  }
+  .facilities-pane::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56px;
+    background: linear-gradient(180deg, rgba(247,249,252,0), rgba(247,249,252,1));
+    pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .facilities-pane.expanded::after {
+    opacity: 0;
+  }
+  .facilities-toggle-btn {
+    margin-left: auto;
+    appearance: none;
+    border: 1px solid rgba(19,62,135,0.25);
+    background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+    color: #133E87;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  }
+  .facilities-toggle-btn:active {
+    transform: translateY(1px);
+  }
+
+
   /* Gallery Responsive for Mobile */
   .galeri-scroller {
     max-width: 480px !important;
-    width: 300px;
     height: 400px !important;
     position: relative;
     overflow: hidden;
@@ -1863,7 +1987,9 @@
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
-  
+  .nav-atas .logo{
+ max-width: 300px;
+    }
   /* ===== MODERN OVERLAY MENU ===== */
   .main-nav {
     position: fixed;
@@ -1984,7 +2110,6 @@
     align-items: flex-start;
     width: 100%;
     max-width: 360px;
-    position: relative;
     z-index: 10;
   }
   
@@ -2340,52 +2465,155 @@ body.no-scroll {
     text-align: center;
   }
   
-  /* Responsive timeline adjustments */
+  /* ========================================
+     MOBILE TIMELINE - NO OVERLAP DESIGN
+     ======================================== */
+  
   .timeline {
-    max-width: 900px !important;
-    padding: 0 55px !important;
+    max-width: 100% !important;
+    padding: 0 15px !important;
+    position: relative;
   }
   
+  /* Vertical timeline line - positioned on the left side */
   .timeline:before {
-    left: 50% !important;
+    left: 30px !important;
+    width: 3px !important;
+    transform: none !important;
   }
   
   .timeline-row {
-    flex-direction: row !important;
+    display: flex !important;
+    flex-direction: column !important;
     align-items: flex-start !important;
-    margin-bottom: 40px !important;
+    position: relative !important;
+    margin-bottom: 60px !important;
+    padding-left: 60px !important;
+    cursor: pointer !important;
+    min-height: 50px !important;
   }
   
-  .timeline-row.left {
-    justify-content: flex-start;
-    
-  }
-  .timeline-row.right{
-    justify-content: flex-end;
+  /* Reset justify-content for mobile - no difference between left/right */
+  .timeline-row.left,
+  .timeline-row.right {
+    justify-content: flex-start !important;
   }
   
+  /* Point ball - positioned on the left timeline line */
   .timeline-row:after {
-    left: 50% !important;
-    top: 18px !important;
+    position: absolute !important;
+    left: 30px !important;
+    top: 0 !important;
     transform: translateX(-50%) !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-width: 3px !important;
+    cursor: pointer !important;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    z-index: 10 !important;
+    background: #fff !important;
+    border-color: #254a8a !important;
   }
   
+  /* Pulse animation for point ball to indicate it's tappable */
+  .timeline-row:after {
+    animation: pulse-hint 2.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-hint {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+  }
+  
+  /* Timeline content - positioned to the right of the point ball */
   .timeline-content {
-    max-width: 170px !important;
-    padding: 0 28px !important;
-    font-size: 0.38rem !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: calc(100vw - 110px) !important;
+    padding: 14px 18px !important;
+    font-size: 0.75rem !important;
     line-height: 1.5 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateX(-20px) scale(0.9) !important;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    pointer-events: none !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
   }
-.c-right{
-  margin-right: -3rem;
-}
-.c-left{
-  margin-left: -3rem;
-}
   
+  /* Remove negative margins that cause overlap */
+  .timeline-content.c-right,
+  .timeline-content.c-left {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* Show content when timeline-row is active (clicked) */
+  .timeline-row.active .timeline-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) scale(1) !important;
+    pointer-events: auto !important;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25) !important;
+  }
+  
+  /* Active point ball styling - more prominent */
+  .timeline-row.active:after {
+    width: 32px !important;
+    height: 32px !important;
+    background: linear-gradient(135deg, #7296cb 0%, #5a7eb8 100%) !important;
+    border-color: #fff !important;
+    border-width: 4px !important;
+    box-shadow: 
+      0 0 0 6px rgba(114, 150, 203, 0.3),
+      0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    animation: none !important;
+    transform: translateX(-50%) scale(1.05) !important;
+  }
+  
+  /* Timeline year badge */
   .timeline-year {
     font-size: 0.75rem !important;
+    font-weight: 700 !important;
     margin-bottom: 8px !important;
+    padding: 5px 10px !important;
+    display: inline-block !important;
+    background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-radius: 20px !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  }
+  
+  /* Timeline content text */
+  .timeline-content p {
+    margin: 0 !important;
+    color: #fff !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+  
+  /* Add connecting line from point ball to content (visual enhancement) */
+  .timeline-row.active:before {
+    content: '' !important;
+    position: absolute !important;
+    left: 44px !important;
+    top: 14px !important;
+    width: 16px !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 100%) !important;
+    z-index: 5 !important;
+    transition: all 0.3s ease !important;
   }
 
   /* Gallery Responsive for Mobile */
@@ -2399,7 +2627,7 @@ body.no-scroll {
   .galeri-scroll {
     width: 450px;
     height: 300px;
-    left: 30%;
+    margin: 0 auto;
   }
 
   .gallery-slide {
@@ -2744,6 +2972,70 @@ body.no-scroll {
    LARGE SCREENS (1280px - 1600px)
    Enhanced typography and spacing for desktop
    ============================================= */
+/* Timeline content organization (high-specificity) */
+.sejarah-section .timeline-content .timeline-year{
+  display:block;
+  margin-bottom:8px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,0.28) !important;
+}
+.sejarah-section .timeline-content p{
+  margin:0 !important;
+  padding:10px 12px !important;
+  background:rgba(255,255,255,0.06) !important;
+  border:1px solid rgba(255,255,255,0.22) !important;
+  border-radius:10px !important;
+  line-height:1.55 !important;
+}
+.sejarah-section .timeline-content p + p{ margin-top:10px !important; }
+
+/* Side accents near the center line by alignment */
+@media (min-width: 601px) and (max-width: 900px){
+  .sejarah-section .timeline-row.left .timeline-content p{ border-left:2px solid rgba(255,255,255,0.32) !important; padding-left:12px !important; }
+  .sejarah-section .timeline-row.right .timeline-content p{ border-right:2px solid rgba(255,255,255,0.32) !important; padding-right:12px !important; }
+}
+@media (min-width: 900px){
+  .sejarah-section .timeline-row.left .timeline-content p{ border-left:3px solid rgba(255,255,255,0.35) !important; padding-left:14px !important; }
+  .sejarah-section .timeline-row.right .timeline-content p{ border-right:3px solid rgba(255,255,255,0.35) !important; padding-right:14px !important; }
+}
+
+/* Awards horizontal scroll for small tablets (600px–930px) */
+@media (min-width: 600px) and (max-width: 930px){
+  .data-desa-section .data-desa-awards{
+    display:flex !important;
+    gap:16px;
+    overflow-x:auto;
+    overflow-y:visible;
+    width:100%;
+    max-width:100vw;
+    padding:0 20px 14px;
+    margin:10px 0 40px;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    scroll-padding:0 20px;
+  }
+  .data-desa-section .data-desa-awards{ scrollbar-width:thin; scrollbar-color: rgba(19,62,135,.6) transparent; }
+  .data-desa-section .data-desa-awards::-webkit-scrollbar{ height:8px; }
+  .data-desa-section .data-desa-awards::-webkit-scrollbar-track{ background:transparent; }
+  .data-desa-section .data-desa-awards::-webkit-scrollbar-thumb{ background:linear-gradient(135deg,#133E87,#608BC1); border-radius:8px; }
+
+  .data-desa-section .award-card{
+    flex:0 0 clamp(340px, 76vw, 520px);
+    scroll-snap-align:start;
+  }
+  .data-desa-section .awards-title{ position:relative; }
+  .data-desa-section .awards-title::after{
+    content:'Geser untuk melihat lainnya →';
+    display:block;
+    margin-top:8px;
+    font-size:.95rem;
+    font-weight:600;
+    color:rgba(255,255,255,0.85);
+    text-align:center;
+    letter-spacing:.5px;
+  }
+}
+
 @media (min-width: 1280px) {
   /* Root Variables - Increased sizes for large screens */
   :root {
@@ -2780,9 +3072,7 @@ body.no-scroll {
   }
 
   /* === NAVIGATION === */
-  .nav-atas {
-    padding: 0 var(--desktop-padding);
-  }
+  
 
   .nav-atas .logo img {
     width: 70px;
@@ -2804,6 +3094,7 @@ body.no-scroll {
 
   .profil-nav {
     top: 450px;
+    bottom: auto;
     padding: 0 50px;
     max-width: 1600px;
     margin: 0 auto;
@@ -2815,12 +3106,16 @@ body.no-scroll {
   }
 
   .profil-nav ul {
-    gap: 35px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 6px;
   }
 
   .profil-nav a {
-    font-size: 1.4rem;
-    padding: 16px 24px;
+    font-size: 1.05rem;
+    padding: 8px 12px;
+    line-height: 1.2;
   }
 
   /* === DATA DESA SECTION === */
@@ -2845,14 +3140,10 @@ body.no-scroll {
 
   .data-desa-box {
     font-size: 1.3rem;
-    min-height: 120px;
-    padding: 28px;
     border-radius: 18px;
   }
 
   .data-desa-box strong {
-    font-size: 2.2rem;
-    margin-bottom: 14px;
   }
 
   /* === TIMELINE SECTION === */
@@ -3114,6 +3405,7 @@ body.no-scroll {
 
   .profil-nav {
     top: 540px;
+    bottom: auto;
     padding: 0 70px;
     max-width: 1920px;
   }
@@ -3124,12 +3416,16 @@ body.no-scroll {
   }
 
   .profil-nav ul {
-    gap: 45px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 8px;
   }
 
   .profil-nav a {
-    font-size: 1.6rem;
-    padding: 18px 28px;
+    font-size: 1.1rem;
+    padding: 9px 14px;
+    line-height: 1.2;
   }
 
   /* === DATA DESA SECTION === */
@@ -3150,14 +3446,11 @@ body.no-scroll {
 
   .data-desa-box {
     font-size: 1.5rem;
-    min-height: 140px;
-    padding: 35px;
     border-radius: 22px;
   }
 
   .data-desa-box strong {
-    font-size: 2.6rem;
-    margin-bottom: 18px;
+
   }
 
   /* === TIMELINE SECTION === */
@@ -3418,6 +3711,7 @@ body.no-scroll {
 
   .profil-nav {
     top: 680px;
+    bottom: auto;
     padding: 0 90px;
     max-width: 2400px;
   }
@@ -3428,13 +3722,17 @@ body.no-scroll {
   }
 
   .profil-nav ul {
-    gap: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 28px;
+    row-gap: 10px;
   }
 
   .profil-nav a {
-    font-size: 1.85rem;
-    padding: 22px 34px;
+    font-size: 1.2rem;
+    padding: 10px 16px;
     border-radius: 16px;
+    line-height: 1.2;
   }
 
   /* === DATA DESA SECTION === */
@@ -3587,6 +3885,7 @@ body.no-scroll {
     border-radius: 32px;
   }
 
+  
   .vm-box h2 {
     font-size: 3.8rem;
     margin-bottom: 45px;
