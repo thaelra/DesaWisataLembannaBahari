@@ -44,7 +44,8 @@ const wisataData = {
             'Pemandu wisata lokal',
             'Area istirahat'
         ], 
-        sejarah: 'Gua Passea merupakan salah satu situs purbakala yang menyimpan kisah sejarah masyarakat Lembanna. Dahulu, gua ini menjadi tempat persembunyian warga ketika terjadi serangan dari suku kanibal. Nama Passea yang berarti “perih” menggambarkan penderitaan masyarakat saat itu, karena mereka mengalami kekurangan makanan dan kebutuhan hidup, bahkan sebagian ada yang meninggal di dalam gua. Di dalamnya ditemukan kerangka manusia, sisa-sisa pemakaman, serta berbagai peninggalan lain yang memperkuat nilai sejarahnya. Kini, Gua Passea menjadi lokasi penelitian yang menarik perhatian para peneliti maupun mahasiswa dari berbagai universitas di Sulawesi Selatan.'
+        sejarah: 'Gua Passea merupakan salah satu situs purbakala yang menyimpan kisah sejarah masyarakat Lembanna. Dahulu, gua ini menjadi tempat persembunyian warga ketika terjadi serangan dari suku kanibal. Nama Passea yang berarti “perih” menggambarkan penderitaan masyarakat saat itu, karena mereka mengalami kekurangan makanan dan kebutuhan hidup, bahkan sebagian ada yang meninggal di dalam gua. Di dalamnya ditemukan kerangka manusia, sisa-sisa pemakaman, serta berbagai peninggalan lain yang memperkuat nilai sejarahnya. Kini, Gua Passea menjadi lokasi penelitian yang menarik perhatian para peneliti maupun mahasiswa dari berbagai universitas di Sulawesi Selatan.',
+        qr_code: 'asset/img/wisata andalah/QR_CODE_GUA.jpeg'
     },
     'TebingMatto': {
         title: 'Tebing Mattoanging',
@@ -199,6 +200,18 @@ function openWisataModal(wisataKey) {
     if (sejarahEl) {
         sejarahEl.textContent = data.sejarah || '';
         sejarahEl.style.display = data.sejarah ? 'block' : 'none';
+    }
+
+    // Populate QR Code
+    const qrSectionEl = document.getElementById('modalQrSection');
+    const qrCodeEl = document.getElementById('modalQrCode');
+    if (qrSectionEl && qrCodeEl) {
+        if (data.qr_code) {
+            qrCodeEl.src = data.qr_code;
+            qrSectionEl.style.display = 'block';
+        } else {
+            qrSectionEl.style.display = 'none';
+        }
     }
 
     // Clear previous slideshow if any

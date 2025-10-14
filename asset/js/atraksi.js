@@ -33,120 +33,83 @@ function initAtraksiAnimations() {
 
 // Detailed information for each atraksi
 const atraksiData = {
-    assulo: {
-        title: "Assulo Juk'u",
-        subtitle: "Ritual Tradisional Nelayan Bugis Makassar",
-        description: `
-            <p><strong>Assulo Juk'u</strong> adalah ritual sakral yang telah dilakukan turun-temurun oleh masyarakat nelayan Bugis Makassar di Desa Lembanna. Upacara ini dilaksanakan sebagai bentuk rasa syukur kepada Sang Pencipta dan permohonan keselamatan sebelum para nelayan melaut.</p>
-            
-            <h3>Makna dan Filosofi</h3>
-            <p>Ritual ini mencerminkan kearifan lokal masyarakat pesisir yang sangat menghargai laut sebagai sumber kehidupan. Melalui Assulo Juk'u, masyarakat mengajarkan nilai-nilai spiritual dan keseimbangan dengan alam.</p>
-            
-            <h3>Prosesi Ritual</h3>
-            <ul>
-                <li>Pembacaan doa-doa tradisional</li>
-                <li>Penyajian sesaji khas masyarakat pesisir</li>
-                <li>Prosesi ke tepi pantai</li>
-                <li>Pelepasan perahu dengan harapan keselamatan</li>
-            </ul>
-            
-            <h3>Waktu Pelaksanaan</h3>
-            <p>Ritual ini dilakukan pada awal musim melaut, biasanya setelah musim angin barat berakhir dan laut kembali tenang.</p>
-            
-            <h3>Nilai Budaya</h3>
-            <p>Assulo Juk'u menjadi bukti nyata bagaimana masyarakat Lembanna menjaga tradisi nenek moyang sambil tetap menjalankan kehidupan modern sebagai desa wisata.</p>
-        `,
-        image: "asset/img/profil-desa/Assulo Juk'u di Mandala Ria.jpg"
+    salonreng: {
+         title: "Tari Salonreng",
+    subtitle: "Tarian Tradisional dari Desa Ara",
+    description: `
+        <p><strong>Tari Salonreng</strong> merupakan tarian adat klasik yang telah berusia lebih dari <strong>400 tahun</strong> dan diwariskan secara turun-temurun oleh masyarakat Desa Ara. Tarian ini mencerminkan keanggunan, kehormatan, serta nilai-nilai budaya masyarakat Bugis-Makassar.</p>
+        
+        <h3>Sejarah dan Asal-usul</h3>
+        <p>Tari Salonreng dibawa ke Ara oleh para bangsawan <strong>Kerajaan Gowa</strong> pada abad ke-17, ketika mereka menjalin kerja sama dengan masyarakat Ara untuk membangun perahu-perahu armada laut Gowa. Salah satu bangsawan yang memperkenalkan tarian ini adalah <strong>Karaeng Mamampang</strong>, yang kemudian menetap di Ara bersama keluarganya. Dari sinilah tarian ini berkembang dan menjadi identitas budaya masyarakat Ara.</p>
+        <p>Kedudukan Tari Salonreng semakin kuat ketika keturunan Karaeng Mamampang menikah dengan bangsawan Ara, seperti <strong>Saloko Daeng Makatti</strong> yang menikah dengan <strong>Daeng Sikati Bunting Berua</strong>. Hubungan ini memperkuat posisi Salonreng sebagai warisan budaya bersama antara Gowa dan Ara.</p>
+        
+        <h3>Struktur dan Ragam Tarian</h3>
+        <p>Dalam penampilannya, Tari Salonreng terdiri dari tiga bagian utama, yaitu:</p>
+        <ul>
+            <li><strong>Pakarena Lalo</strong> (atau <em>Akkarena Tedong</em>)</li>
+            <li><strong>Siusiri</strong></li>
+            <li><strong>Salonreng</strong> itu sendiri</li>
+        </ul>
+        <p>Setiap bagian memiliki makna dan irama gerakan yang berbeda, namun semuanya menggambarkan keanggunan dan kelembutan wanita Bugis-Makassar.</p>
+
+        <h3>Kostum dan Musik Pengiring</h3>
+        <p>Kostum yang digunakan oleh penari Salonreng terdiri dari <strong>Baju Bodo</strong>, <strong>sarung Samarinda</strong> atau <strong>sarung sutra</strong>, dan <strong>Tambong</strong> (selendang panjang berbentuk segitiga). Jumlah penari selalu <strong>genap</strong> karena setiap gerakan dibawakan secara berpasangan, menggambarkan harmoni dan keseimbangan. Tarian ini diiringi oleh alat musik tradisional seperti <strong>gong</strong> dan <strong>gendang</strong> yang mengatur tempo dan suasana selama pertunjukan.</p>
+
+        <h3>Makna dan Nilai Filosofis</h3>
+        <p>Tari Salonreng memiliki makna mendalam tentang <strong>keindahan, perangai, dan keharmonisan</strong>. Ia melambangkan ajaran untuk <strong>menerima kebaikan dan meninggalkan keburukan</strong>, menjaga <strong>norma dan kesopanan</strong>, serta memperlihatkan kesatuan antara <strong>pemerintah atau penguasa dengan masyarakat</strong>. Tarian ini menjadi simbol persatuan dan keseimbangan dalam kehidupan sosial dan spiritual masyarakat Ara.</p>
+        
+        <h3>Peran dalam Sejarah</h3>
+        <p>Berdasarkan catatan <em>lontara</em> di Ara, Tari Salonreng sering dipentaskan untuk menghibur para bangsawan Gowa dan Ara saat menunggu selesainya pembuatan perahu. Tarian ini bahkan pernah ditampilkan di hadapan <strong>Sultan Hasanuddin</strong> saat singgah di Tanah Beru sebelum berangkat berperang ke Buton.</p>
+        <p>Tercatat pula bahwa tarian ini pernah diundang oleh <strong>Raja Bone ke-XXIII, La Tenritappu</strong>, dan dipentaskan di Baruga Bone pada <strong>20–21 September 1793</strong>. Fakta ini menunjukkan nilai diplomasi budaya dan sejarah yang melekat pada Tari Salonreng.</p>
+        
+        <h3>Pertunjukan</h3>
+        <p>Tari Salonreng sering ditampilkan dalam acara adat, penyambutan tamu kehormatan, serta festival budaya di wilayah Ara dan sekitarnya. Tarian ini menjadi simbol kebanggaan masyarakat Ara atas warisan budaya yang telah bertahan selama berabad-abad.</p>
+
+        <h3>QR CODE Sejarah Lengkap</h3>
+        <img src="asset/img/wisata andalah/QR_CODE_TARISALONRENG.jpeg" alt="QR Code Sejarah Salonreng">
+    `,
+    image: "asset/img/wisata andalah/tarian-salonreng.jpeg"
     },
-    pinisi: {
-        title: "Warisan Pembuatan Perahu Pinisi",
-        subtitle: "UNESCO Intangible Cultural Heritage",
-        description: `
-            <p><strong>Pembuatan Perahu Pinisi</strong> adalah seni kerajinan kapal tradisional yang telah diakui UNESCO sebagai warisan budaya takbenda manusia. Desa Lembanna memiliki sejarah panjang dalam tradisi pembuatan kapal legendaris ini.</p>
-            
-            <h3>Pengakuan UNESCO</h3>
-            <p>Pada tahun 2017, UNESCO secara resmi mengakui pembuatan perahu Pinisi sebagai warisan budaya takbenda yang harus dilestarikan. Ini menempatkan tradisi Bugis-Makassar setara dengan warisan budaya dunia lainnya.</p>
-            
-            <h3>Teknik Pembuatan</h3>
-            <ul>
-                <li>Tanpa menggunakan gambar teknik formal</li>
-                <li>Pengetahuan turun-temurun dari generasi ke generasi</li>
-                <li>Pemilihan kayu khusus dengan ritual tersendiri</li>
-                <li>Proses pembuatan bisa memakan waktu berbulan-bulan</li>
-                <li>Setiap detail memiliki makna filosofis</li>
-            </ul>
-            
-            <h3>Keunikan Pinisi</h3>
-            <p>Perahu Pinisi bukan sekadar kapal, tetapi simbol ketangguhan dan jiwa petualang masyarakat Bugis-Makassar. Kapal ini mampu berlayar hingga ke berbagai negara, membuktikan kecanggihan teknologi maritim nusantara.</p>
-            
-            <h3>Pelestarian Tradisi</h3>
-            <p>Desa Lembanna aktif dalam upaya pelestarian pengetahuan pembuatan Pinisi, termasuk mengadakan workshop dan demonstrasi untuk generasi muda dan wisatawan.</p>
-        `,
-        image: "asset/img/profil-desa/penghargaan-unesco.png"
-    },
-    pakarena: {
-        title: "Tari Pakarena",
-        subtitle: "Tarian Klasik Bugis-Makassar",
-        description: `
-            <p><strong>Tari Pakarena</strong> adalah tarian klasik yang mencerminkan keanggunan dan kesopanan wanita Bugis-Makassar. Setiap gerakan dalam tarian ini sarat dengan makna filosofis dan nilai-nilai luhur.</p>
-            
-            <h3>Sejarah dan Asal-usul</h3>
-            <p>Konon, Tari Pakarena berasal dari kisah bidadari kahyangan yang turun ke bumi. Gerakan-gerakannya yang lemah gemulai mencerminkan keanggunan dan kelemahlembutan yang menjadi ciri khas wanita Bugis.</p>
-            
-            <h3>Karakteristik Gerakan</h3>
-            <ul>
-                <li>Gerakan tangan yang lembut dan terukur</li>
-                <li>Langkah kaki yang halus dan sopan</li>
-                <li>Pandangan mata yang rendah, menunjukkan kesopanan</li>
-                <li>Penggunaan kipas sebagai properti utama</li>
-                <li>Irama yang mengikuti musik tradisional</li>
-            </ul>
-            
-            <h3>Makna Filosofis</h3>
-            <p>Setiap gerakan dalam Tari Pakarena mengandung makna mendalam tentang nilai-nilai kesopanan, kerendahan hati, dan keanggunan yang harus dimiliki seorang wanita dalam budaya Bugis-Makassar.</p>
-            
-            <h3>Kostum dan Musik</h3>
-            <p>Penari mengenakan baju bodo, pakaian tradisional khas Bugis-Makassar, dengan warna-warna yang melambangkan strata sosial. Musik pengiring menggunakan alat musik tradisional seperti gendang, suling, dan kecapi.</p>
-            
-            <h3>Pertunjukan</h3>
-            <p>Tari Pakarena sering ditampilkan dalam acara-acara adat, penyambutan tamu kehormatan, dan festival budaya di Desa Lembanna.</p>
-        `,
-        image: "asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (1).jpeg"
-    },
-    festival: {
-        title: "Festival Bahari Lembanna",
-        subtitle: "Perayaan Budaya Maritim Tahunan",
-        description: `
-            <p><strong>Festival Bahari Lembanna</strong> adalah acara tahunan yang memadukan berbagai kegiatan maritim, budaya, dan wisata. Festival ini menjadi ajang memperkenalkan kekayaan budaya dan potensi wisata Desa Lembanna.</p>
-            
-            <h3>Rangkaian Acara</h3>
-            <ul>
-                <li><strong>Lomba Perahu Tradisional:</strong> Kompetisi antar desa dengan perahu khas Bugis-Makassar</li>
-                <li><strong>Pameran Hasil Laut:</strong> Showcase produk-produk unggulan masyarakat pesisir</li>
-                <li><strong>Kuliner Nusantara:</strong> Festival makanan khas dengan menu-menu seafood tradisional</li>
-                <li><strong>Pertunjukan Seni:</strong> Tari Pakarena, musik tradisional, dan seni budaya lainnya</li>
-                <li><strong>Kompetisi Fotografi:</strong> Menangkap momen keindahan Lembanna</li>
-                <li><strong>Seminar Maritim:</strong> Diskusi tentang konservasi laut dan pengembangan pariwisata</li>
-            </ul>
-            
-            <h3>Tujuan Festival</h3>
-            <p>Festival ini bertujuan untuk:</p>
-            <ul>
-                <li>Melestarikan budaya maritim lokal</li>
-                <li>Meningkatkan kesadaran akan pentingnya konservasi laut</li>
-                <li>Mempromosikan potensi wisata Desa Lembanna</li>
-                <li>Memberdayakan ekonomi kreatif masyarakat</li>
-                <li>Mempererat tali silaturahmi antar komunitas</li>
-            </ul>
-            
-            <h3>Waktu Pelaksanaan</h3>
-            <p>Festival Bahari Lembanna biasanya diselenggarakan pada pertengahan tahun, bertepatan dengan musim kemarau ketika cuaca laut sedang bersahabat.</p>
-            
-            <h3>Partisipasi</h3>
-            <p>Festival ini terbuka untuk umum dan melibatkan seluruh lapisan masyarakat, dari anak-anak hingga dewasa, wisatawan lokal maupun mancanegara.</p>
-        `,
-        image: "asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (4).jpeg"
-    }
+   pattoengang: {
+    title: "Pattoengang",
+    subtitle: "Tradisi Ayunan Masyarakat Ara Lembanna",
+    description: `
+        <p><strong>Pattoengang</strong> adalah sebuah kekayaan budaya Ara Lembanna yang pernah mengalami puncak keemasannya dengan meninggalkan kenangan manis. Kenangan yang ditandai dengan banyaknya keinginan untuk memunculkan kembali budaya ini di tengah-tengah masyarakat pemiliknya adalah sebuah harapan yang senantiasa membuncah di puncak keinginannya. Pattoengang sebagai ajang silaturrahmi sesungguhnya mengandung makna yang sangat dalam bagi masyarakat yang pernah menyaksikannya secara langsung ataupun pelaku dan pelaksana dari tradisi leluhur ini, lebih-lebih lagi bagi warga yang hanya mendengarkan dari kisah-kisah leluhurnya lewat cerita lisan yang didendangkan oleh kakek nenek dengan cerita berbumbu kenangan.</p>
+        
+        <h3>Sejarah Penamaan</h3>
+        <p>Pattoengang dari sisi bahasa berarti arena berayun yang mencerminkan kegembiraan seluruh masyarakat pendukungnya. Pattoengang sendiri berakar dari kata <strong>PATTOENG</strong> yang artinya ayunan dan <strong>ANGGANG</strong> yang berarti ayunan yang inti pelaksanaannya adalah berayun-ayun dengan cara tertentu sesuai adat kebiasaan pendukungnya. Permainan ini selalu menjadi hal yang pada masa lalu dinantikan oleh kaum remaja baik perempuan maupun laki-laki dengan berbagai motif keikutsertaannya dalam arena ayun berayun yang bertitel Pattoengang. Pelaksanaannya sendiri kebanyakan dilakukan pada saat musim kemarau tiba kecuali untuk pelaksanaan hajat-hajat tertentu oleh masyarakat.
+
+       <h3>Latar Belakang Sosial dan Budayanya</h3>
+       <p>Pada mulanya, permainan ini adalah sebuah ritual untuk mengenang turunnya manusia pertama di bumi Bugis Makassar yakni <strong>Batara Guru</strong> yang diturunkan ke bumi menggunakan <stong>toeng bulaeng</stong> atau ayunan emas. 
+       <strong>Batara Guru</strong> sendiri akhirnya menurunkan generasi penguasa Sulawesi Selatan termasuk <strong>Sawerigading</strong>, seorang tokoh legendaris asal Tanah Luwu yang fenomenal hingga kini. 
+       <strong>Sawerigading</strong> sendiri dengan orang-orang Ara memiliki ikatan emosional sebagai sosok yang pertama kali mengajarkan orang-orang Ara membuat perahu dengan segala bumbu mitos yang mengiringinya. 
+       Dengan demikian, ikatan emosional melahirkan keinginan kolektif untuk mengabadikan ikatan ini dalam sebuah tradisi yang dinamakan Pattoengang. Kegiatan ini terus dilanjutkan oleh masyarakat Ara Lembanna sebagai sebuah tradisi yang pada masa perkembangannya 
+       bukan lagi sebagai ritual tetapi sebagai hal yang profan berbentuk kegembiraan seperti pesta perkawinan, mendorong perahu, upacara kelahiran, pencarian jodoh, dan lain-lain. Sebagai sebuah permainan kolektif dan melembaga di masyarakat pada zamannya, 
+       permainan ini telah menyimpan memori yang sangat dalam akan puncak-puncak keemasannya dengan pelaksanaan yang begitu meriah. Sampai saat ini, memori masyarakat Ara Lembanna mengenang tiga peristiwa penting yang menjadi puncak terbaik dalam pelaksanaannya.
+       </p>
+        <h3>Pelaksanaan Terbaik</h3>
+        <ul>
+            <li><strong>Lembanna (1936):</strong> Diselenggarakan bersamaan dengan pertunjukan komedi oleh Residen Belanda, berlangsung selama sebulan penuh.</li>
+            <li><strong>Bontona (1946):</strong> Dipadu dengan tradisi Safar, Pattoengang paling lengkap dan meriah, dipimpin Bungko Atok.</li>
+            <li><strong>Tinaung (1947):</strong> Dilaksanakan keluarga Ballo Daeng Mangulisi, dengan bintang utama Tasa Demmamempo.</li>
+        </ul>
+
+        <h3>Peralatan & Jalannya Permainan</h3>
+        <ul>
+            <li>Gadis duduk di <em>empogang</em> atau dudukan, dengan pengaman <em>panggepek</em>.</li>
+            <li>Ayunan digantung pada pohon atau balok setinggi minimal 10 meter, tali disebut <em>lambero</em>.</li>
+            <li><em>Palambero</em> menarik tali, melepaskannya dengan gerakan <em>ajjae</em>, ditutup tari <em>salonreng</em>.</li>
+        </ul>
+
+        <h3>Tujuan</h3>
+        <ul>
+            <li>Melestarikan tradisi budaya lokal</li>
+            <li>Meningkatkan kecintaan masyarakat pada kampung</li>
+            <li>Menjadikan Pattoengang event tahunan</li>
+        </ul>
+    `,
+    image: "asset/img/wisata andalah/pattoengang-1.jpeg"
+}
 };
 
 // Show detailed modal for specific atraksi

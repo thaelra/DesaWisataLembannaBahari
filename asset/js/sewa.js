@@ -1,302 +1,280 @@
-// sewa.js
-// Fungsionalitas untuk bagian Sewa
+// Travel Agency & Rental Services JavaScript
 
-const SEWA_WHATSAPP_NUMBER = window.SEWA_WHATSAPP_NUMBER || '6281234567893'; // Ambil dari global.js
+// Service data for different rental types
+// Service titles for modal
+const serviceTitles = {
+    mobil: "Rental Mobil",
+    motor: "Rental Motor",
+    perahu: "Rental Perahu",
+    tourguide: "Layanan Tour Guide"
+};
 
-function initializeSewa() {
-    const sewaTrack = document.getElementById('sewaTrack');
-    if (!sewaTrack) {
-        console.error('Sewa track tidak ditemukan!');
-        return;
-    }
-
-    // Bangun kartu sewa dari data dummy
-    buildSewaCards(sewaTrack, window.sewaData);
-
-    // Inisialisasi slider setelah konten terbangun (async build)
-    setTimeout(() => {
-        setupSewaSlider();
-    }, 350);
-
-    // Inisialisasi pencarian
-    bindSewaSearch();
-}
-
-function buildSewaCards(container, dataArray) {
-    // Show loading state
-    container.innerHTML = '<div class="sewa-page"><div class="cards-grid-sewa loading-skeleton"></div></div>';
-    
-    // Simulate loading delay for better UX
-    setTimeout(() => {
-        container.innerHTML = ''; // Bersihkan konten lama
-
-        const cardsPerPage = 3; // Tampilkan 3 kartu per halaman (sesuaikan dengan desain)
-        const totalPages = Math.ceil(dataArray.length / cardsPerPage);
-
-        if (dataArray.length === 0) {
-            container.innerHTML = '<div class="sewa-page"><div class="cards-grid-sewa" style="text-align:center; width:100%; padding:20px; color: var(--primary-color);">Tidak ada item sewa ditemukan.</div></div>';
-            document.getElementById('sewaPrev').disabled = true;
-            document.getElementById('sewaNext').disabled = true;
-            return;
-        }
-
-    for (let p = 0; p < totalPages; p++) {
-        const pageDiv = document.createElement('div');
-        pageDiv.className = 'sewa-page';
-        const gridDiv = document.createElement('div');
-        gridDiv.className = 'cards-grid-sewa';
-
-        const startIndex = p * cardsPerPage;
-        const endIndex = Math.min(startIndex + cardsPerPage, dataArray.length);
-
-        for (let i = startIndex; i < endIndex; i++) {
-            const data = dataArray[i];
-            const card = document.createElement('div');
-            card.className = 'card-sewa';
-            card.dataset.sewaName = data.name;
-            card.dataset.sewaPrice = data.price;
-            card.dataset.sewaUnit = data.unit;
-            card.dataset.sewaDesc = data.desc;
-
-            // Generate random availability status
-            const isAvailable = Math.random() > 0.1; // 90% chance of being available
-            const availabilityText = isAvailable ? 'Tersedia' : 'Tidak Tersedia';
-            const availabilityClass = isAvailable ? 'available' : 'unavailable';
-            
-            card.innerHTML = `
-                <div class="availability-badge ${availabilityClass}">${availabilityText}</div>
-                <div class="card-image-sewa">
-                    <img src="${data.img}" alt="${data.name}" loading="lazy" />
-                    <div class="image-overlay"></div>
-                </div>
-                <div class="card-content">
-                    <h3>${data.name}</h3>
-                    <div class="price-tag">${formatPrice(data.price, data.unit)}</div>
-                    <p>${data.desc}</p>
-                    <div class="card-features">
-                        <span class="feature-tag">✓ Bebas Biaya Admin</span>
-                        <span class="feature-tag">✓ Asuransi Lengkap</span>
-                    </div>
-                    <button class="btn-pesan-sewa" ${!isAvailable ? 'disabled' : ''}>
-                        <span class="btn-text">${isAvailable ? 'Pesan Sekarang' : 'Tidak Tersedia'}</span>
-                        <span class="btn-icon">${isAvailable ? '→' : '✕'}</span>
-                    </button>
-                </div>
-            `;
-            gridDiv.appendChild(card);
-
-            // Initialize image rotation for this card
-            initializeSewaImageRotation(card, data);
-
-            // Event listener untuk tombol pesan dengan loading state
-            const button = card.querySelector('.btn-pesan-sewa');
-            if (button && !button.disabled) {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Add loading state
-                    button.classList.add('loading');
-                    button.disabled = true;
-                    
-                    // Simulate loading delay for better UX
-                    setTimeout(() => {
-                        openSewaWhatsapp(data);
-                        button.classList.remove('loading');
-                        button.disabled = false;
-                    }, 800);
-                });
-            }
-            
-            // Add card click event for better UX
-            card.addEventListener('click', (e) => {
-                if (!e.target.closest('.btn-pesan-sewa')) {
-                    // Add subtle click animation
-                    card.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        card.style.transform = '';
-                    }, 150);
-                }
-            });
-        }
-        pageDiv.appendChild(gridDiv);
-        container.appendChild(pageDiv);
-    }
-    
-    // Add staggered entrance animation
-    const cards = container.querySelectorAll('.card-sewa');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-    
-    }, 300); // End of setTimeout
-}
-
-function setupSewaSlider() {
-    const sewaTrack = document.getElementById('sewaTrack');
-    const prevBtn = document.getElementById('sewaPrev');
-    const nextBtn = document.getElementById('sewaNext');
-    let currentPage = 0;
-
-    // Debug logging
-    console.log('Setting up sewa slider:', {
-        sewaTrack: !!sewaTrack,
-        prevBtn: !!prevBtn,
-        nextBtn: !!nextBtn,
-        totalPages: sewaTrack ? sewaTrack.children.length : 0
-    });
-
-    function updateSliderPosition() {
-        const totalPages = sewaTrack.children.length;
-        sewaTrack.style.transform = `translateX(-${currentPage * 100}%)`;
-        prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === totalPages - 1;
-    }
-
-    prevBtn.addEventListener('click', () => {
-        if (currentPage > 0) {
-            currentPage--;
-            updateSliderPosition();
-        }
-    });
-
-    nextBtn.addEventListener('click', () => {
-        console.log('Sewa next button clicked, currentPage:', currentPage);
-        const totalPages = sewaTrack.children.length;
-        if (currentPage < totalPages - 1) {
-            currentPage++;
-            updateSliderPosition();
-            console.log('Moved to page:', currentPage);
-        }
-    });
-
-    updateSliderPosition(); // Inisialisasi posisi slider
-}
-
-function bindSewaSearch() {
-    const input = document.getElementById('sewaSearchInput');
-    const searchBtn = document.getElementById('sewaSearchBtn');
-    const sewaTrack = document.getElementById('sewaTrack');
-
-    const performSearch = () => {
-        const q = input.value.toLowerCase();
-        const filteredData = window.sewaData.filter(data => 
-            data.name.toLowerCase().includes(q) || data.desc.toLowerCase().includes(q)
-        );
-        buildSewaCards(sewaTrack, filteredData);
-        setupSewaSlider(); // Reset slider
-    };
-
-    if (input) {
-        input.addEventListener('input', performSearch);
-    }
-    if (searchBtn) {
-        searchBtn.addEventListener('click', performSearch);
-    }
-}
-
-function openSewaWhatsapp(data) {
-    const name = data.name || 'Sewa';
-    const price = formatPrice(data.price, data.unit);
-    const text = encodeURIComponent(
-        `Halo, saya ingin menyewa:\n- Item: ${name}\n- Harga: ${price}\n\nMohon info ketersediaan.`
-    );
-    const waUrl = `https://wa.me/${SEWA_WHATSAPP_NUMBER}?text=${text}`;
-    window.open(waUrl, '_blank');
-}
-
-// Image rotation function for sewa cards
-function initializeSewaImageRotation(card, data) {
-    const cardImage = card.querySelector('.card-image-sewa');
-    if (!cardImage) return;
-
-    // For sewa, we'll create multiple images from the same source with slight variations
-    // or use a simple fade effect since sewa data doesn't have multiple images
-    const images = [data.img]; // For now, just use the single image
-    
-    // If we had multiple images, we would use them here
-    // For demonstration, let's create a simple fade effect
-    if (images.length < 2) return;
-
-    // Create rotating images
-    images.forEach((src, index) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = data.name + ' - Image ' + (index + 1);
-        img.className = 'rotating-image';
-        if (index === 0) img.classList.add('active');
-        cardImage.appendChild(img);
-    });
-
-    let currentIndex = 0;
-    let rotationInterval = null;
-
-    // Start rotation on hover
-    card.addEventListener('mouseenter', () => {
-        if (rotationInterval) clearInterval(rotationInterval);
-        
-        // Change image immediately on hover
-        const images = cardImage.querySelectorAll('.rotating-image');
-        if (images.length > 1) {
-            const currentImg = images[currentIndex];
-            const nextIndex = (currentIndex + 1) % images.length;
-            const nextImg = images[nextIndex];
-
-            // Add exit animation to current image
-            currentImg.classList.add('exiting');
-            currentImg.classList.remove('active');
-
-            // Add enter animation to next image
-            nextImg.classList.add('entering', 'active');
-            nextImg.classList.remove('next');
-
-            // Clean up classes after animation
-            setTimeout(() => {
-                currentImg.classList.remove('exiting');
-                nextImg.classList.remove('entering');
-            }, 600);
-
-            currentIndex = nextIndex;
-        }
-        
-        // Start continuous rotation every second
-        rotationInterval = setInterval(() => {
-            const images = cardImage.querySelectorAll('.rotating-image');
-            const currentImg = images[currentIndex];
-            const nextIndex = (currentIndex + 1) % images.length;
-            const nextImg = images[nextIndex];
-
-            // Add exit animation to current image
-            currentImg.classList.add('exiting');
-            currentImg.classList.remove('active');
-
-            // Add enter animation to next image
-            nextImg.classList.add('entering', 'active');
-            nextImg.classList.remove('next');
-
-            // Clean up classes after animation
-            setTimeout(() => {
-                currentImg.classList.remove('exiting');
-                nextImg.classList.remove('entering');
-            }, 600);
-
-            currentIndex = nextIndex;
-        }, 1000); // Change every 1 second
-    });
-
-    // Stop rotation on mouse leave
-    card.addEventListener('mouseleave', () => {
-        if (rotationInterval) {
-            clearInterval(rotationInterval);
-            rotationInterval = null;
-        }
-
-        // Reset to first image
-        const images = cardImage.querySelectorAll('.rotating-image');
-        images.forEach((img, index) => {
-            img.classList.remove('active', 'entering', 'exiting', 'next');
-            if (index === 0) img.classList.add('active');
+// Initialize travel agency functionality
+function initTravelAgency() {
+    // Add click event listeners to service items
+    const serviceItems = document.querySelectorAll('.service-item');
+    serviceItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const serviceType = this.getAttribute('data-service');
+            openServiceModal(serviceType);
         });
-        currentIndex = 0;
+
+        // Add hover animation
+        item.addEventListener('mouseenter', () => {
+            item.style.animation = 'pulse 1s infinite';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            item.style.animation = '';
+        });
     });
+
+    // Lihat Lebih Lanjut button functionality
+    const lihatLebihLanjutBtn = document.getElementById('lihatLebihLanjut');
+    if (lihatLebihLanjutBtn) {
+        lihatLebihLanjutBtn.addEventListener('click', function() {
+            openTravelAgencyModal();
+        });
+    }
+    
+    // Close modal when clicking the close button
+    const closeBtn = document.getElementById('travelModalClose');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeServiceModal);
+    }
+
+    // Close modal when clicking outside the modal content
+    const modal = document.getElementById('travelModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeServiceModal();
+            }
+        });
+    }
+
+    // Add escape key listener to close modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+            closeServiceModal();
+        }
+    });
+    
+    // Close deskripsi modal when clicking the close button
+    const deskripsiCloseBtn = document.getElementById('deskripsiModalClose');
+    if (deskripsiCloseBtn) {
+        deskripsiCloseBtn.addEventListener('click', closeDeskripsiModal);
+    }
+    
+    // Close deskripsi modal when clicking outside the modal content
+    const deskripsiModal = document.getElementById('deskripsiModal');
+    if (deskripsiModal) {
+        deskripsiModal.addEventListener('click', (e) => {
+            if (e.target === deskripsiModal) {
+                closeDeskripsiModal();
+            }
+        });
+    }
+    
+    // Add escape key listener to close deskripsi modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && deskripsiModal && deskripsiModal.style.display === 'block') {
+            closeDeskripsiModal();
+        }
+    });
+}
+
+// Open service modal with specific service type
+function openServiceModal(serviceType) {
+    const modal = document.getElementById('travelModal');
+    const modalTitle = document.getElementById('modalServiceTitle');
+    const servicesGrid = document.getElementById('servicesGrid');
+    
+    // Set modal title
+    modalTitle.textContent = serviceTitles[serviceType] || 'Layanan Rental';
+    
+    // Clear previous content
+    servicesGrid.innerHTML = '';
+    
+    // Get services for the selected type
+    const services = rentalServices[serviceType] || [];
+    
+    // Create service cards
+    services.forEach(service => {
+        const serviceCard = document.createElement('div');
+        serviceCard.className = 'service-card';
+        
+        serviceCard.innerHTML = `
+            <div class="service-image">
+                <img src="${service.image}" alt="${service.name}" onerror="this.src='asset2/WhatsApp Image 2025-08-20 at 18.48.36.png'">
+            </div>
+            <div class="service-details">
+                <h3>${service.name}</h3>
+                <p>${service.description}</p>
+                <div class="service-features">
+                    ${service.features.map(feature => `<span class="service-feature">${feature}</span>`).join('')}
+                </div>
+            </div>
+        `;
+        
+        servicesGrid.appendChild(serviceCard);
+    });
+    
+    // Show modal with animation
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    
+    // Animate entrance
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
+}
+
+// Close modal
+function closeModal() {
+    const modal = document.getElementById('travelModal');
+    if (modal) {
+        modal.style.opacity = '0';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300); // Match the CSS transition time
+    }
+}
+
+// Close service modal
+function closeServiceModal() {
+    closeModal(); // Reuse the closeModal function
+}
+
+// Open travel agency modal with full agency information
+function openTravelAgencyModal() {
+    const modal = document.getElementById('travelModal');
+    const modalTitle = document.getElementById('modalServiceTitle');
+    const servicesGrid = document.getElementById('servicesGrid');
+    
+    if (modal && modalTitle && servicesGrid) {
+        modalTitle.textContent = 'Rezkyta Travel';
+        
+        // Create comprehensive agency description
+        servicesGrid.innerHTML = `
+            <div class="deskripsi-content">
+                <img src="asset/img/wisata andalah/header-travel.jpeg" alt="Lembanna Travel & Rental" class="header-image">
+                <h3>Tentang Kami</h3>
+                <p>Rezkyta Travel adalah penyedia layanan transportasi dan wisata terpercaya di Desa Wisata Lembanna. Kami menawarkan berbagai pilihan kendaraan dan paket wisata yang dapat disesuaikan dengan kebutuhan Anda.</p>
+                
+                <h3>Layanan Kami</h3>
+                <p>Kami menyediakan berbagai layanan untuk memenuhi kebutuhan wisata Anda:</p>
+                <ul>
+                    <li>Rental Mobil</li>
+                    <li>Rental Motor</li>
+                    <li>Rental Perahu</li>
+                    <li>Jasa Tour Guide berpengalaman</li>
+                    <li>Paket Wisata Lengkap</li>
+                </ul>
+                
+                <h3>Keunggulan Kami</h3>
+                <ul>
+                    <li>Armada terawat dan terjamin kebersihannya</li>
+                    <li>Driver dan tour guide berpengalaman dan ramah</li>
+                    <li>Harga terjangkau dengan layanan premium</li>
+                    <li>Fleksibel sesuai kebutuhan wisatawan</li>
+                    <li>Dukungan 24/7 untuk bantuan darurat</li>
+                </ul>
+                <div class="agency-services">
+                        <div class="service-item" data-service="mobil">
+                            <div class="service-icon"><i class="fas fa-car"></i></div>
+                            <span>Rental Mobil</span>
+                        </div>
+                        <div class="service-item" data-service="motor">
+                            <div class="service-icon"><i class="fas fa-motorcycle"></i></div>
+                            <span>Rental Motor</span>
+                        </div>
+                        <div class="service-item" data-service="perahu">
+                            <div class="service-icon"><i class="fas fa-ship"></i></div>
+                            <span>Rental Perahu</span>
+                        </div>
+                        <div class="service-item" data-service="tourguide">
+                            <div class="service-icon"><i class="fas fa-map-marked-alt"></i></div>
+                            <span>Tour Guide</span>
+                        </div>
+                    </div>
+                    <div class="agency-features">
+                        <div class="feature"><i class="fas fa-headset"></i> 24/7 Customer Service</div>
+                        <div class="feature"><i class="fas fa-shield-alt"></i> Asuransi Lengkap</div>
+                        <div class="feature"><i class="fas fa-user-tie"></i> Driver Berpengalaman</div>
+                        <div class="feature"><i class="fas fa-hand-holding-usd"></i> Harga Terjangkau</div>
+                    </div>
+            </div>
+            
+    
+            
+           
+        `;
+        
+        // Add click event to service cards
+        const serviceCards = modal.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const serviceType = this.getAttribute('data-service');
+                openServiceModal(serviceType);
+            });
+        });
+        
+        // Show modal with animation
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        
+        // Animate entrance
+        setTimeout(() => {
+            modal.style.opacity = '1';
+        }, 10);
+    }
+}
+
+// Open deskripsi modal
+function openDeskripsiModal() {
+    const modal = document.getElementById('deskripsiModal');
+    
+    // Show modal
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    
+    // Animate entrance
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
+}
+
+// Close deskripsi modal
+function closeDeskripsiModal() {
+    const modal = document.getElementById('deskripsiModal');
+    
+    // Animate exit
+    modal.style.opacity = '0';
+    
+    // Hide modal after animation
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Restore scrolling
+    }, 300);
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initTravelAgency);
+
+// Add to global init function if it exists
+if (typeof window.initWisata === 'function') {
+    const originalInit = window.initWisata;
+    window.initWisata = function() {
+        try {
+            originalInit();
+        } catch (e) {
+            console.log("Original init error handled:", e.message);
+        }
+        initTravelAgency();
+    };
+} else {
+    // If initWisata doesn't exist, add event listener for DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', initTravelAgency);
 }
