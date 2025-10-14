@@ -510,34 +510,12 @@ window.kulinerData = [
 
 ];
 
-// Data untuk Sewa
-window.sewaData = [
-    {
-        name: "Mobil Avanza",
-        desc: "Mobil keluarga yang nyaman untuk perjalanan wisata",
-        img: "asset/img/wisata andalah/Toyota Avanza.jpeg",
-        unit: "hari"
-    },
-    
-    {
-        name: "Perahu Nelayan",
-        desc: "Perahu tradisional untuk aktivitas memancing dan wisata laut",
-        img: "asset2/WhatsApp Image 2025-08-20 at 12.40.15.jpeg",
-        unit: "hari"
-    },
-    {
-        name: "Mobil Innova",
-        desc: "Mobil besar yang cocok untuk rombongan wisata",
-        img: "asset/img/wisata andalah/Mobil innova.jpeg",
-        unit: "hari"
-    }
-];
 
 // WhatsApp numbers
 window.ATRAKSI_WHATSAPP_NUMBER = '6281234567890';
 window.AKOMODASI_WHATSAPP_NUMBER = '6281234567891';
 window.KULINER_WHATSAPP_NUMBER = '6281234567892';
-window.SEWA_WHATSAPP_NUMBER = '6281234567893';
+window.SEWA_WHATSAPP_NUMBER = '6282291494298';
 
 // Global initialization function
 function initWisata() {

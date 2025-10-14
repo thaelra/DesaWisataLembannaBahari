@@ -427,22 +427,75 @@
 
         <section class="sewa" id="sewa">
             <h2 class="sewa-title"><span>Sewa</span></h2>
-            <div class="sewa-search">
-                <input type="text" id="sewaSearchInput" placeholder="Cari sewa..." aria-label="Cari sewa" />
-                <button type="button" id="sewaSearchBtn">SEARCH</button>
-            </div>
-            <div class="sewa-viewport">
-                <button class="sewa-prev" aria-label="Sebelumnya" id="sewaPrev">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
-                </button>
-                <div class="sewa-track" id="sewaTrack">
-                    <!-- Konten sewa akan dibangun oleh JS -->
+            <div class="travel-agency-container">
+                <div class="travel-agency-card" id="travelAgencyCard">
+                    <div class="agency-header">
+                        <div class="agency-logo">
+                            <img src="asset/img/wisata andalah/logo-travel.jpeg" alt="Logo Agen Travel" loading="lazy">
+                        </div>
+                        <div class="agency-info">
+                            <h3>Rezkyta Travel</h3>
+                            <p>Solusi lengkap perjalanan dan persewaan untuk wisata Anda</p>
+                        </div>
+                    </div>
+                    <div class="agency-description">
+                        <p>Kami menyediakan berbagai layanan persewaan kendaraan dan paket wisata untuk memenuhi kebutuhan perjalanan Anda di Desa Wisata Lembanna. Dengan armada kendaraan terawat dan pemandu wisata berpengalaman, kami siap memberikan pengalaman wisata terbaik.</p>
+                        <button id="lihatLebihLanjut" class="lihat-lanjut-btn">Lihat Lebih Lanjut</button>
+                    </div>
+                   
+                    </div>
                 </div>
-                <button class="sewa-next" aria-label="Berikutnya" id="sewaNext">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="http://www.w3.org/2000/svg" width="30px" fill="#133E87"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
-                </button>
             </div>
         </section>
+
+        <!-- Modal Travel Agency Services -->
+        <div class="travel-modal" id="travelModal">
+            <div class="travel-modal-content">
+                <div class="travel-modal-header">
+                    <h2 id="modalServiceTitle">Layanan Rental</h2>
+                    <button class="travel-modal-close" id="travelModalClose">×</button>
+                </div>
+                <div class="travel-modal-body">
+                    <div class="services-grid" id="servicesGrid">
+                        <!-- Services will be populated by JavaScript -->
+                    </div>
+                    <div class="contact-section">
+                        <div class="contact-info">
+                            <h3>Hubungi Kami untuk Reservasi</h3>
+                            <div class="contact-methods">
+                                <a href="https://wa.me/6282291494298" class="contact-btn whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                                <a href="rezkytatravel79@gmail.com" class="contact-btn email">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Email</span>
+                                </a>
+                                <a href="6282291494298" class="contact-btn phone">
+                                    <i class="fas fa-phone"></i>
+                                    <span>Telepon</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Lihat Lebih Lanjut -->
+        <div class="travel-modal" id="deskripsiModal">
+            <div class="travel-modal-content">
+                <div class="travel-modal-header">
+                    
+                    <button class="travel-modal-close" id="deskripsiModalClose">×</button>
+                </div>
+                <div class="travel-modal-body">
+                    <div class="deskripsi-content">
+                      
+                    
+                </div>
+            </div>
+        </div>
         
     </main>
 
