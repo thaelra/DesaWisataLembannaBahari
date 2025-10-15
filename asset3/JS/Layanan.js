@@ -87,3 +87,56 @@ function initButtonRipple() {
     });
   });
 }
+(function(){
+  'use strict';
+  const initFacilitiesToggle = () => {
+    const pane = document.querySelector('.facilities-pane');
+    if (!pane) return;
+    const grid = pane.querySelector('.facility-grid');
+    let btn = pane.querySelector('.facilities-toggle-btn');
+    const isMobile = window.innerWidth <= 900;
+
+    if (isMobile) {
+      if (!btn) {
+        btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'facilities-toggle-btn';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-controls', 'facilityGrid');
+        btn.textContent = 'Tampilkan semua';
+        if (grid && grid.parentNode === pane) {
+          grid.insertAdjacentElement('afterend', btn);
+        } else {
+          pane.appendChild(btn);
+        }
+        btn.style.position = 'sticky';
+        btn.style.bottom = '8px';
+        btn.style.display = 'block';
+        btn.style.margin = '10px auto 0';
+        btn.style.zIndex = '2';
+
+        btn.addEventListener('click', () => {
+          const expanded = pane.classList.toggle('expanded');
+          btn.setAttribute('aria-expanded', String(expanded));
+          btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
+
+          if (!expanded) {
+            const rect = pane.getBoundingClientRect();
+            const offsetTop = window.pageYOffset + rect.top - 80;
+            window.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
+          }
+        });
+      }
+    } else {
+      if (btn) btn.remove();
+      pane.classList.remove('expanded');
+    }
+  };
+
+  // Ensure the grid has an id for aria-controls
+  const facilityGrid = document.querySelector('.facilities-pane .facility-grid');
+  if (facilityGrid && !facilityGrid.id) facilityGrid.id = 'facilityGrid';
+
+  initFacilitiesToggle();
+  window.addEventListener('resize', initFacilitiesToggle);
+})();

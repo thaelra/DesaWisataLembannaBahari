@@ -438,6 +438,27 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
+/* Desktop image widening for fasilitas pages */
+@media (min-width: 1200px) {
+  .slideshow-container {
+    max-width: 1000px;
+    padding: 20px 0 32px 0;
+  }
+  .slide-img {
+    height: 520px;
+    max-width: 980px;
+    object-fit: cover;
+  }
+
+  .location-map {
+    height: 360px;
+  }
+
+  .info-card .gallery {
+    min-height: 420px;
+  }
+}
+
 /* Aside */
 .aside {
   position: sticky;
