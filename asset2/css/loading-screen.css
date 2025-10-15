@@ -1,0 +1,332 @@
+/* Loading Screen for Desa Wisata Andalan - Lembanna */
+
+/* Loading Screen Container */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #133E87 0%, #608BC1 50%, #CBDCEB 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    overflow: hidden;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+.loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+/* Loading Content Container */
+.loading-content {
+    text-align: center;
+    color: white;
+    z-index: 2;
+    position: relative;
+}
+
+/* Logo Animation */
+.loading-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    position: relative;
+    animation: logoFloat 3s ease-in-out infinite;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.loading-logo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+}
+
+.loading-logo::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    animation: logoSpin 2s linear infinite;
+    z-index: -1;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes logoSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading Text */
+.loading-title {
+    font-family: 'Playfair Display SC', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    animation: textGlow 2s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.loading-subtitle {
+    font-family: 'Karma', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    animation: textFade 3s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(203, 220, 235, 0.6);
+    }
+}
+
+@keyframes textFade {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Loading Spinner - Custom Beach Theme */
+.loading-spinner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 2rem auto;
+}
+
+
+
+/* Loading Progress Dots */
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.dot:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+@keyframes dotBounce {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Loading Message */
+.loading-message {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Karma', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    animation: messageSlide 4s ease-in-out infinite;
+}
+
+@keyframes messageSlide {
+    0%, 25% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0px);
+    }
+    50%, 75% {
+        opacity: 0.7;
+        transform: translateX(-50%) translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0px);
+    }
+}
+
+/* Floating Particles */
+.loading-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: particleFloat 6s linear infinite;
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(3) {
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.particle:nth-child(4) {
+    left: 40%;
+    animation-delay: 3s;
+}
+
+.particle:nth-child(5) {
+    left: 50%;
+    animation-delay: 4s;
+}
+
+.particle:nth-child(6) {
+    left: 60%;
+    animation-delay: 5s;
+}
+
+.particle:nth-child(7) {
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+.particle:nth-child(8) {
+    left: 80%;
+    animation-delay: 2.5s;
+}
+
+.particle:nth-child(9) {
+    left: 90%;
+    animation-delay: 3.5s;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 1;
+    }
+    10% {
+        transform: translateY(90vh) scale(1);
+        opacity: 1;
+    }
+    90% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20vh) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .loading-title {
+        font-size: 2rem;
+    }
+    
+    .loading-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .loading-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .loading-spinner {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .spinner-wave:nth-child(2) {
+        width: 45px;
+        height: 45px;
+        top: 7.5px;
+        left: 7.5px;
+    }
+    
+    .spinner-wave:nth-child(3) {
+        width: 30px;
+        height: 30px;
+        top: 15px;
+        left: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-title {
+        font-size: 1.8rem;
+    }
+    
+    .loading-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .loading-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
