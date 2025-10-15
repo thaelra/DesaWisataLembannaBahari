@@ -37,6 +37,37 @@
 /* Keep nav nicely sized within the viewport */
 .nav-wrapper nav {
     width: min(1200px, calc(100vw - 32px));
+    padding: 15px 25px;
+}
+
+
+
+@media (max-width: 970px) {
+    .has-submenu a{
+        font-size: 0.9rem;
+    }
+
+    .nav-wrapper.nav-sticky .logo a{
+        font-size: 1rem;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+    .nav-wrapper nav {
+    padding: 5px 15px;
+    }
+}
+.nav-wrapper nav {
+    width: min(1200px, calc(100vw - 32px));
+    padding: 15px 25px;
+}
+
+@media (min-width: 1280px) {
+    .nav-wrapper nav {
+    width: 1500px;
+}
 }
 
 /* Safe area support (iOS notch) */
@@ -101,7 +132,6 @@
 /* Tab Navigation */
 .info-nav-section {
     padding: 0.25rem 0; /* reduced vertical spacing */
-    position: sticky;
     top: 0;
     z-index: 20;
     height: 60px;

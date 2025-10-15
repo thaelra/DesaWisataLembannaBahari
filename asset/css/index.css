@@ -1208,8 +1208,8 @@ body.profil-nav-floating .profil-main {
 /* Tablet timeline adjustments to prevent overlap and maintain center alignment */
 @media (min-width: 601px) and (max-width: 900px) {
     .timeline { 
-        max-width: 92vw; 
-        padding: 0 24px; 
+        max-width: 95vw; 
+        padding: 0 20px; 
     }
     .timeline:before {
         left: 50%;
@@ -1228,7 +1228,7 @@ body.profil-nav-floating .profil-main {
         border-width: 4px;
     }
     .timeline-content {
-        max-width: 360px;
+        max-width: 450px;
         padding: 16px 20px;
         font-size: 0.95rem;
         line-height: 1.5;
