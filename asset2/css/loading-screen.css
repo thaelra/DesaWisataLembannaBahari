@@ -197,6 +197,50 @@
     }
 }
 
+/* Background Waves */
+.loading-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 100px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 50% 50% 0 0;
+    animation: waveMove 4s ease-in-out infinite;
+}
+
+.wave:nth-child(2) {
+    height: 80px;
+    animation-delay: 1s;
+    animation-duration: 6s;
+    opacity: 0.7;
+}
+
+.wave:nth-child(3) {
+    height: 60px;
+    animation-delay: 2s;
+    animation-duration: 8s;
+    opacity: 0.5;
+}
+
+@keyframes waveMove {
+    0%, 100% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+    50% {
+        transform: translateX(-50%) rotate(180deg);
+    }
+}
+
 /* Floating Particles */
 .loading-particles {
     position: absolute;
@@ -280,53 +324,530 @@
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Comprehensive Breakpoints */
+
+/* ========== ULTRAWIDE SCREENS (2560px+) ========== */
+@media (min-width: 2560px) {
+    .loading-content {
+        transform: scale(1.3);
+    }
+    
+    .loading-title {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .loading-subtitle {
+        font-size: 1.8rem;
+        margin-bottom: 4rem;
+    }
+    
+    .loading-logo {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 3rem;
+    }
+    
+    .loading-dots {
+        gap: 16px;
+        margin-top: 3rem;
+    }
+    
+    .dot {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .loading-message {
+        font-size: 1.4rem;
+        bottom: 4rem;
+    }
+    
+    .particle {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* ========== LARGE DESKTOP (1920px - 2559px) ========== */
+@media (min-width: 1920px) and (max-width: 2559px) {
+    .loading-content {
+        transform: scale(1.2);
+    }
+    
+    .loading-title {
+        font-size: 3rem;
+    }
+    
+    .loading-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .loading-logo {
+        width: 140px;
+        height: 140px;
+        margin: 0 auto 2.5rem;
+    }
+    
+    .loading-dots {
+        gap: 14px;
+        margin-top: 2.5rem;
+    }
+    
+    .dot {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .loading-message {
+        font-size: 1.2rem;
+        bottom: 3.5rem;
+    }
+    
+    .particle {
+        width: 5px;
+        height: 5px;
+    }
+}
+
+/* ========== DESKTOP/LAPTOP (1200px - 1919px) ========== */
+@media (min-width: 1200px) and (max-width: 1919px) {
+    .loading-title {
+        font-size: 2.8rem;
+    }
+    
+    .loading-subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .loading-logo {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .loading-message {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========== SMALL LAPTOP (992px - 1199px) ========== */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .loading-title {
+        font-size: 2.5rem;
+    }
+    
+    .loading-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .loading-logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .loading-message {
+        font-size: 1rem;
+    }
+}
+
+/* ========== TABLET LANDSCAPE (768px - 991px) ========== */
+@media (min-width: 768px) and (max-width: 991px) {
+    .loading-content {
+        padding: 0 2rem;
+    }
+    
+    .loading-title {
+        font-size: 2.2rem;
+    }
+    
+    .loading-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .loading-logo {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto 2rem;
+    }
+    
+    .loading-dots {
+        gap: 10px;
+        margin-top: 2rem;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .loading-message {
+        font-size: 0.95rem;
+        bottom: 2.5rem;
+        padding: 0 2rem;
+        text-align: center;
+    }
+    
+    .particle {
+        width: 3px;
+        height: 3px;
+    }
+}
+
+/* ========== TABLET PORTRAIT (576px - 767px) ========== */
+@media (min-width: 576px) and (max-width: 767px) {
+    .loading-content {
+        padding: 0 1.5rem;
+    }
+    
     .loading-title {
         font-size: 2rem;
+        margin-bottom: 0.5rem;
     }
     
     .loading-subtitle {
         font-size: 1rem;
         padding: 0 1rem;
+        margin-bottom: 2.5rem;
+        line-height: 1.4;
     }
     
     .loading-logo {
         width: 100px;
         height: 100px;
+        margin: 0 auto 1.5rem;
     }
     
-    .loading-spinner {
-        width: 60px;
-        height: 60px;
+    .loading-dots {
+        gap: 8px;
+        margin-top: 1.5rem;
     }
     
-    .spinner-wave:nth-child(2) {
-        width: 45px;
-        height: 45px;
-        top: 7.5px;
-        left: 7.5px;
+    .dot {
+        width: 9px;
+        height: 9px;
     }
     
-    .spinner-wave:nth-child(3) {
-        width: 30px;
-        height: 30px;
-        top: 15px;
-        left: 15px;
+    .loading-message {
+        font-size: 0.9rem;
+        bottom: 2rem;
+        padding: 0 1.5rem;
+        text-align: center;
+        line-height: 1.3;
     }
 }
 
-@media (max-width: 480px) {
+/* ========== MOBILE LANDSCAPE (480px - 575px) ========== */
+@media (min-width: 480px) and (max-width: 575px) {
+    .loading-content {
+        padding: 0 1rem;
+    }
+    
     .loading-title {
         font-size: 1.8rem;
+        margin-bottom: 0.3rem;
     }
     
     .loading-subtitle {
         font-size: 0.9rem;
+        padding: 0 0.5rem;
+        margin-bottom: 2rem;
+        line-height: 1.3;
     }
     
     .loading-logo {
-        width: 80px;
+        width: 85px;
+        height: 85px;
+        margin: 0 auto 1.2rem;
+    }
+    
+    .loading-dots {
+        gap: 7px;
+        margin-top: 1.2rem;
+    }
+    
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .loading-message {
+        font-size: 0.85rem;
+        bottom: 1.5rem;
+        padding: 0 1rem;
+        text-align: center;
+        line-height: 1.2;
+    }
+}
+
+/* ========== MOBILE PORTRAIT (360px - 479px) ========== */
+@media (min-width: 360px) and (max-width: 479px) {
+    .loading-content {
+        padding: 0 0.8rem;
+    }
+    
+    .loading-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+        line-height: 1.2;
+    }
+    
+    .loading-subtitle {
+        font-size: 0.8rem;
+        padding: 0 0.5rem;
+        margin-bottom: 1.8rem;
+        line-height: 1.2;
+    }
+    
+    .loading-logo {
+        width: 75px;
+        height: 75px;
+        margin: 0 auto 1rem;
+    }
+    
+    .loading-logo::before {
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        bottom: -8px;
+    }
+    
+    .loading-dots {
+        gap: 6px;
+        margin-top: 1rem;
+    }
+    
+    .dot {
+        width: 7px;
+        height: 7px;
+    }
+    
+    .loading-message {
+        font-size: 0.8rem;
+        bottom: 1.2rem;
+        padding: 0 0.8rem;
+        text-align: center;
+        line-height: 1.1;
+    }
+    
+    .particle {
+        width: 2px;
+        height: 2px;
+    }
+}
+
+/* ========== SMALL MOBILE (320px - 359px) ========== */
+@media (min-width: 320px) and (max-width: 359px) {
+    .loading-content {
+        padding: 0 0.5rem;
+    }
+    
+    .loading-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.1;
+    }
+    
+    .loading-subtitle {
+        font-size: 0.7rem;
+        padding: 0 0.3rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+    }
+    
+    .loading-logo {
+        width: 65px;
+        height: 65px;
+        margin: 0 auto 0.8rem;
+    }
+    
+    .loading-logo::before {
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+    }
+    
+    .loading-dots {
+        gap: 5px;
+        margin-top: 0.8rem;
+    }
+    
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .loading-message {
+        font-size: 0.7rem;
+        bottom: 1rem;
+        padding: 0 0.5rem;
+        text-align: center;
+        line-height: 1;
+    }
+}
+
+/* ========== EXTRA SMALL MOBILE (280px - 319px) ========== */
+@media (max-width: 319px) {
+    .loading-content {
+        padding: 0 0.3rem;
+    }
+    
+    .loading-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.1rem;
+        line-height: 1;
+    }
+    
+    .loading-subtitle {
+        font-size: 0.6rem;
+        padding: 0 0.2rem;
+        margin-bottom: 1.2rem;
+        line-height: 1;
+    }
+    
+    .loading-logo {
+        width: 55px;
+        height: 55px;
+        margin: 0 auto 0.6rem;
+    }
+    
+    .loading-logo::before {
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+    }
+    
+    .loading-logo img {
+        border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    .loading-dots {
+        gap: 4px;
+        margin-top: 0.6rem;
+    }
+    
+    .dot {
+        width: 5px;
+        height: 5px;
+    }
+    
+    .loading-message {
+        font-size: 0.6rem;
+        bottom: 0.8rem;
+        padding: 0 0.3rem;
+        text-align: center;
+        line-height: 0.9;
+    }
+    
+    .particle {
+        width: 1.5px;
+        height: 1.5px;
+    }
+}
+
+/* ========== RESPONSIVE ANIMATIONS ========== */
+@media (max-width: 767px) {
+    @keyframes logoFloat {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+}
+
+@media (max-width: 479px) {
+    @keyframes logoFloat {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-3px);
+        }
+    }
+}
+
+/* ========== RESPONSIVE WAVES ========== */
+@media (max-width: 991px) {
+    .wave {
         height: 80px;
+    }
+    
+    .wave:nth-child(2) {
+        height: 60px;
+    }
+    
+    .wave:nth-child(3) {
+        height: 40px;
+    }
+}
+
+@media (max-width: 575px) {
+    .wave {
+        height: 60px;
+    }
+    
+    .wave:nth-child(2) {
+        height: 45px;
+    }
+    
+    .wave:nth-child(3) {
+        height: 30px;
+    }
+}
+
+@media (max-width: 359px) {
+    .wave {
+        height: 40px;
+    }
+    
+    .wave:nth-child(2) {
+        height: 30px;
+    }
+    
+    .wave:nth-child(3) {
+        height: 20px;
+    }
+}
+
+/* ========== ACCESSIBILITY IMPROVEMENTS ========== */
+@media (prefers-reduced-motion: reduce) {
+    .loading-logo,
+    .loading-title,
+    .loading-subtitle,
+    .loading-message,
+    .dot,
+    .particle,
+    .wave {
+        animation: none !important;
+    }
+    
+    .loading-logo::before {
+        animation: none !important;
+    }
+}
+
+/* ========== HIGH CONTRAST MODE ========== */
+@media (prefers-contrast: high) {
+    .loading-screen {
+        background: linear-gradient(135deg, #000080 0%, #0066cc 50%, #ffffff 100%);
+    }
+    
+    .loading-title,
+    .loading-subtitle,
+    .loading-message {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    .loading-logo img {
+        border: 4px solid #ffffff;
+    }
+    
+    .dot,
+    .particle {
+        background: #ffffff;
     }
 }

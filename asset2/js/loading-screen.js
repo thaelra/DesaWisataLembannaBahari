@@ -8,7 +8,7 @@ class LoadingScreen {
             'Memuat keindahan pantai Mandala Ria...',
             'Menyiapkan pesona tebing Batu Tongkarayya...',
             'Menghadirkan kemegahan tebing Mattoanging...',
-            'Membuka gerbang gua Purbakala Passea...',
+            'Menjelajahi misteri Gua Purbakala Passea...',
             'Selamat datang di Desa Wisata Lembanna...'
         ];
         this.currentMessageIndex = 0;
