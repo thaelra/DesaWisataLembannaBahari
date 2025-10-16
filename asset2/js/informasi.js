@@ -43,16 +43,43 @@ function initNewsCarousel() {
     const nextBtn = document.getElementById('nextBtn');
     const indicators = document.querySelectorAll('.indicator');
     const newsCards = document.querySelectorAll('.news-card');
+    const newsCarouselContainer = document.querySelector('.news-carousel-container');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
     
     let currentSlide = 0;
     const totalSlides = newsCards.length;
     let autoSlideInterval;
     
+    // Touch swipe variables
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isMobile = window.innerWidth <= 480;
+    
+    // Hide scroll indicator when user scrolls (mobile only)
+    if (newsCarouselContainer && scrollIndicator && isMobile) {
+        let scrollTimeout;
+        newsCarouselContainer.addEventListener('scroll', function() {
+            // Hide indicator on scroll
+            scrollIndicator.style.opacity = '0';
+            
+            // Clear previous timeout
+            clearTimeout(scrollTimeout);
+            
+            // Show indicator again after user stops scrolling for 3 seconds
+            scrollTimeout = setTimeout(function() {
+                scrollIndicator.style.opacity = '1';
+            }, 3000);
+        });
+    }
+    
     // Auto-slide functionality
     function startAutoSlide() {
-        autoSlideInterval = setInterval(() => {
-            nextSlide();
-        }, 3000);
+        // Only start auto-slide if not on mobile
+        if (!isMobile) {
+            autoSlideInterval = setInterval(() => {
+                nextSlide();
+            }, 3000);
+        }
     }
     
     function stopAutoSlide() {
@@ -60,16 +87,19 @@ function initNewsCarousel() {
     }
     
     function updateSlidePosition() {
-        const translateX = -currentSlide * 100;
-        track.style.transform = `translateX(${translateX}%)`;
-        
-        // Update indicators
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentSlide);
-        });
-        
-        // Stop CSS animation when manually controlling
-        track.style.animation = 'none';
+        // Only apply transform on non-mobile devices
+        if (!isMobile) {
+            const translateX = -currentSlide * 100;
+            track.style.transform = `translateX(${translateX}%)`;
+            
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Stop CSS animation when manually controlling
+            track.style.animation = 'none';
+        }
     }
     
     function nextSlide() {
@@ -80,6 +110,63 @@ function initNewsCarousel() {
     function prevSlide() {
         currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
         updateSlidePosition();
+    }
+    
+    // Check if device is mobile
+    function checkMobile() {
+        isMobile = window.innerWidth <= 480;
+        
+        // Reset styles based on device type
+        if (isMobile) {
+            track.style.transform = '';
+            track.style.animation = 'none';
+        } else {
+            updateSlidePosition();
+        }
+    }
+    
+    // Touch swipe handlers
+    function handleTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+    }
+    
+    function handleTouchMove(e) {
+        // Prevent default only on mobile to allow scrolling
+        if (isMobile) {
+            e.stopPropagation();
+        }
+    }
+    
+    function handleTouchEnd(e) {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }
+    
+    function handleSwipe() {
+        // Only process swipe on mobile
+        if (isMobile) {
+            const swipeDistance = touchEndX - touchStartX;
+            // Minimum swipe distance to trigger navigation
+            if (Math.abs(swipeDistance) > 50) {
+                if (swipeDistance > 0) {
+                    // Swipe right - do nothing, let natural scroll happen
+                } else {
+                    // Swipe left - do nothing, let natural scroll happen
+                }
+            }
+        } else {
+            // On desktop, use swipe for prev/next
+            const swipeDistance = touchEndX - touchStartX;
+            if (Math.abs(swipeDistance) > 50) {
+                stopAutoSlide();
+                if (swipeDistance > 0) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
+                startAutoSlide();
+            }
+        }
     }
     
     // Event listeners
@@ -109,11 +196,22 @@ function initNewsCarousel() {
         });
     });
     
-    // Pause on hover
+    // Touch events
     if (track) {
+        track.addEventListener('touchstart', handleTouchStart, {passive: true});
+        track.addEventListener('touchmove', handleTouchMove, {passive: false});
+        track.addEventListener('touchend', handleTouchEnd, {passive: true});
+        
+        // Pause on hover (desktop only)
         track.addEventListener('mouseenter', stopAutoSlide);
         track.addEventListener('mouseleave', startAutoSlide);
     }
+    
+    // Handle window resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Initialize mobile check
+    checkMobile();
     
     // News card clicks - open detail page or external link for specific news
     newsCards.forEach(card => {

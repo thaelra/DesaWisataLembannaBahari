@@ -1609,9 +1609,11 @@
   .mobile-bottom-nav {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
-    left: 0;
-    right: 0;
-    transform: none;
+    left: 50%;
+    right: auto;
+    width: 100vw;
+    max-width: 100vw;
+    transform: translateX(-50%);
     display: none; /* Hidden by default, shown only on mobile */
     justify-content: center;
     align-items: center;
@@ -1806,15 +1808,18 @@
   /* Show on mobile only */
   @media (max-width: 900px) {
     .mobile-bottom-nav { 
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
+      display: grid !important;
+      place-items: center !important;
       padding-inline: max(12px, env(safe-area-inset-left, 0px)) max(12px, env(safe-area-inset-right, 0px)) !important;
+      left: 50% !important;
+      right: auto !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+      transform: translateX(-50%) !important;
     }
     .mobile-nav-container { 
       margin: 0 auto !important; 
-      width: min(560px, calc(100vw - 24px)) !important; 
-      max-width: calc(100vw - 24px) !important;
+      max-width: 100% !important;
     }
   }
 
@@ -2932,12 +2937,13 @@ body.no-scroll {
   .mobile-bottom-nav {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
-    left: 0;
-    right: 0;
-    transform: none;
-    display: none; /* Hidden by default, shown only on mobile */
-    justify-content: center;
-    align-items: center;
+    left: 50%;
+    right: auto;
+    width: 100vw;
+    max-width: 100vw;
+    transform: translateX(-50%);
+    display: grid;
+    place-items: center;
     padding-inline: max(12px, env(safe-area-inset-left, 0px)) max(12px, env(safe-area-inset-right, 0px));
     z-index: 10000;
     pointer-events: none; /* allow clicks only on the inner container */
@@ -2958,6 +2964,8 @@ body.no-scroll {
     box-shadow: 0 10px 30px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.12);
     backdrop-filter: blur(16px) saturate(160%);
     -webkit-backdrop-filter: blur(16px) saturate(160%);
+    margin: 0 auto; /* center the inner container */
+    pointer-events: auto; /* enable clicks */
   }
 }
 
@@ -3030,6 +3038,8 @@ body.no-scroll {
 }
 
 @media (min-width: 1280px) {
+
+  
   /* Root Variables - Increased sizes for large screens */
   :root {
     --fontXXL: 5.5rem;
@@ -3345,7 +3355,7 @@ body.no-scroll {
   }
 
   .content-section p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1.8;
   }
 }
@@ -3641,7 +3651,7 @@ body.no-scroll {
   }
 
   .content-section p {
-    font-size: 1.45rem;
+    font-size: 1rem;
     line-height: 1.85;
   }
 }
@@ -3959,7 +3969,7 @@ body.no-scroll {
   }
 
   .content-section p {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     line-height: 1.95;
   }
 
