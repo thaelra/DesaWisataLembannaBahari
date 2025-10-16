@@ -438,6 +438,27 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
+/* Desktop image widening for fasilitas pages */
+@media (min-width: 1200px) {
+  .slideshow-container {
+    max-width: 1000px;
+    padding: 20px 0 32px 0;
+  }
+  .slide-img {
+    height: 520px;
+    max-width: 980px;
+    object-fit: cover;
+  }
+
+  .location-map {
+    height: 360px;
+  }
+
+  .info-card .gallery {
+    min-height: 420px;
+  }
+}
+
 /* Aside */
 .aside {
   position: sticky;
@@ -543,5 +564,26 @@ h1, h2, h3, h4, h5, h6,
     padding: 14px 16px;
     border-radius: 10px;
     font-size: 1.02rem;
+  }
+}
+
+/* Ultra desktop: 1920 - 2560 */
+@media (min-width: 1920px) and (max-width: 2560px) {
+  .slideshow-container {
+    max-width: 1600px;
+    padding: 28px 0 40px 0;
+  }
+  .slide-img {
+    height: 900px;
+    max-width: 1500px;
+    object-fit: cover;
+  }
+
+  .location-map {
+    height: 520px;
+  }
+
+  .gallery {
+    min-height: 700px;
   }
 }
