@@ -2,6 +2,7 @@
 
 /* Header Section */
 .info-header {
+    margin-top: -10px;
     position: relative;
     width: 100%;
     min-height: clamp(380px, 65vh, 760px);
@@ -21,7 +22,7 @@
 
 /* Pull header slightly under the nav for a tighter top fit on this page */
 .nav-wrapper + .info-header {
-    margin-top: 0; /* ensure no gap above header */
+    margin-top: -10px; /* ensure no gap above header */
 }
 
 /* Make the Informasi page navbar overlay the header and stay fixed at the very top */
@@ -75,6 +76,17 @@
 }
 
 @media (min-width: 1280px) {
+
+     .info-nav-section{
+        position: relative;
+        top: -100px;
+    }
+
+    .content-section{
+        position: relative;
+        top: -100px;
+    }
+
     .nav-wrapper nav {
     width: 1500px;
 }
@@ -91,10 +103,7 @@
     .nav-wrapper { padding-top: max(0px, env(safe-area-inset-top)); }
 }
 
-@media (max-width: 768px) {
-    .nav-wrapper + .info-header { margin-top: 0; }
-    .info-header { padding-top: 0; }
-}
+
 
 .info-header .header-content {
     text-align: center;
@@ -148,7 +157,6 @@
 /* Tab Navigation */
 .info-nav-section {
     padding: 0.25rem 0; /* reduced vertical spacing */
-    top: 0;
     z-index: 20;
     height: 60px;
 }
@@ -924,7 +932,7 @@
     .wave-2 svg { animation: wave-flow-2 30s ease-in-out infinite reverse; }
     .wave-3 svg { animation: wave-flow-3 35s ease-in-out infinite; }
 
-    .info-nav-tabs { align-items: center; gap: 1rem; }
+    .info-nav-tabs {position: relative; top: -30px; gap: 1rem; }
     .tab-button { font-size: 1rem; width: 200px; justify-content: center; }
 
     .agenda-grid { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
@@ -932,7 +940,10 @@
 }
 
 @media (max-width: 480px) {
-    .carousel-indicators{
+.info-nav-tabs{
+    top: 20px;
+
+}    .carousel-indicators{
         display: none;
     }
 
@@ -1243,4 +1254,333 @@ h1.page-title::before,
   height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+}
+
+/* ===== ULTRA-WIDE SCREEN RESPONSIVE (1921px+) ===== */
+@media (min-width: 1921px) {
+    .info-nav-section{
+        position: relative;
+        top: -150px;
+    }
+
+    .content-section{
+        position: relative;
+        top: -150px;
+    }
+
+    .nav-wrapper nav {
+        width: 1800px;
+        padding: 18px 35px;
+    }
+
+    .info-header {
+        min-height: 85vh;
+        padding: 0 40px 70px;
+    }
+
+    .info-header .header-content {
+        max-width: 1400px;
+        gap: 18px;
+        top: 180px;
+    }
+
+    .page-title {
+        font-size: 5.5rem;
+        letter-spacing: 3px;
+        padding: 16px 28px;
+        margin: 10px auto 16px;
+    }
+
+    .page-subtitle {
+        font-size: 1.5rem;
+        padding: 14px 24px;
+    }
+
+    .info-nav-section {
+        padding: 0.5rem 0;
+        height: 80px;
+    }
+
+    .info-nav-tabs {
+        max-width: 800px;
+        gap: 3rem;
+    }
+
+    .tab-button {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.6rem;
+        transform: translateY(15px);
+    }
+
+    .tab-button i {
+        font-size: 1.5rem;
+    }
+
+    .content-section {
+        padding: 5rem 0;
+        min-height: 75vh;
+    }
+
+    .section-header {
+        margin-bottom: 5rem;
+    }
+
+    .section-header h2 {
+        font-size: 3.2rem;
+        padding: 12px 20px;
+        margin: 10px 0 22px;
+    }
+
+    .section-header p {
+        font-size: 1.3rem;
+        max-width: 800px;
+    }
+
+    .info-main .container {
+        max-width: 1800px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .news-carousel-container {
+        max-width: 1800px;
+    }
+
+    .news-carousel {
+        border-radius: 28px;
+    }
+
+    .news-card {
+        border-radius: 28px;
+    }
+
+    .news-image {
+        min-height: 500px;
+    }
+
+    .news-content {
+        padding: 4rem;
+    }
+
+    .news-title {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .news-excerpt {
+        font-size: 1.2rem;
+        line-height: 1.8;
+    }
+
+    .news-date {
+        font-size: 1.1rem;
+        gap: 0.7rem;
+    }
+
+    .news-category {
+        padding: 0.7rem 1.4rem;
+        font-size: 1rem;
+        border-radius: 25px;
+    }
+
+    .news-overlay i {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .news-overlay span {
+        font-size: 1.5rem;
+    }
+
+    .carousel-btn {
+        width: 90px;
+        height: 90px;
+        font-size: 2.2rem;
+    }
+
+    .prev-btn {
+        left: 1.5rem;
+    }
+
+    .next-btn {
+        right: 1.5rem;
+    }
+
+    .carousel-indicators {
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .indicator {
+        width: 18px;
+        height: 18px;
+    }
+
+    .agenda-grid {
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 3rem;
+        max-width: 1800px;
+        padding: 0 3rem;
+    }
+
+    .agenda-card {
+        border-radius: 24px;
+    }
+
+    .agenda-date {
+        top: 1.5rem;
+        left: 1.5rem;
+        padding: 1.3rem;
+        border-radius: 18px;
+        min-width: 100px;
+    }
+
+    .date-number {
+        font-size: 2.5rem;
+    }
+
+    .date-month {
+        font-size: 1.1rem;
+    }
+
+    .date-year {
+        font-size: 1rem;
+    }
+
+    .agenda-image {
+        height: 320px;
+    }
+
+    .agenda-content {
+        padding: 2.5rem;
+    }
+
+    .agenda-meta {
+        gap: 0.7rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .agenda-time,
+    .agenda-location {
+        font-size: 1.1rem;
+        gap: 0.7rem;
+    }
+
+    .agenda-title {
+        font-size: 1.9rem;
+        margin-bottom: 1.3rem;
+    }
+
+    .agenda-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+    }
+
+    .agenda-detail-btn {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.2rem;
+    }
+
+    .announcement-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: 1600px;
+        padding: 0 2rem;
+    }
+
+    .announcement-card {
+        padding: 2rem;
+        border-radius: 20px;
+    }
+
+    .announcement-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+    }
+
+    .announcement-icon i {
+        font-size: 1.8rem;
+    }
+
+    .announcement-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .announcement-content p {
+        font-size: 1.1rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .announcement-meta {
+        font-size: 1rem;
+    }
+
+    .faq-list {
+        max-width: 1200px;
+        gap: 1.5rem;
+    }
+
+    .faq-item {
+        border-radius: 18px;
+    }
+
+    .faq-question {
+        padding: 1.5rem 1.8rem;
+        font-size: 1.2rem;
+    }
+
+    .faq-answer {
+        padding: 0 1.8rem;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 250px;
+        padding-bottom: 1.5rem;
+    }
+
+    .faq-answer p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        max-width: 1800px;
+        margin: 0 auto 2.5rem;
+        padding: 0 40px;
+    }
+
+    .footer-section h3,
+    .footer-section h4 {
+        font-size: 1.4rem;
+        margin-bottom: 1.3rem;
+    }
+
+    .footer-section p {
+        font-size: 1.1rem;
+    }
+
+    .social-links a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .footer-bottom {
+        padding-top: 2.5rem;
+        font-size: 1.1rem;
+    }
+
+    .waves-section {
+        height: 140px;
+    }
+
+    .info-footer {
+        padding: 4rem 0 1.5rem;
+        margin-top: 5rem;
+    }
 }

@@ -242,12 +242,22 @@ function openNewsDetail(newsId) {
 // ===== AGENDA CARDS =====
 function initAgendaCards() {
     const agendaButtons = document.querySelectorAll('.agenda-detail-btn');
+    const agendaCards = document.querySelectorAll('.agenda-card');
     
     agendaButtons.forEach(button => {
         button.addEventListener('click', () => {
             const agendaId = button.getAttribute('data-agenda-id');
             openAgendaDetail(agendaId);
         });
+    });
+    
+    agendaCards.forEach(card => {
+        const externalLink = card.getAttribute('data-external-link');
+        if (externalLink) {
+            card.addEventListener('click', () => {
+                window.location.href = externalLink;
+            });
+        }
     });
 }
 
