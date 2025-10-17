@@ -466,6 +466,7 @@
 }
 
 .agenda-card {
+    border: #133E87 solid 2px;
     background: white;
     border-radius: 20px;
     overflow: hidden;

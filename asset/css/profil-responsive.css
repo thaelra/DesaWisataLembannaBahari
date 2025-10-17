@@ -65,6 +65,7 @@
 
 /* Smooth size morph variables and bindings */
 .profil-nav {
+  display: none;
   --nav-width: min(96vw, 1700px);
   --nav-radius: 50px;
   --nav-pad-x: 12px;
