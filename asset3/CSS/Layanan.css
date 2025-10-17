@@ -359,6 +359,41 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
+
+/* Sticky nav and header shrink behaviour */
+.nav-wrapper {
+  position: relative;
+  z-index: 1100;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+.nav-wrapper.sticky {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.nav-wrapper.nav-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.layanan-page .header.small {
+  padding: 8px 0;
+  min-height: 60px;
+}
+.layanan-page .main-title {
+  position: relative; /* allow header shrink without fixed overlay issues */
+  top: 0;
+  margin-top: 0;
+}
+
+/* When header shrinks, reduce logo/title sizes */
+.layanan-page .header.small .header-logo { width: 56px; height: 56px; }
+.layanan-page .header.small .header-title .desa-name { font-size: 0.95rem; }
+.layanan-page .header.small .header-title .kabupaten-name { font-size: 0.75rem; }
+
+/* Ensure main content moves up when nav becomes sticky (avoid large gap) */
+.layanan-page .main-content { margin-top: 0; }
 .layanan-page .scroll-arrow {
   display: flex;
   flex-direction: column;
@@ -2003,5 +2038,76 @@ h2.section-title::before,
   .facility-image img {
     height: 100%;
     object-fit: cover;
+  }
+
+  /* Make overall content, cards and fonts larger but flexible using clamp */
+  .layanan-page {
+    --scale-factor: 5.08;
+    font-size: clamp(1rem, 1rem + 0.4vw, 1.05rem);
+  }
+
+  .layanan-page .product-title,
+  .layanan-page .facility-title,
+  .layanan-page .section-title,
+  .layanan-page .feature-title {
+    font-size: clamp(1.1rem, 1.1rem + 0.8vw, 1.5rem);
+  }
+
+  /* Hiasan adjustments for desktop to occupy more space and reduce gaps */
+  .layanan-page .hiasan {
+    --bubble-left: 48%;
+    --bubble-bottom: -8%;
+    --bubble-size: 160px;
+    --snack-size: 140px;
+  }
+}
+
+/* Large desktop: further scale for very wide screens (>=1600px) */
+@media (min-width: 1600px) {
+  .slideshow-container {
+    max-width: 1200px;
+    padding: 36px 0 52px 0;
+  }
+
+  .slide-img {
+    height: 640px;
+    max-width: 1150px;
+    border-radius: 20px;
+  }
+
+  .product-image,
+  .facility-image {
+    height: 520px;
+  }
+
+  .products-grid,
+  .facilities-grid {
+    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  }
+
+  /* Increase typographic scale but keep flexible */
+  .layanan-page {
+    font-size: clamp(1.05rem, 1rem + 1vw, 1.15rem);
+  }
+
+  .layanan-page .main-title h1 {
+    font-size: clamp(3.6rem, 2.8rem + 2.5vw, 5rem);
+    margin-top: 36vh;
+  }
+
+  /* Hiasan fills more area on large desktops */
+  .layanan-page .hiasan {
+    --bubble-left: 50%;
+    --bubble-bottom: -4%;
+    --bubble-size: 220px;
+    --snack-size: 180px;
+  }
+
+  /* Reduce large empty gaps by increasing container widths */
+  .layanan-page .main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 48px;
   }
 }
