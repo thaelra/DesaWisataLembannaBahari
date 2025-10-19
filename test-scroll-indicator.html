@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Scroll Indicator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+        
+        .test-container {
+            max-width: 480px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        h1 { color: #133E87; margin-bottom: 20px; }
+        
+        .carousel-test {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #133E87;
+            border: 5px solid #608BC1;
+            margin-top: 20px;
+            padding-bottom: 60px;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            z-index: 10;
+            animation: scrollFadeIn 1s ease-out;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator-text {
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            opacity: 0.95;
+        }
+
+        .scroll-arrows {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .scroll-arrow {
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 10px solid white;
+            opacity: 0.7;
+            animation: arrowSlide 1.5s ease-in-out infinite;
+        }
+
+        .scroll-arrow:nth-child(1) { animation-delay: 0s; }
+        .scroll-arrow:nth-child(2) { animation-delay: 0.2s; }
+        .scroll-arrow:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes arrowSlide {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateX(0px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(10px);
+            }
+        }
+
+        @keyframes scrollFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f4f8;
+            border-left: 4px solid #133E87;
+            border-radius: 5px;
+        }
+        
+        .status strong { color: #133E87; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Scroll Indicator Test</h1>
+        <p>This is a simplified test page to verify the scroll indicator is working correctly.</p>
+        
+        <div class="carousel-test">
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <span class="scroll-indicator-text">Geser untuk melihat</span>
+                <div class="scroll-arrows">
+                    <div class="scroll-arrow"></div>
+                    <div class="scroll-arrow"></div>
+                    <div class="scroll-arrow"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status">
+            <strong>✅ If you see the white text and animated arrows above:</strong><br>
+            Your browser supports the scroll indicator correctly.
+            <br><br>
+            <strong>The issue is likely:</strong>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Browser cache - try Ctrl+Shift+R</li>
+                <li>CSS file not loading - check Network tab in DevTools</li>
+                <li>Screen width not ≤480px</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

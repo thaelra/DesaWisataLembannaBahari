@@ -8,6 +8,56 @@ document.addEventListener('DOMContentLoaded', () => {
   initButtonRipple();
 });
 
+// Make header/nav follow scroll like profil page: sticky, shrink/restore on scroll
+(function() {
+  let lastScroll = 0;
+  const header = document.querySelector('.header');
+  const navWrapper = document.querySelector('.nav-wrapper');
+  const hamburger = document.querySelector('.hamburger');
+  const mainNav = document.querySelector('.main-nav');
+
+  if (!header || !navWrapper) return;
+
+  // Add sticky container for nav after header when scrolled
+  function onScroll() {
+    const current = window.scrollY || window.pageYOffset;
+
+    // Add 'scrolled' when past header height/60
+    if (current > 60) {
+      header.classList.add('small');
+      navWrapper.classList.add('sticky');
+    } else {
+      header.classList.remove('small');
+      navWrapper.classList.remove('sticky');
+    }
+
+    // Show/hide nav based on scroll direction for minimal distraction
+    if (current > lastScroll && current > 120) {
+      // scrolling down -> hide
+      navWrapper.classList.add('nav-hidden');
+    } else {
+      // scrolling up -> show
+      navWrapper.classList.remove('nav-hidden');
+    }
+
+    lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+  }
+
+  // Ensure hamburger toggles when nav-wrapper sticky
+  if (hamburger && mainNav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mainNav.classList.toggle('active');
+      document.body.classList.toggle('no-scroll');
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  // initial state
+  onScroll();
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   // Floating cards animation delay setup
   document.querySelectorAll('.info-card').forEach((card, index) => {

@@ -351,7 +351,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         navLi.forEach(a => {
             a.classList.remove('active');
-            if (a.getAttribute('href').includes(current)) {
+            const href = a.getAttribute('href');
+            if (href && href.startsWith('#') && current && href.slice(1) === current) {
                 a.classList.add('active');
             }
         });

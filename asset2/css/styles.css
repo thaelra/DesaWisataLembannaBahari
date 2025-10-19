@@ -27,7 +27,7 @@
 body {
     margin: 0;
     font-family: 'Karma', serif;
-
+    
     color: var(--primary-color);
     overflow-x: hidden;
 }
@@ -375,7 +375,6 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .main-title h1 span {
-    font-weight: 500;
     opacity: 1;
     background: none !important;
     -webkit-background-clip: initial !important;
@@ -5614,7 +5613,7 @@ rousel-inner img {
     }
 
     .header-container {
-        min-height: 1080px;
+        min-height: 1280px;
     }
 
     .header-overlay {

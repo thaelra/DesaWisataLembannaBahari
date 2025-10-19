@@ -65,6 +65,7 @@
 
 /* Smooth size morph variables and bindings */
 .profil-nav {
+  display: none;
   --nav-width: min(96vw, 1700px);
   --nav-radius: 50px;
   --nav-pad-x: 12px;
@@ -3003,6 +3004,8 @@ body.no-scroll {
 }
 
 @media (min-width: 1280px) {
+
+  
   /* Root Variables - Increased sizes for large screens */
   :root {
     --fontXXL: 5.5rem;
@@ -3318,7 +3321,7 @@ body.no-scroll {
   }
 
   .content-section p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1.8;
   }
 }
@@ -3610,7 +3613,7 @@ body.no-scroll {
   }
 
   .content-section p {
-    font-size: 1.45rem;
+    font-size: 1rem;
     line-height: 1.85;
   }
 }
@@ -3928,7 +3931,7 @@ body.no-scroll {
   }
 
   .content-section p {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     line-height: 1.95;
   }
 
