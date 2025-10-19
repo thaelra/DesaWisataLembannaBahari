@@ -38,30 +38,6 @@ function initLayanan() {
   });
   document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
 
-  // Tab switching
-  const switchTab = (tabName) => {
-    document.querySelectorAll('.content-section').forEach((s) => s.classList.remove('active'));
-    document.getElementById(`${tabName}-content`)?.classList.add('active');
-    document.querySelectorAll('.header-btn').forEach((b) => {
-      b.classList.toggle('active', b.getAttribute('data-tab') === tabName);
-    });
-  };
-  // delegated click handler for header buttons (robust if DOM changes)
-  document.addEventListener('click', (ev) => {
-    const btn = ev.target.closest && ev.target.closest('.header-btn');
-    if (!btn) return;
-    // if it's a link or button, prevent default navigation
-    ev.preventDefault();
-    const tab = btn.dataset.tab;
-    if (!tab) return;
-    if (typeof window.switchTabAndSave === 'function') {
-      window.switchTabAndSave(tab);
-    } else {
-      switchTab(tab);
-    }
-  }, { passive: false });
-  switchTab('produk'); // default tab
-
   // previous onScroll wiring removed (header/nav behavior handled elsewhere)
   
   // ----- IntersectionObserver for header-follow (more efficient) -----
