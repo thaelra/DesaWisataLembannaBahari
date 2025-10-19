@@ -1540,7 +1540,7 @@ h2.section-title::before,
   }
 
   .layanan-page .main-title {
-    margin-top: -20vh !important;
+    margin-top: -30vh !important;
     height: auto !important;
     min-height: fit-content !important;
     font-size: 1.2rem !important;
@@ -1890,10 +1890,42 @@ h2.section-title::before,
   .layanan-toast-btn.primary { background: #fff; color: var(--primary-color); }
   .layanan-toast-btn:focus { outline: 3px solid rgba(255,255,255,0.18); }
 
+  /* cute visual treatment */
+  .layanan-toast.cute {
+    border-radius: 18px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, rgba(96,139,193,0.96), rgba(133,173,216,0.98));
+    box-shadow: 0 10px 36px rgba(19,62,135,0.28), 0 2px 8px rgba(255,255,255,0.04) inset;
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(6px);
+  }
+  .layanan-toast.cute::before {
+    content: "✨";
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 1.25rem;
+    transform-origin: center;
+  }
+
+  /* welcome-back variant (shown on reload) */
+  .layanan-toast.welcome {
+    background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(240,246,255,0.95));
+    color: var(--primary-color);
+  }
+  .layanan-toast.welcome::before { content: "👋"; }
+
+  @keyframes toastPop {
+    0% { transform: translateX(-50%) translateY(8px) scale(0.96); opacity: 0; }
+    60% { transform: translateX(-50%) translateY(0) scale(1.02); opacity: 1; }
+    100% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+  }
+  .layanan-toast.cute.show { animation: toastPop 420ms cubic-bezier(0.2,0.9,0.2,1); }
+
   /* Center main title and stack content on narrow screens */
   .layanan-page .main-title {
     position: relative;
-    margin: 0 auto;
+    /* nudge slightly below vertical center on small screens */
+    margin: 6vh auto 0; /* top right/left/bottom */
     top: 0;
     transform: none;
     display: flex;

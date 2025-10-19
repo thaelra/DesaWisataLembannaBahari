@@ -14,60 +14,9 @@ function initLayanan() {
   // Setup header + nav behavior and a single scroll listener
   const header = document.querySelector('.header');
   const navWrapper = document.querySelector('.nav-wrapper');
-  const hamburger = document.querySelector('.hamburger');
-  const mainNav = document.querySelector('.main-nav');
   const headerButtons = document.querySelector('.header-buttons');
   const media = window.matchMedia('(min-width: 1200px)');
   let lastScroll = 0;
-
-  function onScroll() {
-    const current = window.scrollY || window.pageYOffset;
-
-    // sticky / shrink header
-    if (header && navWrapper) {
-      if (current > 60) {
-        header.classList.add('small');
-        navWrapper.classList.add('sticky');
-      } else {
-        header.classList.remove('small');
-        navWrapper.classList.remove('sticky');
-      }
-
-      // hide nav when scrolling down, show when up
-      if (current > lastScroll && current > 120) {
-        navWrapper.classList.add('nav-hidden');
-      } else {
-        navWrapper.classList.remove('nav-hidden');
-      }
-    }
-
-    // header buttons follow center on desktop is handled by IntersectionObserver (see below)
-
-    lastScroll = Math.max(0, current);
-  }
-
-  // hamburger behavior
-  if (hamburger && mainNav) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mainNav.classList.toggle('active');
-      document.body.classList.toggle('no-scroll');
-    });
-  }
-
-  // setup parallax (if header exists)
-  const headerContainer = document.querySelector('.header-container') || header;
-  if (headerContainer) {
-    window.addEventListener('scroll', () => {
-      const parallax = window.pageYOffset * 0.5;
-      headerContainer.style.transform = `translateY(${parallax}px)`;
-    }, { passive: true });
-  }
-
-  // info-card delay
-  document.querySelectorAll('.info-card').forEach((card, index) => {
-    card.style.setProperty('--delay', `${1 + index * 0.2}s`);
-  });
 
   // Scroll to top button
   const scrollToTopBtn = document.createElement('button');
@@ -113,10 +62,7 @@ function initLayanan() {
   }, { passive: false });
   switchTab('produk'); // default tab
 
-  // hook scroll/resize
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  onScroll();
+  // previous onScroll wiring removed (header/nav behavior handled elsewhere)
   
   // ----- IntersectionObserver for header-follow (more efficient) -----
   try {
@@ -203,7 +149,16 @@ function initLayanan() {
     const showFasilitasBtn = document.getElementById('layanan-toast-show-fasilitas');
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function showToast() {
+    function showToast(opts = {}) {
+      const { variant = 'cute', text } = opts;
+      // update classes
+      toast.classList.remove('cute', 'welcome');
+      toast.classList.add(variant);
+      // update message if provided
+      if (text) {
+        const msgEl = toast.querySelector('.layanan-toast-message');
+        if (msgEl) msgEl.innerHTML = text;
+      }
       toast.hidden = false;
       // small delay so transition runs
       requestAnimationFrame(() => toast.classList.add('show'));
@@ -233,12 +188,19 @@ function initLayanan() {
       hideToast();
     });
 
-    // Only show if user hasn't seen it before and page has header buttons
+    // Only show if page has header buttons
     try {
       const seen = localStorage.getItem(TOAST_KEY);
-      if (!seen && document.querySelectorAll('.header-btn').length) {
-        // show after a small delay so page layout settles
-        setTimeout(showToast, 900);
+      const sessionSeen = sessionStorage.getItem(TOAST_KEY + ':session');
+      if (!document.querySelectorAll('.header-btn').length) return;
+
+      if (!seen) {
+        // first time ever -> cute hint
+        setTimeout(() => showToast({ variant: 'cute' }), 900);
+      } else if (!sessionSeen) {
+        // seen before but not in this session -> welcome back message
+        sessionStorage.setItem(TOAST_KEY + ':session', '1');
+        setTimeout(() => showToast({ variant: 'welcome', text: 'Selamat datang kembali — Anda bisa beralih ke <strong>Fasilitas</strong> lewat tombol di atas.' }), 700);
       }
     } catch (e) {
       // ignore storage errors
