@@ -3820,80 +3820,6 @@ h2.section-title::before,
     }
 }
 
-/* ===== MOBILE BOTTOM NAVIGATION ===== */
-/* Hide mobile bottom navigation on laptop/computer viewports */
-@media (min-width: 901px) {
-    .mobile-bottom-nav {
-        display: none !important;
-    }
-}
-
-/* Show mobile bottom navigation only on mobile devices */
-@media (max-width: 900px) {
-    .mobile-bottom-nav {
-        display: block;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 8px 0;
-    }
-    
-    .mobile-nav-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 0 10px;
-    }
-    
-    .mobile-nav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.7);
-        transition: all 0.3s ease;
-        padding: 8px 12px;
-        border-radius: 12px;
-        min-width: 60px;
-    }
-    
-    .mobile-nav-item.active,
-    .mobile-nav-item:hover {
-        color: var(--white-color);
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-2px);
-    }
-    
-    .mobile-nav-icon {
-        width: 24px;
-        height: 24px;
-        margin-bottom: 4px;
-    }
-    
-    .mobile-nav-icon svg {
-        width: 100%;
-        height: 100%;
-        fill: currentColor;
-    }
-    
-    .mobile-nav-label {
-        font-size: 0.7rem;
-        font-weight: 500;
-        text-align: center;
-        line-height: 1.2;
-    }
-
-    .site-footer {
-    padding: 40px 0 120px 0;
-    }
-
-    .site-footer {
-    padding: 40px 0 120px 0;
-    }
-}
 
 @media (max-width: 700px){
         .feature-text h2 {
@@ -4397,31 +4323,7 @@ h2.section-title::before,
         padding-top: 25px;
     }
     
-    /* === MOBILE BOTTOM NAVIGATION === */
-    .mobile-bottom-nav {
-        padding: 6px 0;
-        margin-bottom: 10px;
-    }
     
-    .mobile-nav-container {
-        padding: 0 8px;
-    }
-    
-    .mobile-nav-item {
-        padding: 6px 8px;
-        min-width: 50px;
-        border-radius: 10px;
-    }
-    
-    .mobile-nav-icon {
-        width: 16px !important;
-        height: 16px !important;
-        margin-bottom: 2px !important;
-    }
-    
-    .mobile-nav-label {
-        font-size: 0.65rem;
-    }
     
     /* === MODAL AND CAROUSEL === */
     .modal {
@@ -5046,31 +4948,6 @@ rousel-inner img {
         padding-top: 25px;
     }
     
-    /* === MOBILE BOTTOM NAVIGATION === */
-    .mobile-bottom-nav {
-        padding: 6px 0;
-        margin-bottom: 10px;
-    }
-    
-    .mobile-nav-container {
-        padding: 0 8px;
-    }
-    
-    .mobile-nav-item {
-        padding: 6px 8px;
-        min-width: 50px;
-        border-radius: 10px;
-    }
-    
-    .mobile-nav-icon {
-        width: 16px !important;
-        height: 16px !important;
-        margin-bottom: 2px !important;
-    }
-    
-    .mobile-nav-label {
-        font-size: 0.65rem;
-    }
     
     /* === MODAL AND CAROUSEL === */
     .modal {
