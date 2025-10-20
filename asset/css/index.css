@@ -1,5 +1,4 @@
 
-
 @import url('https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
 
 
@@ -221,9 +220,6 @@ body.profil-nav-floating .profil-main {
     padding: 0 30px 0 30px;
     background: transparent; 
 }
-
-
-
 
 .nav-atas .logo {
     display: flex;
@@ -754,7 +750,7 @@ body.profil-nav-floating .profil-main {
     align-items: center;
     position: relative;
     z-index: 10;
-    margin-top: -42px; /* pull up slightly more to remove white seam under floating menu */
+    margin-top: -80px; /* pull up to remove gap between profil-nav and data-desa-section */
     overflow: hidden; /* for shine overlay */
 }
 
@@ -921,6 +917,17 @@ body.profil-nav-floating .profil-main {
 .data-desa-box li { color: var(--primary-color); }
 .data-desa-box ul { padding-left: 1.2rem; }
 
+.awards-title{
+    text-align: center !important;
+    font-size: var(--fontXL);
+    font-family: 'Playfair Display SC', serif !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    margin-top: 60px !important;
+    margin-bottom: 40px !important;
+    letter-spacing: 2px !important;
+    text-shadow: 0 3px 16px rgba(0,0,0,0.25) !important;
+}
 /* Sejarah Section */
 .sejarah-section {
     position: relative;

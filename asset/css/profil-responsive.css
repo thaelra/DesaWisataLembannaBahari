@@ -73,8 +73,8 @@
   border-radius: var(--nav-radius);
 }
 
-/* Show profil-nav on screens above 1023px */
-@media (min-width: 1024px) {
+/* Show profil-nav on screens above 900px */
+@media (min-width: 901px) {
   .profil-nav {
     display: block !important;
   }
@@ -153,6 +153,11 @@
     transform: translateX(100px) translateZ(-65px) rotateY(-10deg);
   }
 
+  .hamburger{
+    width: 160px !important; /* Increased width for better appearance on min 320px */
+    height: 20px !important; /* Increased height for better appearance on min 320px */
+  }
+
 
 }
 
@@ -207,19 +212,13 @@
   /* Mobile menu styling */
   .hamburger {
     display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
     cursor: pointer;
+    z-index: 1000;
     position: relative;
-    z-index: 1005;
-    background: rgba(19, 62, 135, 0.9);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    margin-right: 16px;
-    margin-top: 8px;
+    background-color: transparent !important;
+    border-radius: 10 !important;
+    width: 140px !important; /* Increased width for better appearance on min 320px */
+    height: 40px !important; /* Increased height for better appearance on min 320px */
   }
   
   .hamburger:hover {
@@ -230,7 +229,7 @@
   .hamburger span {
     display: block;
     width: 20px;
-    height: 2px;
+    height: 20px;
     background-color: #ffffff;
     margin: 3px 0;
     transition: all 0.3s ease;
@@ -433,6 +432,27 @@
     font-size: 10px;
   }
 }
+
+@media (min-width: 481px) and (max-width: 766px){ /* KHUSUS HAMBURGER MENU*/
+ .nav-links{
+    display:none !important;}
+
+  .mobile-menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    left: 150px;
+  }
+
+}
+
 /* =============================================
    481px - 600px
    ============================================= */
@@ -499,6 +519,18 @@
     width: 21px;
     height: 2.2px;
     margin: 3px 0;
+  }
+  .mobile-menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
   }
 
   .mobile-menu-list li a {
@@ -925,7 +957,7 @@
   }
 
   .awards-title {
-    font-size: 1.4rem;
+    font-size: 2rem;
     margin: var(--mobile-padding) 0;
     padding: 0 var(--mobile-padding);
     text-align: center;
@@ -1194,7 +1226,7 @@
     content:'Geser untuk melihat lainnya →';
     display:block;
     margin-top:8px;
-    font-size:.95rem;
+    font-size:2rem;
     font-weight:600;
     color:rgba(255,255,255,0.85);
     text-align:center;
@@ -1328,6 +1360,7 @@
     max-width: 350px;
     margin: 0 auto;
     align-items: center; /* center items now */
+    left: 200px;
   }
 
   .mobile-menu-list li {
@@ -1422,6 +1455,7 @@
     border-radius: 8px;
     letter-spacing: 1px;
     text-transform: uppercase;
+    text-align: center; /* Center the text within the anchor tag */
   }
 
   .mobile-menu-list li a:hover,
@@ -1752,7 +1786,7 @@
   }
 
   .awards-title {
-    font-size: 1.4rem;
+    font-size: 2rem;
     margin: var(--mobile-padding) 0;
     padding: 0 var(--mobile-padding);
     text-align: center;
@@ -2051,6 +2085,42 @@
 .submenu , .dropdown-toggle{
     display: none;
 }
+
+/* Show main navigation like desktop */
+.nav-links {
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-height: 56px;
+    gap: 24px; /* Slightly smaller gap for this breakpoint */
+    text-decoration: none;
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    transform: none;
+    flex-direction: row;
+}
+
+.nav-links li {
+    width: auto;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Playfair Display SC', serif;
+    font-size: 1.5rem; /* Slightly smaller font size */
+    font-weight: 500;
+    padding: 8px 12px; /* More compact padding */
+    transition: color 0.2s;
+    display: block;
+    text-align: center;
+}
+
  .main-nav a {
     color: #fff;
     text-decoration: none;
@@ -2120,34 +2190,37 @@
         padding-bottom: 0;
     }
 
-    /* Ensure off-canvas menu can overflow navbar on mobile */
+    /* Override any mobile navigation conflicts for this breakpoint */
     nav { overflow: visible; }
 
-    .nav-links {
-        position: absolute;
-        right: 0px;
-        height: 92vh;
-        top: 8vh;
-        background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 70%;
-        gap: 6px;
-        padding-top: 16px;
-        transform: translateX(100%);
-        transition: transform 0.4s ease-in-out;
-    }
-
-    .nav-links li { width: 100%; }
-    .nav-links a { display: block; width: 100%; text-align: center; padding: 14px 24px; font-size: 1.1em; }
-
-    .nav-links.nav-active {
-        transform: translateX(0%);
-    }
-
     .hamburger {
-        display: block;
+        display: none;
+    }
+
+    /* Make profil-nav more compact for this breakpoint */
+    .profil-nav {
+        --nav-width: min(94vw, 1000px)  !important; /* Smaller width */
+        --nav-radius: 30px  !important; /* Smaller border radius */
+        --nav-pad-x: 8px  !important; /* Smaller padding */
+        margin-bottom: 10px  !important; /* Add some space below */
+    }
+
+    .profil-nav ul {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        column-gap: 12px  !important; /* Smaller gap */
+        row-gap: 2px  !important; /* Smaller row gap */
+        padding: 2px var(--nav-pad-x)  !important; /* Less padding */
+    }
+
+    .profil-nav a {
+        font-size: 0.8rem !important; /* Smaller font size */
+        padding: 4px 6px  !important; /* More compact padding */
+        line-height: 1.1  !important; /* Tighter line height */
+    }
+
+    /* Prevent horizontal overflow */
+    .profil-main {
+        overflow-x: hidden;
     }
 
     .toggle .line1 {
@@ -2233,15 +2306,15 @@
   /* Style untuk tablet landscape */
   .profil-header {
     position: relative;
-    margin-bottom: var(--tablet-gap);
+    margin-bottom: 0;
   }
   
   .header-bg {
-    height: 250px;
+    height: 350px;
   }
   
   .header-img {
-    height: 250px;
+    height: 350px;
     object-fit: cover;
   }
   
@@ -2252,7 +2325,7 @@
   }
   
   .profil-nav {
-    top: 210px;
+    top: 320px;
     bottom: auto;
     padding: 0 10px;
   }
@@ -2272,8 +2345,11 @@
   }
 
   .data-desa-section {
-    padding: 0 0 var(--tablet-padding) 0;
+    padding: 60px 0 var(--tablet-padding) 0;
     min-height: 320px;
+    position: relative;
+    z-index: 1;
+    margin-top: -80px;
   }
   
   .data-desa-grid {
@@ -2289,10 +2365,15 @@
   }
   
   .data-desa-title {
-    font-size: 1.7rem;
+    display: block !important;
+    visibility: visible !important;
+    font-size: 1.7rem  !important;
     margin: var(--tablet-padding) 0;
     padding: 0 var(--tablet-padding);
     text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 80px !important;
   }
   
   .timeline {
@@ -2425,7 +2506,43 @@
         opacity: calc(0.7 * var(--nav-atas-glow-intensity));
     }
 }
-  
+
+/* =============================================
+   DESKTOP (1024px - 1279px)
+   ============================================= */
+   @media (min-width: 1024px) and (max-width: 1279px) {
+    .profil-header {
+        position: relative;
+        margin-bottom: 0;
+    }
+    /* Make profil-nav more compact for this breakpoint */
+    .profil-nav {
+        --nav-width: min(94vw, 1000px)  !important; /* Smaller width */
+        --nav-radius: 30px  !important; /* Smaller border radius */
+        --nav-pad-x: 8px  !important; /* Smaller padding */
+        margin-bottom: 10px  !important; /* Add some space below */
+    }
+
+    .profil-nav ul {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        column-gap: 12px  !important; /* Smaller gap */
+        row-gap: 2px  !important; /* Smaller row gap */
+        padding: 2px var(--nav-pad-x)  !important; /* Less padding */
+    }
+
+    .profil-nav a {
+        font-size: 0.8rem !important; /* Smaller font size */
+        padding: 4px 6px  !important; /* More compact padding */
+        line-height: 1.1  !important; /* Tighter line height */
+    }
+    .profil-nav {
+    top: 400px;
+    bottom: auto;
+    padding: 0 10px;
+  }
+
+
+  }
 
 /* =============================================
    LARGE SCREENS (1280px - 1600px)
@@ -2458,9 +2575,6 @@
   .sejarah-section .timeline-row.right .timeline-content p{ border-right:3px solid rgba(255,255,255,0.35) !important; padding-right:14px !important; }
 }
 
-/* =============================================
-   
-   ============================================= */
 
 
 /* =============================================
@@ -3069,7 +3183,7 @@ body.no-scroll {
   }
 
   .profil-nav {
-    top: 450px;
+    top: 420px;
     bottom: auto;
     padding: 0 50px;
     max-width: 1600px;
@@ -3119,8 +3233,14 @@ body.no-scroll {
     border-radius: 18px;
   }
 
+  .awards-title{
+     font-size: 3rem !important;
+  }
 
   /* === TIMELINE SECTION === */
+  .sejarah-header h2{
+    font-size: 3rem !important;
+  }
   .timeline {
     max-width: 1600px;
     margin: 0 auto;
@@ -3228,12 +3348,15 @@ body.no-scroll {
 
   /* === SECTION TITLES === */
   .section-title {
-    font-size: 3.2rem;
+    font-size: 3rem;
     margin: var(--desktop-padding) 0 var(--desktop-gap) 0;
     padding: 0 var(--desktop-padding);
   }
 
   /* === VISI MISI SECTION === */
+  .visi-title, .misi-title {
+    font-size: 3rem !important;
+  }
   .vm-content {
     max-width: 1600px;
     margin: 0 auto;
@@ -3257,6 +3380,9 @@ body.no-scroll {
   }
 
   /* === STRUKTUR ORGANISASI === */
+  .struktur-title{
+    font-size: 3rem !important;
+  }
   .struktur-container {
     max-width: 1600px;
     margin: 0 auto;
@@ -3331,6 +3457,10 @@ body.no-scroll {
     font-size: 1.2rem;
     line-height: 1.8;
   }
+
+  .peta-title, .title-galeri, .galeri-title, .medsos-title, .person-in-charge-title{
+    font-size: 3rem !important;
+  }
 }
 
 /* =============================================
@@ -3341,7 +3471,7 @@ body.no-scroll {
   /* Root Variables - Further increased for XL screens */
   :root {
     --fontXXL: 6.5rem;
-    --fontXL: 5rem;
+    --fontXL: 4rem;
     --fontL: 3.2rem;
     --fontB: 2.3rem;
     --fontMM: 1.7rem;
@@ -3372,11 +3502,11 @@ body.no-scroll {
   }
 
   .nav-atas .logo-text .desa {
-    font-size: 1.75rem;
+    font-size: 1.7rem;
   }
 
   .nav-atas .logo-text .kabupaten {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .profil-nav {
@@ -3399,7 +3529,7 @@ body.no-scroll {
   }
 
   .profil-nav a {
-    font-size: 1.1rem;
+    font-size: 1.5rem !important;
     padding: 9px 14px;
     line-height: 1.2;
   }
@@ -3411,7 +3541,7 @@ body.no-scroll {
   }
 
   .data-desa-title {
-    font-size: 3.6rem;
+    font-size: 4rem;
     margin: calc(var(--desktop-gap) * 1.2) 0;
   }
 
@@ -3623,6 +3753,12 @@ body.no-scroll {
     font-size: 1rem;
     line-height: 1.85;
   }
+  .peta-title, .title-galeri, .galeri-title, .medsos-title, .person-in-charge-title, .visi-title, .misi-title, .awards-title, .struktur-title{
+    font-size: 4rem !important;
+  }
+  .nav-links a{
+    font-size: 2rem !important;
+  }
 }
 
 /* =============================================
@@ -3682,7 +3818,7 @@ body.no-scroll {
   }
 
   .profil-nav {
-    top: 680px;
+    top: 700px;
     bottom: auto;
     padding: 0 90px;
     max-width: 2400px;
@@ -3969,6 +4105,13 @@ body.no-scroll {
     padding: 16px 24px;
     border-radius: 14px;
   }
+
+  .peta-title, .title-galeri, .galeri-title, .medsos-title, .person-in-charge-title, .visi-title, .misi-title, .awards-title, .struktur-title, .sejarah-header h2 {
+    font-size: 5rem !important;
+  }
+  .nav-links a{
+    font-size: 2rem !important;
+  }
 }
 
 /* Small tablet responsive adjustments (769px - 900px) */
@@ -4020,7 +4163,7 @@ body.no-scroll {
 }
 
 
- .awards-title{ text-align:center;color:#fff;font-family:'Playfair Display SC',serif;letter-spacing:2px;margin:40px 0 16px;font-size:1.8rem;text-shadow:0 3px 16px rgba(0,0,0,.25);}    
+ .awards-title{ text-align:center;color:#fff;font-family:'Playfair Display SC',serif;letter-spacing:2px;margin:40px 0 16px;font-size:2rem;text-shadow:0 3px 16px rgba(0,0,0,.25);}    
                 .data-desa-awards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:1100px;margin:10px auto 40px;padding:0 16px;}
                 .award-card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.86) 0%, rgba(214,227,243,.95) 100%);border:1px solid rgba(255,255,255,.6);border-radius:16px;box-shadow:0 10px 26px rgba(0,0,0,.12);overflow:hidden;transition:transform .28s ease, box-shadow .28s ease;}
                 .award-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.20);}    
@@ -4078,7 +4221,7 @@ body.no-scroll {
                         display:block;
                         font-family:'Karma', serif;
                         font-weight:600;
-                        font-size:.95rem;
+                        font-size:2rem;
                         opacity:.9;
                         color:#fff;
                         margin-top:6px;
@@ -4151,7 +4294,7 @@ grid-template-columns: repeat(1, 1fr);
     content: 'Geser untuk melihat lainnya →';
     display: block;
     margin-top: 8px;
-    font-size: .95rem;
+    font-size: 2rem;
     font-weight: 600;
     color: rgba(255,255,255,0.85);
     text-align: center;
