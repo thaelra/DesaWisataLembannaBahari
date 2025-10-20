@@ -87,61 +87,55 @@ function initButtonRipple() {
     });
   });
 }
+
+
+// Responsive facilities toggle: create button for widths < 1920px
 (function(){
-  'use strict';
-  const initFacilitiesToggle = () => {
+  const BREAKPOINT = 1920;
+
+  function createToggle() {
     const pane = document.querySelector('.facilities-pane');
     if (!pane) return;
     const grid = pane.querySelector('.facility-grid');
-    let btn = pane.querySelector('.facilities-toggle-btn');
-    const isMobile = window.innerWidth <= 900;
+    if (!grid) return;
 
-    if (isMobile) {
-      // if button not present, create it; otherwise ensure label matches state
+    // if a button already exists, keep it
+    let btn = pane.querySelector('.facilities-toggle-btn');
+    if (window.innerWidth < BREAKPOINT) {
       if (!btn) {
         btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'facilities-toggle-btn';
-        btn.setAttribute('aria-expanded', 'false');
-        btn.setAttribute('aria-controls', 'facilityGrid');
-        btn.textContent = 'Tampilkan semua';
-        if (grid && grid.parentNode === pane) {
-          grid.insertAdjacentElement('afterend', btn);
-        } else {
-          pane.appendChild(btn);
-        }
-        // keep styles in CSS, but ensure it's visible for older browsers
-        btn.style.display = 'block';
-        btn.style.zIndex = '2';
+        btn.setAttribute('aria-expanded', String(pane.classList.contains('expanded')));
+        btn.setAttribute('aria-controls', grid.id || 'facilityGrid');
+        btn.textContent = pane.classList.contains('expanded') ? 'Sembunyikan' : 'Tampilkan semua';
+        // insert after the grid for natural flow
+        grid.insertAdjacentElement('afterend', btn);
 
         btn.addEventListener('click', () => {
           const expanded = pane.classList.toggle('expanded');
           btn.setAttribute('aria-expanded', String(expanded));
-        
+          btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
 
           if (!expanded) {
-            // smooth-scroll the pane into view when collapsing
+            // when collapsing, scroll pane into view so header doesn't cover it
             const rect = pane.getBoundingClientRect();
             const offsetTop = window.pageYOffset + rect.top - 80;
             window.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
           }
         });
-      } else {
-        // ensure button text reflects current state
-        const expanded = pane.classList.contains('expanded');
-        btn.setAttribute('aria-expanded', String(expanded));
-       
       }
     } else {
       if (btn) btn.remove();
       pane.classList.remove('expanded');
     }
-  };
+  }
 
-  // Ensure the grid has an id for aria-controls
+  // Ensure the grid has an id
   const facilityGrid = document.querySelector('.facilities-pane .facility-grid');
   if (facilityGrid && !facilityGrid.id) facilityGrid.id = 'facilityGrid';
 
-  initFacilitiesToggle();
-  window.addEventListener('resize', initFacilitiesToggle);
+  // initialize and bind
+  createToggle();
+  window.addEventListener('resize', createToggle);
 })();
