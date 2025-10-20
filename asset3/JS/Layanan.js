@@ -1,31 +1,87 @@
-function initLayanan() {
-  // initialize helpers (functions defined later in this file)
-  try {
-    initFloatingCards();
-  } catch (e) { /* graceful */ }
-  try { initParallax(); } catch (e) {}
-  try { initScrollToTop(); } catch (e) {}
-  try { initAnimations(); } catch (e) {}
-  try { initTabs(); } catch (e) {}
-  try { initScrollProgressBar(); } catch (e) {}
-  try { initButtonRipple(); } catch (e) {}
-  try { initFacilitiesToggle(); } catch (e) {}
+document.addEventListener('DOMContentLoaded', () => {
+  initFloatingCards();
+  initParallax();
+  initScrollToTop();
+  initAnimations();
+  initTabs();
+  initScrollProgressBar();
+  initButtonRipple();
+});
 
-  // Setup header + nav behavior and a single scroll listener
+// Make header/nav follow scroll like profil page: sticky, shrink/restore on scroll
+(function() {
+  let lastScroll = 0;
   const header = document.querySelector('.header');
   const navWrapper = document.querySelector('.nav-wrapper');
-  const headerButtons = document.querySelector('.header-buttons');
-  const media = window.matchMedia('(min-width: 1200px)');
-  let lastScroll = 0;
+  const hamburger = document.querySelector('.hamburger');
+  const mainNav = document.querySelector('.main-nav');
+
+  if (!header || !navWrapper) return;
+
+  // Add sticky container for nav after header when scrolled
+  function onScroll() {
+    const current = window.scrollY || window.pageYOffset;
+
+    // Add 'scrolled' when past header height/60
+    if (current > 60) {
+      header.classList.add('small');
+      navWrapper.classList.add('sticky');
+    } else {
+      header.classList.remove('small');
+      navWrapper.classList.remove('sticky');
+    }
+
+    // Show/hide nav based on scroll direction for minimal distraction
+    if (current > lastScroll && current > 120) {
+      // scrolling down -> hide
+      navWrapper.classList.add('nav-hidden');
+    } else {
+      // scrolling up -> show
+      navWrapper.classList.remove('nav-hidden');
+    }
+
+    lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+  }
+
+  // Ensure hamburger toggles when nav-wrapper sticky
+  if (hamburger && mainNav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mainNav.classList.toggle('active');
+      document.body.classList.toggle('no-scroll');
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  // initial state
+  onScroll();
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Floating cards animation delay setup
+  document.querySelectorAll('.info-card').forEach((card, index) => {
+    card.style.setProperty('--delay', `${1 + index * 0.2}s`);
+  });
+
+  // Parallax effect for header
+  const headerContainer = document.querySelector('.header-container') || document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    if (!headerContainer) return;
+    const parallax = window.pageYOffset * 0.5;
+    headerContainer.style.transform = `translateY(${parallax}px)`;
+  });
 
   // Scroll to top button
   const scrollToTopBtn = document.createElement('button');
   scrollToTopBtn.id = 'scrollToTopBtn';
   scrollToTopBtn.title = 'Kembali ke atas';
   document.body.appendChild(scrollToTopBtn);
+
   window.addEventListener('scroll', () => {
     scrollToTopBtn.classList.toggle('show', window.scrollY > 300);
-  }, { passive: true });
+  });
+
   scrollToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -38,158 +94,21 @@ function initLayanan() {
   });
   document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
 
-  // previous onScroll wiring removed (header/nav behavior handled elsewhere)
-  
-  // ----- IntersectionObserver for header-follow (more efficient) -----
-  try {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if ('IntersectionObserver' in window && header && headerButtons) {
-      // create a sentinel at the header bottom by observing a zero-height element
-      const sentinel = document.createElement('div');
-      sentinel.style.position = 'absolute';
-      sentinel.style.left = '0';
-      sentinel.style.right = '0';
-      sentinel.style.bottom = '0';
-      sentinel.style.height = '1px';
-      header.appendChild(sentinel);
-
-      const observerOptions = {
-        root: null,
-        threshold: [0],
-      };
-
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          // when sentinel is NOT intersecting, header scrolled past viewport -> float buttons
-          if (!entry.isIntersecting && media.matches) {
-            headerButtons.classList.add('follow');
-            if (!prefersReduced) headerButtons.classList.add('floating');
-          } else {
-            headerButtons.classList.remove('follow', 'floating');
-          }
-        });
-      }, observerOptions);
-
-      io.observe(sentinel);
-      // cleanup on unload
-      window.addEventListener('unload', () => io.disconnect());
-    }
-  } catch (e) {
-    // fallback: keep current behavior
-    console.error(e);
-  }
-
-  // ----- Keyboard navigation for header buttons -----
-  (function() {
-    const btns = Array.from(document.querySelectorAll('.header-buttons .header-btn'));
-    if (!btns.length) return;
-
-    btns.forEach((b, i) => {
-      b.setAttribute('tabindex', '0');
-      b.addEventListener('keydown', (ev) => {
-        if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') {
-          ev.preventDefault();
-          btns[(i + 1) % btns.length].focus();
-        } else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') {
-          ev.preventDefault();
-          btns[(i - 1 + btns.length) % btns.length].focus();
-        } else if (ev.key === 'Enter' || ev.key === ' ') {
-          ev.preventDefault();
-          b.click();
-        }
-      });
+  // Tab switching
+  const switchTab = (tabName) => {
+    document.querySelectorAll('.content-section').forEach((s) => s.classList.remove('active'));
+    document.getElementById(`${tabName}-content`)?.classList.add('active');
+    document.querySelectorAll('.header-btn').forEach((b) => {
+      b.classList.toggle('active', b.getAttribute('data-tab') === tabName);
     });
-  })();
+  };
 
-  // ----- Remember last active tab (localStorage) -----
-  (function() {
-    const STORE_KEY = 'layanan:lastTab';
-    const saved = localStorage.getItem(STORE_KEY);
-    if (saved) switchTab(saved);
-    // override switchTab to persist
-    const origSwitch = switchTab;
-    window.switchTabAndSave = (tabName) => {
-      origSwitch(tabName);
-      try { localStorage.setItem(STORE_KEY, tabName); } catch (e) {}
-    };
-    // note: header button listeners are attached in the main registration block (avoids duplicates)
-  })();
+  document.querySelectorAll('.header-btn').forEach((button) => {
+    button.addEventListener('click', () => switchTab(button.dataset.tab));
+  });
 
-  // ----- Toast hint for first-time visitors (switch tabs hint) -----
-  (function(){
-    const TOAST_KEY = 'layanan:toastSeenV1';
-    const toast = document.getElementById('layanan-toast');
-    if (!toast) return;
-
-    const dismissBtn = document.getElementById('layanan-toast-dismiss');
-    const showFasilitasBtn = document.getElementById('layanan-toast-show-fasilitas');
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function showToast(opts = {}) {
-      const { variant = 'cute', text } = opts;
-      // update classes
-      toast.classList.remove('cute', 'welcome');
-      toast.classList.add(variant);
-      // update message if provided
-      if (text) {
-        const msgEl = toast.querySelector('.layanan-toast-message');
-        if (msgEl) msgEl.innerHTML = text;
-      }
-      toast.hidden = false;
-      // small delay so transition runs
-      requestAnimationFrame(() => toast.classList.add('show'));
-      // auto-dismiss after 6s if not reduced motion
-      if (!prefersReduced) {
-        setTimeout(hideToast, 6000);
-      }
-    }
-
-    function hideToast() {
-      toast.classList.remove('show');
-      // keep it hidden after transition
-      setTimeout(() => { toast.hidden = true; }, 300);
-      try { localStorage.setItem(TOAST_KEY, '1'); } catch (e) {}
-    }
-
-    // Dismiss handlers
-    dismissBtn?.addEventListener('click', hideToast);
-    toast.addEventListener('click', (ev) => {
-      // if clicking outside buttons, dismiss
-      if (ev.target === toast) hideToast();
-    });
-
-    // Action: show fasilitas tab and hide
-    showFasilitasBtn?.addEventListener('click', () => {
-      window.switchTabAndSave(showFasilitasBtn.dataset.tab || 'fasilitas');
-      hideToast();
-    });
-
-    // Only show if page has header buttons
-    try {
-      const seen = localStorage.getItem(TOAST_KEY);
-      const sessionSeen = sessionStorage.getItem(TOAST_KEY + ':session');
-      if (!document.querySelectorAll('.header-btn').length) return;
-
-      if (!seen) {
-        // first time ever -> cute hint
-        setTimeout(() => showToast({ variant: 'cute' }), 900);
-      } else if (!sessionSeen) {
-        // seen before but not in this session -> welcome back message
-        sessionStorage.setItem(TOAST_KEY + ':session', '1');
-        setTimeout(() => showToast({ variant: 'welcome', text: 'Selamat datang kembali — Anda bisa beralih ke <strong>Fasilitas</strong> lewat tombol di atas.' }), 700);
-      }
-    } catch (e) {
-      // ignore storage errors
-    }
-  })();
-}
-
-// Run init immediately if the document is already ready, otherwise wait for DOMContentLoaded
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initLayanan);
-} else {
-  initLayanan();
-}
+  switchTab('produk'); // default tab
+});
 function initScrollProgressBar() {
   const progressBar = document.createElement('div');
   progressBar.id = 'scroll-progress';
