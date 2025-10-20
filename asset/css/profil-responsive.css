@@ -555,6 +555,12 @@
   .misi-list li{
     font-size: .9rem !important;
   }
+
+  .peta-tab-btn{
+    font-size: .9rem;
+    border-radius: 10px;
+    border: none;
+  }
 }
 
 @media (min-width: 481px) and (max-width: 766px){ /* KHUSUS HAMBURGER MENU*/
@@ -574,6 +580,8 @@
     gap: 20px;
     left: 150px;
   }
+
+
 
 }
 
@@ -1112,7 +1120,9 @@
   }
 
   .peta-tab-btn{
-    font-size: 0.7rem;
+    font-size: 1rem;
+     border-radius: 10px;
+    border: none;
   }
 .map-modal-content{
   position:relative;
@@ -1176,6 +1186,7 @@
         font-size: 1.3rem;
     }
     .video-modal-content{height:80vh;width:95vw;}
+
 }
 
 
@@ -1367,8 +1378,11 @@
     font-size: 2rem;
   }
 
-  
-
+  .peta-tab-btn{
+    font-size: 1.2rem;
+     border-radius: 10px;
+    border: none;
+  }
 }
   
 
@@ -2076,7 +2090,9 @@
   }
 
   .peta-tab-btn{
-    font-size: 0.7rem;
+    font-size: 1.3rem;
+     border-radius: 10px;
+    border: none;
   }
 .map-modal-content{
   position:relative;
@@ -4267,8 +4283,6 @@ body.no-scroll {
   
   
 
-  
-
   /* === MILESTONE SECTION === */
   .ms-container {
     max-width: 2400px;
@@ -4585,7 +4599,6 @@ body.no-scroll {
 }
 @media (max-width:600px){
     .peta-title{font-size:1.6rem}
-    .peta-tab-btn{padding:8px 12px}
     .peta-desc p{font-size:.95rem}
     .peta-caption{font-size:.78rem}
 }
