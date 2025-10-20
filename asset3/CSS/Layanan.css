@@ -967,46 +967,6 @@ body {
     gap: 1.5rem;
     padding: 40px 15px;
   }
-
-  /* Apply header overlay stacking and main-title adjustments similar to the 480px rules */
-  .layanan-page .header-overlay {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    row-gap: 2.5rem; /* slightly smaller than phone but still noticeable */
-    padding: 12px 20px;
-  }
-
-  .layanan-page .main-title {
-    transform: translateX(4%) !important;
-    margin-top: 0 !important;
-    padding: 20px 20px !important;
-    max-width: calc(100% - 40px) !important;
-    text-align: center !important;
-  }
-
-  .layanan-page .main-title h1 {
-    font-size: clamp(2rem, 6.5vw, 4rem) !important;
-    line-height: 1.05 !important;
-    margin-top: 0 !important;
-    letter-spacing: 1.5px !important;
-    word-break: break-word !important;
-    white-space: normal !important;
-  }
-
-  /* Make the facilities toggle button visible and full-width on tablet/smaller screens */
-  .facilities-toggle-btn {
-    display: block !important;
-    width: calc(100% - 32px) !important;
-    margin: 12px auto 0 !important;
-    padding: 12px 16px !important;
-    border-radius: 12px !important;
-    background: rgba(19,62,135,0.95) !important;
-    color: #fff !important;
-    border: none !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.12) !important;
-  }
 }
 
 /* Decorative Section */
@@ -1193,20 +1153,23 @@ body {
 .layanan-page .hiasan-kue {
   position: absolute;
   /* Center the snack over bubble2 using variables */
-  left: 40%;
-  top: 90%;
+  left: var(--bubble-left);
+  transform: translateX(-50%);
+  /* position the snack slightly above the bubble */
+  bottom: calc(var(--bubble-bottom) + 8px);
   width: var(--snack-size);
-  z-index: 54; /* above bubble */
+  z-index: 70; /* ensure the kue sits above bubbles */
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   animation: floatKue 6s ease-in-out infinite;
 }
 
 .layanan-page .hiasan-bubble2 {
   position: absolute;
-  left: 40%;
+  left: var(--bubble-left);
+  transform: translateX(-50%);
   bottom: var(--bubble-bottom);
   width: var(--bubble-size);
-  z-index: 30;
+  z-index: 10; /* keep bubble behind the kue */
   opacity: 0.95;
   animation: floatBubble2 6s ease-in-out infinite;
 }
