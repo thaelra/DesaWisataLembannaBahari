@@ -224,7 +224,19 @@
   .misi-list li{
     font-size: .9rem !important;
   }
-  
+
+  .struktur-menu{
+  width: 250px !important;
+ }
+.struktur-tab{
+  font-size: .5rem ;
+}
+.struktur-content{
+  width: 250px !important;
+}
+.struktur-list li{
+  font-size: .75rem !important;
+}
 
 }
 
@@ -458,6 +470,21 @@
 
   .c-left {
     margin-left: -0.1rem !important;
+  }
+  .struktur-menu{
+    width: 350px;
+  }
+  .struktur-tab{
+    padding: 14px 12px;
+    font-size: .8rem !important;
+    border-radius: 10px;
+  }
+  .struktur-content{
+     width: 350px;
+  }
+  .struktur-org-title{
+    color: var(--primary-color);
+    font-size: 2rem;
   }
   
   /* Gallery Responsive */
@@ -924,15 +951,21 @@
   }
   
   .visi-desc {
-    font-size: 0.8rem;
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: var(--mobile-padding);
     text-align: center;
-    padding: 0 8px;
+    padding: 30px 20px;
+    width: 400px;
+  }
+
+  .misi-list{
+     width: 400px;
+    padding: 30px 30px;
   }
   
-  .misi-list {
-    font-size: 0.5rem;
+  .misi-list li {
+    font-size: 1rem;
     line-height: 1.5;
     padding-left: 20px;
     margin: 0;
@@ -962,7 +995,7 @@
   
   .struktur-tab {
     padding: 10px 16px;
-    font-size: 0.6rem;
+    font-size: .9rem;
     border-radius: 20px;
     min-width: auto;
     flex: 0 0 auto;
@@ -976,13 +1009,14 @@
   }
   
   .struktur-org-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: var(--mobile-gap);
     text-align: center;
+    color: var(--primary-color);
   }
   
-  .struktur-list {
-    font-size: 0.7rem;
+  .struktur-list li{
+    font-size: 1rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -998,10 +1032,10 @@
   }
   
   .struktur-list-img .struktur-img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     margin-right: var(--mobile-gap);
-    border-radius: 50%;
+    border-radius: 3px;
     object-fit: cover;
     flex-shrink: 0;
   }
@@ -1201,6 +1235,138 @@
     width: 400px;
     height: 480px;
   }
+
+  .visi-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: var(--mobile-padding);
+    text-align: center;
+    padding: 30px 20px;
+    width: 400px;
+  }
+
+  .misi-list{
+     width: 400px;
+    padding: 30px 30px;
+  }
+  
+  .misi-list li {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-left: 20px;
+    margin: 0;
+  }
+  
+  .misi-list li {
+    margin-bottom: 8px;
+  }
+
+  /* Struktur Section */
+  .struktur-section {
+    padding: var(--mobile-padding);
+  }
+  
+  .struktur-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--mobile-padding);
+    text-align: center;
+  }
+  
+  .struktur-menu {
+    gap: 5px;
+    margin-bottom: var(--mobile-padding);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .struktur-tab {
+    padding: 10px 16px;
+    font-size: .9rem;
+    border-radius: 20px;
+    min-width: auto;
+    flex: 0 0 auto;
+  }
+  
+  .struktur-content {
+    padding: var(--mobile-gap);
+    max-width: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+  }
+  
+  .struktur-org-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--mobile-gap);
+    text-align: center;
+    color: var(--primary-color);
+  }
+  
+  .struktur-list {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .struktur-list li {
+    margin-bottom: 8px;
+    padding: 8px var(--mobile-gap);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .struktur-list-img .struktur-img {
+    width: 100px;
+    height: 100px;
+    margin-right: var(--mobile-gap);
+    border-radius: 5px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .struktur-org-img-wrapper {
+    margin-bottom: var(--mobile-padding);
+    text-align: center;
+  }
+  
+  .struktur-org-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .struktur-pdf-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    margin-top: var(--mobile-padding);
+    border-radius: 25px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .struktur-pdf-wrapper iframe {
+    min-height: 250px;
+    border-radius: 12px;
+  }
+  
+  .img-modal-content {
+    margin: 24px auto;
+    max-width: 98vw;
+    max-height: 60vh;
+  }
+  
+  .img-modal-close {
+    top: 12px;
+    right: 18px;
+    font-size: 2rem;
+  }
+
   
 
 }
@@ -1742,9 +1908,6 @@
   }
 
   /* Visi Misi Section */
-  .visi-misi-section {
-    padding: var(--mobile-padding) var(--mobile-padding) var(--mobile-padding) var(--mobile-padding);
-  }
   
   .visi-title, 
   .misi-title {
@@ -1754,15 +1917,18 @@
   }
   
   .visi-desc {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    width: 700px;
     line-height: 1.6;
     margin-bottom: var(--mobile-padding);
     text-align: center;
-    padding: 0 8px;
+    padding: 20px 30px !important;
   }
-  
-  .misi-list {
-    font-size: 0.5rem;
+  .misi-list{
+    width: 700px;
+  }
+  .misi-list li {
+    font-size: 1rem;
     line-height: 1.5;
     padding-left: 20px;
     margin: 0;
@@ -1792,7 +1958,7 @@
   
   .struktur-tab {
     padding: 10px 16px;
-    font-size: 0.6rem;
+    font-size: 1.1rem;
     border-radius: 20px;
     min-width: auto;
     flex: 0 0 auto;
@@ -1806,13 +1972,14 @@
   }
   
   .struktur-org-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: var(--mobile-gap);
     text-align: center;
+    color: var(--primary-color);
   }
   
   .struktur-list {
-    font-size: 0.7rem;
+    font-size: 1.2rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -1828,10 +1995,10 @@
   }
   
   .struktur-list-img .struktur-img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     margin-right: var(--mobile-gap);
-    border-radius: 50%;
+    border-radius: 5px;
     object-fit: cover;
     flex-shrink: 0;
   }
@@ -1851,7 +2018,7 @@
   
   .struktur-pdf-btn {
     padding: 12px 20px;
-    font-size: 0.7rem;
+    font-size: 1rem;
     margin-top: var(--mobile-padding);
     border-radius: 25px;
     display: block;
@@ -2450,6 +2617,30 @@
         animation-duration: calc(5s / var(--nav-atas-animation-speed));
         opacity: calc(0.7 * var(--nav-atas-glow-intensity));
     }
+
+    .visi-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+    padding: 30px 20px;
+    width: 790px;
+  }
+
+  .misi-list{
+    width: 950px !important;
+    padding: 30px 40px;
+  }
+  
+  .misi-list li {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-left: 20px;
+    margin: 0;
+  }
+  
+  .misi-list li {
+    margin-bottom: 8px;
+  }
 }
 
 /* =============================================
@@ -2484,6 +2675,30 @@
     top: 400px;
     bottom: auto;
     padding: 0 10px;
+  }
+
+  .visi-desc {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    text-align: center;
+    padding: 30px 20px;
+    width: 900px;
+  }
+
+  .misi-list{
+    width: 1100px !important;
+    padding: 30px 50px;
+  }
+  
+  .misi-list li {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    padding-left: 20px;
+    margin: 0;
+  }
+  
+  .misi-list li {
+    margin-bottom: 8px;
   }
 
 
@@ -3067,6 +3282,10 @@ body.no-scroll {
   }
 
    .medsos-grid{ grid-template-columns: 1fr 1fr; align-items:start; } 
+
+   .data-desa-title, .peta-title, .title-galeri, .galeri-title, .medsos-title, .person-in-charge-title{
+    font-size: 2rem !important;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -3160,7 +3379,7 @@ body.no-scroll {
   }
 
   .data-desa-title {
-    font-size: 3rem;
+    font-size: 2rem;
     margin: var(--desktop-gap) 0;
     padding: 0 var(--desktop-padding);
   }
@@ -3447,11 +3666,11 @@ body.no-scroll {
   }
 
   .nav-atas .logo-text .desa {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
   }
 
   .nav-atas .logo-text .kabupaten {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .profil-nav {
@@ -3474,7 +3693,7 @@ body.no-scroll {
   }
 
   .profil-nav a {
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
     padding: 9px 14px;
     line-height: 1.2;
   }
@@ -3486,7 +3705,7 @@ body.no-scroll {
   }
 
   .data-desa-title {
-    font-size: 4rem;
+    font-size: 2.5rem;
     margin: calc(var(--desktop-gap) * 1.2) 0;
   }
 
@@ -3669,7 +3888,7 @@ body.no-scroll {
   }
 
   .ms-tile .year {
-    font-size: 4rem;
+    font-size: 2rem;
     margin-bottom: 20px;
   }
 
@@ -3699,10 +3918,10 @@ body.no-scroll {
     line-height: 1.85;
   }
   .peta-title, .title-galeri, .galeri-title, .medsos-title, .person-in-charge-title, .visi-title, .misi-title, .awards-title, .struktur-title{
-    font-size: 4rem !important;
+    font-size: 2.5rem !important;
   }
   .nav-links a{
-    font-size: 2rem !important;
+    font-size: 1.8rem !important;
   }
 }
 
@@ -3977,6 +4196,78 @@ body.no-scroll {
   .struktur-card .position {
     font-size: 1.5rem;
   }
+.struktur-content {
+    padding: var(--desktop-padding);
+    max-width: 50%;
+    min-height: 0;
+    box-sizing: border-box;
+  }
+  .struktur-menu{
+    width: 1600px;
+    gap: 50px;
+  }
+  .struktur-tab{
+    font-size: 2.5rem;
+    padding: 30px 40px;
+    border-radius: 40px;
+    min-width: auto;
+    flex: 0 0 auto;
+  }
+
+  .struktur-org-title {
+    font-size: 3rem;
+    text-align: center;
+    color: var(--primary-color);
+  }
+  
+  .struktur-list {
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .struktur-list li {
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .struktur-list-img .struktur-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .struktur-org-img-wrapper {
+    text-align: center;
+  }
+  
+  .struktur-org-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .struktur-pdf-btn {
+    padding: 12px 20px;
+    font-size: 2.5rem;
+    border-radius: 25px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+
+  
 
   /* === MILESTONE SECTION === */
   .ms-container {
