@@ -93,11 +93,17 @@ function initButtonRipple() {
 (function(){
   const BREAKPOINT = 1920;
 
+  function ensureGridId(grid) {
+    if (grid && !grid.id) grid.id = 'facilityGrid';
+  }
+
   function createToggle() {
     const pane = document.querySelector('.facilities-pane');
     if (!pane) return;
     const grid = pane.querySelector('.facility-grid');
     if (!grid) return;
+
+    ensureGridId(grid);
 
     // if a button already exists, keep it
     let btn = pane.querySelector('.facilities-toggle-btn');
@@ -124,6 +130,11 @@ function initButtonRipple() {
             window.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
           }
         });
+      } else {
+        // keep label in sync with current state
+        const expanded = pane.classList.contains('expanded');
+        btn.setAttribute('aria-expanded', String(expanded));
+        btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
       }
     } else {
       if (btn) btn.remove();
@@ -131,11 +142,14 @@ function initButtonRipple() {
     }
   }
 
-  // Ensure the grid has an id
-  const facilityGrid = document.querySelector('.facilities-pane .facility-grid');
-  if (facilityGrid && !facilityGrid.id) facilityGrid.id = 'facilityGrid';
+  function init() {
+    createToggle();
+    window.addEventListener('resize', createToggle);
+  }
 
-  // initialize and bind
-  createToggle();
-  window.addEventListener('resize', createToggle);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
