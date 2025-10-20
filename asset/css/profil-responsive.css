@@ -157,24 +157,93 @@
     width: 160px !important; /* Increased width for better appearance on min 320px */
     height: 20px !important; /* Increased height for better appearance on min 320px */
   }
+.awards-title::after{
+  font-size: .85rem !important;
+}
+                  .award-card{
+                        flex: 0 0 clamp(250px,  30vw, 150px) !important;
+                        scroll-snap-align: start;
+                        height: 300px !important;
+                    }
+                 
+                .award-card:hover{
+                  transform:translateY(-4px);
+                  box-shadow:0 18px 40px rgba(0,0,0,.20);
+                }    
+                .award-media{
+                  position:relative;
+                  aspect-ratio:16/9;
+                  overflow:hidden;
+                }
+                .award-img{
+                  width:100% !important;
+                  height:100% !important;
+                  object-fit:cover;
+                  display:block;
+                  filter:saturate(1.05) contrast(1.03);
+                } 
+                .award-badge{
+                  font-size:.50rem !important;
+                }
+                .award-body p{
+                  font-size:.7rem !important;
+                }
+                .award-body h4{
+                  font-size:.95rem !important;
+                }
 
+                .sejarah-header h2{
+                  font-size: 1.5rem !important;
+                }
+   .timeline {
+    max-width: 90vw !important;
+    padding: 0 10px !important;
+  }
+  .timeline-year{
+    font-size: 0.4rem !important;
+  }
+  .timeline-content {
+    max-width: 120px !important;
+    width: 120px !important;
+    padding: 0 8px !important;
+    font-size: 0.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .c-right {
+    right: -0.05rem !important;
+  }
+
+  .c-left {
+    left: -0.05rem !important;
+  }
+  
 
 }
 
 @media (max-width: 480px) {
   /* Style untuk layar sangat kecil */
-  
+  .awards-title::after{
+  font-size: .75rem !important;
+ font-family:'Karma', serif !important;
+}
+.awards-title {
+    font-size: 1.4rem !important;
+    margin: var(--mobile-padding) 0;
+    padding: 0 var(--mobile-padding);
+    text-align: center;
+  }
   /* Header Section */
   .profil-header {
     margin-bottom: var(--mobile-gap);
   }
   
   .header-bg {
-    height: 200px;
+    height: 250px;
   }
   
   .header-img {
-    height: 190px;
+    height: 250px;
     object-fit: cover;
   }
   
@@ -351,7 +420,7 @@
   }
   
   .data-desa-title {
-    font-size: 1.1rem;
+    font-size: 1.1rem !important;
     margin: var(--mobile-padding) 0;
     padding: 0 var(--mobile-padding);
     text-align: center;
@@ -362,9 +431,11 @@
     max-width: 100vw;
     padding: 0 var(--mobile-padding);
   }
-  
+  .timeline-year{
+    font-size: .7rem !important;
+  }
   .timeline-content {
-    max-width: 135px !important;
+    max-width: 150px !important;
     padding: 0 8px !important;
     font-size: 0.47rem !important;
     line-height: 1.2 !important;
@@ -1198,7 +1269,7 @@
 
 
 /* Awards horizontal scroll for small tablets (600px–930px) */
-@media (min-width: 601px) and (max-width: 930px){
+@media (min-width: 320px) and (max-width: 930px){
   .data-desa-section .data-desa-awards{
     display:flex !important;
     gap:16px;
@@ -1226,7 +1297,7 @@
     content:'Geser untuk melihat lainnya →';
     display:block;
     margin-top:8px;
-    font-size:2rem;
+    font-size:1.2rem;
     font-weight:600;
     color:rgba(255,255,255,0.85);
     text-align:center;
@@ -1268,16 +1339,16 @@
   }
 
   .header-bg {
-    height: 230px;
+    height: 330px;
   }
 
   .header-img {
-    height: 220px;
+    height: 330px;
     object-fit: cover;
   }
 
   .profil-title {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     top: 110px;
     padding: 0 var(--mobile-padding);
     text-align: center;
@@ -1648,6 +1719,7 @@
   .timeline-content {
     line-height: 1.5 !important;
     font-family: 'Karma', sans-serif;
+    max-width: 300px !important;
   }
 .c-right{
   margin-right: -3.5rem;
@@ -2070,10 +2142,6 @@
     .mobile-nav-icon { width: 28px; height: 28px; }
   }
 }
-
-/* =============================================
-   TABLET LANDSCAPE (768px - 1023px)
-   ============================================= */
 @media (min-width: 901px) and (max-width: 1023px) {
 
   .nav-links li:not(:last-child)::after,
@@ -3789,7 +3857,7 @@ body.no-scroll {
   }
 
   .profil-title {
-    font-size: 5.5rem;
+    font-size: 6rem !important;
     top: 320px;
     text-shadow: 4px 4px 16px rgba(0, 0, 0, 0.7);
   }
@@ -3832,26 +3900,26 @@ body.no-scroll {
   .profil-nav ul {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    column-gap: 28px;
+    column-gap: 30px;
     row-gap: 10px;
   }
 
   .profil-nav a {
-    font-size: 1.2rem;
-    padding: 10px 16px;
-    border-radius: 16px;
+    font-size: 1.7rem !important;
+    padding: 15px 25px;
+    border-radius: 50px;
     line-height: 1.2;
   }
 
   /* === DATA DESA SECTION === */
   .data-desa-section {
-    padding: calc(var(--desktop-padding) * 1.3) 0;
+    padding: 40px;
     min-height: 650px;
   }
 
   .data-desa-title {
     font-size: 4.5rem;
-    margin: calc(var(--desktop-gap) * 1.3) 0;
+    top: 0;
   }
 
   .data-desa-grid {
@@ -3861,15 +3929,14 @@ body.no-scroll {
   }
 
   .data-desa-box {
-    font-size: 1.75rem;
+    font-size: 3rem;
     min-height: 170px;
     padding: 45px;
     border-radius: 28px;
   }
 
   .data-desa-box strong {
-    font-size: 3.2rem;
-    margin-bottom: 22px;
+    margin-bottom: 5px;
   }
 
   /* === TIMELINE SECTION === */
@@ -3880,6 +3947,9 @@ body.no-scroll {
 
   .timeline::after {
     width: 12px;
+  }
+  .timeline-year{
+    font-size: 2rem !important;
   }
 
   .timeline-box {
@@ -3913,11 +3983,13 @@ body.no-scroll {
   }
 
   .c-right {
-    margin-right: -6rem !important;
+    margin-right: -10rem !important;
+    right: -10rem !important;
   }
 
   .c-left {
-    margin-left: -6rem !important;
+    margin-left: -10rem !important;
+    left: -10rem !important;
   }
 
   /* === GALLERY SECTION === */
@@ -4112,7 +4184,51 @@ body.no-scroll {
   .nav-links a{
     font-size: 2rem !important;
   }
+
+    .data-desa-awards{
+    display:grid !important;
+    grid-template-columns:repeat(auto-fit, minmax(40px,1fr)) !important;
+    gap: 624px !important;
+    max-width: 1400px !important;
+    margin:10px!important;
+    padding:0 16px !important;
+    align-items: center !important;
+  }
+  .award-card{
+    height: 700px !important;
+    width: 650px !important;
+    right: 300px;
+  }
+ 
+                .award-badge{
+                  position:absolute;
+                  left:12px;
+                  top:12px;
+                  background:linear-gradient(135deg,#133E87,#608BC1);
+                  color:#fff;
+                  font-weight:700;
+                  padding:10px 20px !important;
+                  border-radius:999px;
+                  font-size:2rem !important;
+                  box-shadow:0 6px 16px rgba(0,0,0,.18);
+                }
+                .award-body{
+                  padding:14px 16px 18px;
+                  color:#254a8a;
+                }
+                .award-body h4{
+                  margin:2px 0 6px;
+                  font-size:2rem !important;
+                  color:#133E87;
+                }
+                .award-body p{
+                  margin:0 0 10px;
+                  font-size:2rem !important;
+                  line-height:1.45;}
+
 }
+
+/* Additional fix for large screens - broader range to ensure awards spacing */
 
 /* Small tablet responsive adjustments (769px - 900px) */
 @media (min-width: 769px) and (max-width: 900px) {
@@ -4163,17 +4279,84 @@ body.no-scroll {
 }
 
 
- .awards-title{ text-align:center;color:#fff;font-family:'Playfair Display SC',serif;letter-spacing:2px;margin:40px 0 16px;font-size:2rem;text-shadow:0 3px 16px rgba(0,0,0,.25);}    
-                .data-desa-awards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:1100px;margin:10px auto 40px;padding:0 16px;}
-                .award-card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.86) 0%, rgba(214,227,243,.95) 100%);border:1px solid rgba(255,255,255,.6);border-radius:16px;box-shadow:0 10px 26px rgba(0,0,0,.12);overflow:hidden;transition:transform .28s ease, box-shadow .28s ease;}
-                .award-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.20);}    
-                .award-media{position:relative;aspect-ratio:16/9;overflow:hidden;}
-                .award-img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05) contrast(1.03);} 
-                .award-badge{position:absolute;left:12px;top:12px;background:linear-gradient(135deg,#133E87,#608BC1);color:#fff;font-weight:700;padding:6px 10px;border-radius:999px;font-size:.78rem;box-shadow:0 6px 16px rgba(0,0,0,.18);}
-                .award-body{padding:14px 16px 18px;color:#254a8a;}
-                .award-body h4{margin:2px 0 6px;font-size:1.1rem;color:#133E87;}
-                .award-body p{margin:0 0 10px;font-size:.96rem;line-height:1.45;}
-                .award-view{appearance:none;border:none;border-radius:999px;padding:8px 14px;background:linear-gradient(135deg,#133E87,#608BC1);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.18);} 
+ .awards-title{ text-align:center;
+                color:#fff;
+                font-family:'Playfair Display SC',serif;
+                letter-spacing:2px;
+                margin:40px 0 16px;
+                font-size:2rem;
+                text-shadow:0 3px 16px rgba(0,0,0,.25);
+              }    
+                .data-desa-awards{
+                  display:grid;
+                  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+                  gap:28px;
+                  max-width:1100px;
+                  margin:10px auto 40px;
+                  padding:0 16px;
+                }
+                .award-card{
+                  position:relative;
+                  background:linear-gradient(180deg,rgba(255,255,255,.86) 0%, rgba(214,227,243,.95) 100%);
+                  border:1px solid rgba(255,255,255,.6);
+                  border-radius:16px;
+                  box-shadow:0 10px 26px rgba(0,0,0,.12);
+                  overflow:hidden;
+                  transition:transform .28s ease, box-shadow .28s ease;
+                }
+                .award-card:hover{
+                  transform:translateY(-4px);
+                  box-shadow:0 18px 40px rgba(0,0,0,.20);
+                }    
+                .award-media{
+                  position:relative;
+                  aspect-ratio:16/9;
+                  overflow:hidden;
+                }
+                .award-img{
+                  width:100%;
+                  height:100%;
+                  object-fit:cover;
+                  display:block;
+                  filter:saturate(1.05) contrast(1.03);
+                } 
+                .award-badge{
+                  position:absolute;
+                  left:12px;
+                  top:12px;
+                  background:linear-gradient(135deg,#133E87,#608BC1);
+                  color:#fff;
+                  font-weight:700;
+                  padding:6px 10px;
+                  border-radius:999px;
+                  font-size:.78rem;
+                  box-shadow:0 6px 16px rgba(0,0,0,.18);
+                }
+                .award-body{
+                  padding:14px 16px 18px;
+                  color:#254a8a;
+                }
+                .award-body h4{
+                  margin:2px 0 6px;
+                  font-size:1.1rem;
+                  color:#133E87;
+                }
+                .award-body p{
+                  margin:0 0 10px;
+                  font-size:.96rem;
+                  line-height:1.45;}
+
+                .award-view{
+                  appearance:none;
+                  border:none;
+                  border-radius:999px;
+                  padding:8px 14px;
+                  background:linear-gradient(135deg,#133E87,#608BC1);
+                  color:#fff;
+                  font-weight:700;
+                  cursor:pointer;
+                  box-shadow:0 8px 18px rgba(0,0,0,.18);
+                } 
                 .award-view:hover{filter:brightness(1.05);}    
                 /* Modal Gallery */
                 .awards-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
@@ -4773,7 +4956,3 @@ grid-template-columns: repeat(1, 1fr);
         display: none;
     }
 }
-
-
-
-
