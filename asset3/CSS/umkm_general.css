@@ -29,19 +29,34 @@
 }
 
 body {
-  font-family: 'Karma', serif;
+  font-family: "Karma", serif;
   line-height: 1.6;
   color: var(--gray-800);
   background: var(--light-color);
 }
 
 /* Base typography for general text */
-body, p, li, a, span, small, label, input, textarea, button, figcaption {
-  font-family: 'Karma', serif;
+body,
+p,
+li,
+a,
+span,
+small,
+label,
+input,
+textarea,
+button,
+figcaption {
+  font-family: "Karma", serif;
 }
 
 /* Preserve display fonts for primary elements */
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .nav-logo a,
 .nav-link,
 .back-btn,
@@ -49,7 +64,7 @@ h1, h2, h3, h4, h5, h6,
 .product-badge,
 .price-amount,
 .footer {
-  font-family: 'Playfair Display SC', serif;
+  font-family: "Playfair Display SC", serif;
 }
 
 /* Navigation Bar */

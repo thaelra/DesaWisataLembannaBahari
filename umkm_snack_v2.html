@@ -13,7 +13,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-             <div class="nav-menu">
+            <div class="nav-menu">
                 <a href="Layanan.html" class="nav-link">
                     <i class="fas fa-home"></i>
                     <span>Beranda</span>
@@ -27,11 +27,11 @@
             </div>
         </div>
     </nav>
-        <script>
+    <script>
         // Floating navbar show/hide on scroll
         let lastScrollTop = 0;
         const navbar = document.getElementById('floatingNavbar');
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > lastScrollTop) {
                 // Scroll down - show navbar
@@ -44,7 +44,7 @@
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         }, false);
-        </script>
+    </script>
 
     <!-- Back Button -->
     <a href="Layanan.html" class="back-btn">
@@ -58,21 +58,26 @@
             <!-- Product Gallery -->
             <section class="product-gallery">
                 <div class="gallery-main">
-                    <img src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="Makanan Tradisional" id="mainImage" class="main-image">
+                    <img src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg"
+                        alt="Makanan Tradisional" id="mainImage" class="main-image">
                     <div class="gallery-overlay">
                         <button class="zoom-btn" id="zoomBtn">
                             <i class="fas fa-search-plus"></i>
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="gallery-thumbs">
-                    <div class="thumb-item active" data-src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" data-alt="Makanan Tradisional 1">
+                    <div class="thumb-item active"
+                        data-src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg"
+                        data-alt="Makanan Tradisional 1">
                         <!-- Original img kept as commented fallback:
                         <img src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="Makanan Tradisional 1">
                         -->
                     </div>
-                    <div class="thumb-item" data-src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (2).jpeg" data-alt="Makanan Tradisional 4">
+                    <div class="thumb-item"
+                        data-src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (2).jpeg"
+                        data-alt="Makanan Tradisional 4">
                         <!-- Original img kept as commented fallback:
                         <img src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (2).jpeg" alt="Makanan Tradisional 4">
                         -->
@@ -80,7 +85,7 @@
                 </div>
             </section>
 
-                        <!-- Product Info -->
+            <!-- Product Info -->
             <section class="product-info">
                 <div class="product-header">
                     <div class="product-badge">
@@ -93,7 +98,7 @@
                 <div class="product-description">
                     <h2>Deskripsi Produk</h2>
                     <p>Nikmati cita rasa autentik keripik pisang yang telah teruji selama puluhan tahun.</p>
-                    
+
                     <div class="product-features">
                         <div class="feature-item">
                             <i class="fas fa-leaf"></i>
@@ -140,7 +145,7 @@
                 </div>
 
                 <!-- QR Code Section -->
-               <div class="qr-section">
+                <div class="qr-section">
                     <div class="qr-container">
                         <img src="asset3/IMG/UMKM Andalan/UMKM BARCODE - sNACK.jpeg" alt="QR Code" class="qr-code">
                         <p class="qr-desc">Scan QR untuk detail produk, harga tiap ukuran, dan pemesanan.</p>
