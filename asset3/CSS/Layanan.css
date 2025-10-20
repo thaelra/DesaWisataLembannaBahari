@@ -924,7 +924,7 @@ body {
 
 .person-photo {
     width: 150px;
-    height: 150px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #fff;
@@ -936,7 +936,7 @@ body {
   min-width: 260px;
   background: rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 30px 25px;
+  padding: 80px 5px;
   text-align: center;
   color: #ffffff;
   backdrop-filter: blur(10px);
@@ -972,12 +972,27 @@ body {
   justify-content: center;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-.feature-number {
-  font-size: 2.5rem;
+.layanan-page .feature-card .layanan-feature-number {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  /* center and scale from center without affecting layout */
+  transform: translateX(-50%) scale(0.78);
+  transform-origin: center center;
+  box-sizing: border-box;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 10px;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px; /* reserve max size to avoid reflow */
+  height: 72px;
+  background: rgba(255,215,0,0.06);
+  border-radius: 10px;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-radius 180ms ease;
+  z-index: 40; /* sit above card content */
 }
 
 .feature-title {
@@ -999,8 +1014,18 @@ body {
   50% { text-shadow: 0 0 20px rgba(255,215,0,1); }
 }
 
-.feature-card:hover .feature-number {
+.layanan-page .feature-card:hover .layanan-feature-number {
   animation: pulseGlow 1.5s infinite;
+  /* keep centered while scaling */
+  transform: translateX(-50%) scale(1);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+.layanan-page .feature-card .layanan-feature-number:active,
+.layanan-page .feature-card .layanan-feature-number:focus {
+  transform: translateX(-50%) scale(0.96) !important;
+  outline: none;
 }
 
 /* 📱 Responsive */
