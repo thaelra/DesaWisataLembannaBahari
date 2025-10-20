@@ -8,56 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initButtonRipple();
 });
 
-// Make header/nav follow scroll like profil page: sticky, shrink/restore on scroll
-(function() {
-  let lastScroll = 0;
-  const header = document.querySelector('.header');
-  const navWrapper = document.querySelector('.nav-wrapper');
-  const hamburger = document.querySelector('.hamburger');
-  const mainNav = document.querySelector('.main-nav');
-
-  if (!header || !navWrapper) return;
-
-  // Add sticky container for nav after header when scrolled
-  function onScroll() {
-    const current = window.scrollY || window.pageYOffset;
-
-    // Add 'scrolled' when past header height/60
-    if (current > 60) {
-      header.classList.add('small');
-      navWrapper.classList.add('sticky');
-    } else {
-      header.classList.remove('small');
-      navWrapper.classList.remove('sticky');
-    }
-
-    // Show/hide nav based on scroll direction for minimal distraction
-    if (current > lastScroll && current > 120) {
-      // scrolling down -> hide
-      navWrapper.classList.add('nav-hidden');
-    } else {
-      // scrolling up -> show
-      navWrapper.classList.remove('nav-hidden');
-    }
-
-    lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
-  }
-
-  // Ensure hamburger toggles when nav-wrapper sticky
-  if (hamburger && mainNav) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mainNav.classList.toggle('active');
-      document.body.classList.toggle('no-scroll');
-    });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  // initial state
-  onScroll();
-})();
-
 document.addEventListener('DOMContentLoaded', () => {
   // Floating cards animation delay setup
   document.querySelectorAll('.info-card').forEach((card, index) => {
@@ -147,6 +97,7 @@ function initButtonRipple() {
     const isMobile = window.innerWidth <= 900;
 
     if (isMobile) {
+      // if button not present, create it; otherwise ensure label matches state
       if (!btn) {
         btn = document.createElement('button');
         btn.type = 'button';
@@ -159,10 +110,8 @@ function initButtonRipple() {
         } else {
           pane.appendChild(btn);
         }
-        btn.style.position = 'sticky';
-        btn.style.bottom = '8px';
+        // keep styles in CSS, but ensure it's visible for older browsers
         btn.style.display = 'block';
-        btn.style.margin = '10px auto 0';
         btn.style.zIndex = '2';
 
         btn.addEventListener('click', () => {
@@ -171,11 +120,17 @@ function initButtonRipple() {
           btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
 
           if (!expanded) {
+            // smooth-scroll the pane into view when collapsing
             const rect = pane.getBoundingClientRect();
             const offsetTop = window.pageYOffset + rect.top - 80;
             window.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
           }
         });
+      } else {
+        // ensure button text reflects current state
+        const expanded = pane.classList.contains('expanded');
+        btn.setAttribute('aria-expanded', String(expanded));
+        btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
       }
     } else {
       if (btn) btn.remove();
