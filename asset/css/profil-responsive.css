@@ -2280,9 +2280,7 @@
 }
 @media (min-width: 901px) and (max-width: 1023px) {
 
-  .nav-links li:not(:last-child)::after,
-    .nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after,
-    .profil-nav ul li:not(:last-child)::after {
+  .profil-nav ul li:not(:last-child)::after {
         display: none;
     }
 
@@ -2397,6 +2395,11 @@
     /* Override any mobile navigation conflicts for this breakpoint */
     nav { overflow: visible; }
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     .hamburger {
         display: none;
     }
@@ -4417,7 +4420,7 @@ body.no-scroll {
     padding: 50px;
   }
 
-  button, .btn, .button {
+   .btn, .button {
     font-size: 1.5rem;
     padding: 18px 36px;
     border-radius: 16px;
