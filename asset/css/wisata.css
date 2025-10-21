@@ -2456,7 +2456,6 @@ animation: fadeIn 0.3s ease;
 }
 .ak-viewport .ak-page{
     flex: 0 0 100%;
-    min-width: 100%;
     padding: 10px 0;
 }
 
@@ -2695,8 +2694,8 @@ animation: fadeIn 0.3s ease;
 .akc-nav{ position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; border:none; background:rgba(255,255,255,.85); color:var(--primary-color); display:grid; place-items:center; cursor:pointer; box-shadow: 0 6px 16px rgba(0,0,0,.12); }
 .akc-nav.prev{ left:10px; }
 .akc-nav.next{ right:10px; }
-.akc-dots{ display:flex; gap:8px; justify-content:center; margin: 10px 0 0; }
-.akc-dots .dot{ width:10px; height:10px; border-radius:50%; background:#cbd5e1; border:none; cursor:pointer; transition: background .2s ease, transform .2s ease; }
+.akc-dots{ display:flex; gap:6px; justify-content:center; margin: 10px 0 0; }
+.akc-dots .dot{ width:8px !important; height:8px !important; border-radius:50%; background:#cbd5e1; border:none; cursor:pointer; transition: background .2s ease, transform .2s ease; }
 .akc-dots .dot:hover{ transform: scale(1.1); }
 .akc-dots .dot.active{ background: var(--primary-color); }
 
@@ -5241,207 +5240,13 @@ h1, h2, h3 {
   .kuliner-section::before{ display: none; }
 }
 
-/* 2) Section heading enhancement with a bordered descriptor pill */
+/* 2) Section heading enhancement with horizontal line */
 .kuliner-title{ position: relative; }
 .kuliner-title::after{
-  content: "Cita rasa bahari — manis • gurih • pedas";
-  display: inline-flex;               /* better vertical centering */
-  align-items: center;
-  gap: 8px;                           /* spacing if we add icon later */
-  margin-left: 12px;
-  transform: translateY(-4px);        /* subtle elevation, less jumpy */
-  font-family: 'Karma', serif;
-  font-weight: 700;                    /* crisper label */
-  letter-spacing: .2px;
-  font-size: clamp(.82rem, 1.6vw, .95rem);
-  line-height: 1;
-  color: #7c2d12;                      /* slightly darker for contrast */
-  background: linear-gradient(#fff,#fff) padding-box,
-              linear-gradient(135deg, #f59e0b, #d97706) border-box;
-  border: 2px solid transparent;
-  border-radius: 999px;
-  padding: 6px 12px;
-  box-shadow: 0 6px 16px rgba(245,158,11,.18);
-}
-.kuliner-title:hover::after{          /* subtle hover polish */
-  filter: brightness(1.03) saturate(1.02);
-  box-shadow: 0 8px 18px rgba(245,158,11,.22);
-}
-@media (max-width: 900px){           /* responsive spacing tune */
-  .kuliner-title::after{ margin-left: 10px; padding: 6px 10px; }
-}
-@media (max-width: 640px){
-  .kuliner-title::after{ display:none; }
-}
-
-/* 3) Frame the kuliner viewport with an extra inner outline */
-.kuliner-viewport{
-  box-shadow: 0 10px 30px rgba(19, 62, 135, 0.08),
-              inset 0 0 0 2px rgba(245,158,11,0.25);
-}
-
-/* 4) Add a tasteful dashed inner border inside the scrolling area */
-.kuliner-track{ position: relative; }
-.kuliner-track::before{
-  content: "";
-  position: absolute;
-  inset: 12px 20px; /* leave space for arrows */
-  border: 2px dashed rgba(245,158,11,0.35);
-  border-radius: 18px;
-  pointer-events: none;
-  z-index: 1; /* sits above background but below cards */
-}
-
-/* 5) Use more available width for the card grid per page */
-.kuliner-viewport .kuliner-page .cards-grid-kuliner{
-  max-width: 1080px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-@media (max-width: 900px){
-  .kuliner-viewport .kuliner-page .cards-grid-kuliner{ max-width: 98vw; }
-}
-
-/* 6) Filter chips: gradient borders, active states, better affordance */
-.kuliner-search{ gap: 18px; }
-.kuliner-search-filters{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  background: linear-gradient(#ffffffcc,#ffffffcc) padding-box,
-              linear-gradient(135deg, #f59e0b, #d97706, #b45309) border-box;
-  border: 2px solid transparent;
-  border-radius: 16px;
-  padding: 8px 12px;
-  box-shadow: 0 8px 24px rgba(245,158,11,.12);
-}
-.filter-chip{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  user-select: none;
-  background: linear-gradient(#fff,#fff) padding-box,
-              linear-gradient(135deg, #f59e0b, #d97706) border-box;
-  border: 2px solid transparent;
-  color: #92400e;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
-  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
-}
-.filter-chip:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(245,158,11,.18); }
-.filter-chip:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(245,158,11,.35); }
-.filter-chip.active{
-  background: linear-gradient(#fffaf3,#fffaf3) padding-box,
-              linear-gradient(135deg, #d97706, #b45309) border-box;
-  color: #7c2d12;
-  filter: saturate(1.1);
-  box-shadow: 0 8px 18px rgba(245,158,11,.22), inset 0 1px 0 rgba(255,255,255,.9);
-}
-.filter-icon{ font-size: 1rem; }
-
-/* 7) Card: subtle extra inner outline for crisper borders */
-.card-kuliner{
-  box-shadow: 0 10px 28px rgba(245,158,11,0.16),
-              0 4px 12px rgba(0,0,0,0.08),
-              inset 0 0 0 1px rgba(180,83,9,0.12);
-}
-.card-kuliner:hover{
-  box-shadow: 0 15px 40px rgba(245,158,11,0.22),
-              0 8px 20px rgba(0,0,0,0.15),
-              inset 0 0 0 1px rgba(180,83,9,0.18);
-}
-
-/* 8) Button: crisper focus ring */
-.btn-pesan-kuliner:focus-visible{
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(245,158,11,0.35), 0 8px 25px rgba(245,158,11,0.5);
-}
-
-/* === Revert card shape/size/content to previous while keeping current border/background === */
-.kuliner-section .card-kuliner{
-  border-radius: 16px !important;
-  transform: none;
-}
-.kuliner-section .card-kuliner:hover{
-  transform: translateY(-4px);
-}
-.kuliner-section .card-kuliner::after{ content: none !important; }
-.kuliner-section .card-kuliner::before{ display: none !important; }
-.kuliner-section .card-kuliner.steam-effect::before{ display: none !important; }
-
-.kuliner-section .card-image-kuliner{
-  height: 180px;
-  border-radius: 16px 16px 0 0 !important;
-}
-.kuliner-section .card-image-kuliner::before{ display:none !important; }
-.kuliner-section .card-image-kuliner::after{ content:none !important; }
-
-.kuliner-section .card-kuliner h3{
-  background: none !important;
-  -webkit-background-clip: initial !important;
-  -webkit-text-fill-color: initial !important;
-  color: var(--primary-color) !important;
-  margin: 16px 16px 8px 16px;
-}
-.kuliner-section .card-kuliner p{ opacity: 1; }
-
-.kuliner-section .card-kuliner .popularity-badge,
-.kuliner-section .card-kuliner .spice-level{ display: none !important; }
-
-/* === Enforce 3x3 grid per page and 5:3 aspect ratio === */
-/* 3 columns on desktop, 2 on tablets, 1 on mobile */
-.kuliner-section .kuliner-page .cards-grid-kuliner{
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 20px !important;
-}
-@media (max-width: 1024px){
-  .kuliner-section .kuliner-page .cards-grid-kuliner{ grid-template-columns: repeat(2, 1fr) !important; }
-}
-@media (max-width: 640px){
-  .kuliner-section .kuliner-page .cards-grid-kuliner{ grid-template-columns: 1fr !important; }
-}
-/* Reset card span so each occupies one grid cell */
-.kuliner-section .cards-grid-kuliner > .card-kuliner{ grid-column: auto !important; }
-
-/* Apply 5:3 aspect ratio to the image area for consistent card look */
-.kuliner-section .card-image-kuliner{
-  height: auto !important;
-  aspect-ratio: 5 / 3;
-}
-.kuliner-section .card-image-kuliner img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* === Remove Kuliner slider navigation buttons visually and from focus === */
-.kuliner-section .kuliner-prev,
-.kuliner-section .kuliner-next,
-.kuliner-viewport .kuliner-prev,
-.kuliner-viewport .kuliner-next{
-  display: none !important;
-}
-
-/* 10) Use the left area with a compact taste legend (desktop only) */
-.kuliner-section::after{
-  content: "🔥 Pedas  •  🍯 Manis  •  🧂 Gurih";
-  position: absolute;
-  left: 14px;
-  bottom: 12%;
-  transform: rotate(-90deg) translateY(50%);
-  transform-origin: left bottom;
-  font-family: 'Karma', serif;
-  font-weight: 700;
-  font-size: .9rem;
-  color: #7c2d12;
-  background: linear-gradient(#fff,#fff) padding-box,
-              linear-gradient(135deg, #f59e0b, #d97706) bor der-box;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  padding: 8px 12px;
-  box-shadow: 0 6px 16px rgba(245,158,11,.18),
-              inset 0 1px 0 rgba(255,255,255,.8);
+    content: "";
+    height: 2px;
+    background: currentColor;
+    opacity: .25;
+    flex: 1;
+    max-width: 160px;
 }

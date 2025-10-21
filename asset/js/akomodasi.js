@@ -226,29 +226,39 @@ function ensureAkomodasiModal() {
     const modal = document.getElementById('akomodasiDetailModal');
     if (!modal) return;
 
+    // Clear any existing handlers
     const closeBtn = document.getElementById('akomodasiDetailModalCloseBtn');
-    if (closeBtn) {
-        // Tambahkan efek suara saat tombol ditekan (opsional)
-        closeBtn.addEventListener('mousedown', () => {
-            closeBtn.style.transform = 'scale(0.95)';
-        });
+    if (closeBtn && !closeBtn.dataset.handlerAttached) {
+        // Mark as processed to avoid duplicate handlers
+        closeBtn.dataset.handlerAttached = 'true';
         
-        closeBtn.addEventListener('mouseup', () => {
-            closeBtn.style.transform = '';
-        });
-        
-        closeBtn.addEventListener('click', () => {
-            // clear auto-rotate if any
+        // Single click event handler for closing modal  
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Close button clicked - closing modal');
+            
+            // Clear any carousel intervals
             if (modal.dataset.akSlideInterval) {
-                try { clearInterval(Number(modal.dataset.akSlideInterval)); } catch (e) {}
-                delete modal.dataset.akSlideInterval;
+                try { 
+                    clearInterval(Number(modal.dataset.akSlideInterval)); 
+                    delete modal.dataset.akSlideInterval;
+                } catch (e) {}
             }
             
-            // directly close modal without animation for now
-            closeModal();
+            // Clear any guards
+            delete modal.dataset.openGuard;
+            delete modal.dataset.justOpenedAt;
+            
+            // Close the modal directly
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Remove focus from button
+            closeBtn.blur();
         });
         
-        // Tambahkan akses keyboard
+        // Add keyboard accessibility
         closeBtn.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -259,20 +269,34 @@ function ensureAkomodasiModal() {
 
     // Prevent clicks inside content from bubbling to overlay
     const contentEl = modal.querySelector('.modal-content');
-    if (contentEl) contentEl.addEventListener('click', (e) => e.stopPropagation());
+    if (contentEl && !contentEl.dataset.handlerAttached) {
+        contentEl.dataset.handlerAttached = 'true';
+        contentEl.addEventListener('click', (e) => e.stopPropagation());
+    }
 
-    // Close on clicking outside content with guard (attach once)
+    // Close on clicking outside content (attach once)
     if (!modal.dataset.overlayHandlerBound) {
         modal.addEventListener('click', (e) => {
-            // stop bubbling to document-level handler
             e.stopPropagation();
-            if (modal.dataset && modal.dataset.openGuard === '1') return;
+            if (modal.dataset.openGuard === '1') return;
             if (e.target === modal && getComputedStyle(modal).display !== 'none') {
+                console.log('Modal overlay clicked - closing modal');
+                
+                // Clear intervals
                 if (modal.dataset.akSlideInterval) {
-                    try { clearInterval(Number(modal.dataset.akSlideInterval)); } catch (e2) {}
-                    delete modal.dataset.akSlideInterval;
+                    try { 
+                        clearInterval(Number(modal.dataset.akSlideInterval)); 
+                        delete modal.dataset.akSlideInterval;
+                    } catch (e2) {}
                 }
-                closeModal();
+                
+                // Clear guards
+                delete modal.dataset.openGuard;
+                delete modal.dataset.justOpenedAt;
+                
+                // Close modal
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
         });
         modal.dataset.overlayHandlerBound = '1';
