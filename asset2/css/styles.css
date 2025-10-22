@@ -4172,7 +4172,6 @@ h2.section-title::before,
     .features-section {
         padding: 40px 0;
     }
-    styles removed - using 600px media query instead */
     .container {
         padding: 40px 15px;
     }
@@ -4534,8 +4533,7 @@ rousel-inner img {
     /* Optimize content width */
     .container,
     .content-container,
-    .cta-container,
-    .footer-container {
+    .cta-container {
         max-width: 100%;
         margin: 0 auto;
     }
@@ -4798,7 +4796,6 @@ rousel-inner img {
     }
     
     /* Feature-item styles removed - using 600px media query instead */
-    styles removed - using 600px media query instead */
     /* === MAP SECTION === */
     .map-container {
         padding: 30px 15px;
@@ -4924,11 +4921,6 @@ rousel-inner img {
     .footer-container {
         padding: 0 20px;
     }
-    
-    .footer-columns {
-        gap: 30px;
-    }
-    
         @media (max-width: 360px) {
             .footer-column h3 {
         font-size: 1.1rem;
@@ -4936,7 +4928,7 @@ rousel-inner img {
     }
 }
     .footer-column a {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 }
 
