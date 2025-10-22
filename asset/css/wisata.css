@@ -5059,10 +5059,6 @@ animation: fadeIn 0.3s ease;
     list-style: none;
 }
 
-.footer-column li {
-    margin-bottom: 12px;
-}
-
 .footer-column a {
     color: inherit;
     text-decoration: none;
@@ -5095,7 +5091,6 @@ animation: fadeIn 0.3s ease;
 }
 
 .footer-bottom {
-    text-align: right;
     font-size: 1rem;
     color: #E8E8E8;
     opacity: 0.8;
@@ -5274,7 +5269,6 @@ animation: fadeIn 0.3s ease;
     .footer-columns {
         grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
     }
 
     .footer-bottom {

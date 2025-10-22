@@ -4,7 +4,7 @@
 const wisataData = {
     'Mandala': {
         title: 'Pantai Mandala',
-        location: 'Lembanabahari, Bulukumba',
+        location: 'lembannabahari, Bulukumba',
         image: 'asset/img/wisata andalah/pantai-andalan-1.jpeg',
         images: [
             'asset/img/wisata andalah/pantai-andalan-1.jpeg',
@@ -28,7 +28,7 @@ const wisataData = {
     },
     'GuaPassea': {
         title: 'Gua Passea',
-        location: 'Lembanabahari, Bulukumba',
+        location: 'lembannabahari, Bulukumba',
         image: 'asset/img/wisata andalah/gua-passea-1.webp',
         images: [
             'asset/img/wisata andalah/gua-passea-1.webp',
@@ -49,7 +49,7 @@ const wisataData = {
     },
     'TebingMatto': {
         title: 'Tebing Mattoanging',
-        location: 'Lembanabahari, Bulukumba',
+        location: 'lembannabahari, Bulukumba',
         image: 'asset/img/wisata andalah/tebing-mattoanging.webp',
         images: [
             'asset/img/wisata andalah/tebing-mattoanging.webp',
@@ -70,7 +70,7 @@ const wisataData = {
     },
     'TebingTongkarayya': {
         title: 'Tebing Tongkarayya',
-        location: 'Lembanabahari, Bulukumba',
+        location: 'lembannabahari, Bulukumba',
         image: 'asset/img/wisata andalah/batu-tongkarayya-1.jpg',
         images: [
             'asset/img/wisata andalah/batu-tongkarayya-1.jpg',

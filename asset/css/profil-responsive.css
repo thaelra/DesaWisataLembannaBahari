@@ -571,14 +571,16 @@
     border-radius: 10px;
     border: none;
   }
-
+.footer-container {
+        padding: 0 20px;
+    }
   .footer-title {
-    font-size: 0.5rem !important;
+    font-size: 1.1rem !important;
     margin-bottom: 6px;
   }
   
   .footer-column h3 {
-    font-size: 0.7rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 25px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
@@ -586,10 +588,11 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: left;
 }
   .footer-bottom {
     text-align: right;
-    font-size: 0.5rem;
+    font-size: .8rem;
     color: #E8E8E8;
     opacity: 0.8;
     padding-top: 30px;
@@ -599,11 +602,12 @@
   .footer-column a {
     color: inherit;
     text-decoration: none;
-    font-size: .5rem;
+    font-size: 1rem;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     position: relative;
     display: inline-block;
+    text-align: left !important;
 }
  .struktur-list-img .struktur-img {
     width: 90px;
@@ -1172,8 +1176,7 @@
   }
   
   .footer-columns {
-    flex-direction: column;
-    padding: 12px 0 0 0;
+    gap: 30px;
   }
   .footer-bottom {
     text-align: right;
@@ -2141,9 +2144,7 @@
   }
   
   .footer-columns {
-    flex-direction: column;
-    gap: 20px;
-    padding: 12px 0 0 0;
+    gap: 40px;
   }
   
   .footer-col {
@@ -2501,7 +2502,6 @@
     }
 
     .footer-columns {
-        grid-template-columns: 1fr;
         gap: 40px;
         text-align: center;
     }

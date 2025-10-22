@@ -42,17 +42,6 @@
     padding: 15px 25px;
 }
 
-.mobile-nav-icon{
-    width: 40px !important;
-    height: 40px !important;
-}
-@media (max-width: 500px) {
-    .mobile-nav-icon{
-    width: 30px !important;
-    height: 30px !important;
-}
-}
-
 @media (max-width: 970px) {
     .has-submenu a{
         font-size: 0.9rem;
@@ -1592,5 +1581,12 @@ h1.page-title::before,
     .info-footer {
         padding: 4rem 0 1.5rem;
         margin-top: 5rem;
+    }
+}
+
+/* Ensure mobile navigation is visible */
+@media (max-width: 900px) {
+    .mobile-bottom-nav {
+        display: flex !important;
     }
 }

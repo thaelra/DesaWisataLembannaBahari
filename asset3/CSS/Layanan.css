@@ -1054,6 +1054,9 @@ body {
   outline: none;
 }
 
+.footer-column a, .footer-bottom p{ 
+  font-family: 'Karma', serif !important;
+}
 /* 📱 Responsive */
 @media (max-width: 768px) {
   .layanan-features {
@@ -1398,107 +1401,6 @@ body {
     animation: none;
   }
 }
-/* Footer */
-.layanan-page .site-footer {
-  background: linear-gradient(
-    135deg,
-    #103478 0%,
-    var(--primary-color) 50%,
-    #0a2555 100%
-  );
-  color: #e8e8e8;
-  width: 100vw;
-  height: auto;
-  font-family: "Cormorant Garamond", serif;
-  padding: 60px 0 30px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.layanan-page .site-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerGrainLayanan" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23footerGrainLayanan)"/></svg>');
-  opacity: 0.3;
-  pointer-events: none;
-}
-.layanan-page .footer-column a::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: linear-gradient(
-    90deg,
-    var(--third-color) 0%,
-    var(--white-color) 100%
-  );
-  transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.layanan-page .footer-column a:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.layanan-page .footer-column a:hover::after {
-  width: 100%;
-}
-
-.layanan-page .footer-bottom {
-  text-align: right;
-  font-size: 1rem;
-  color: #e8e8e8;
-  opacity: 0.8;
-  padding-top: 30px;
-  border-top: 1px solid rgba(232, 232, 232, 0.15);
-}
-@keyframes floatShip {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(1deg);
-  }
-}
-
-@keyframes floatKue {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(-2deg);
-  }
-}
-
-@keyframes floatBubble2 {
-  0%,
-  100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-15px) scale(1.08);
-  }
-}
-
-@keyframes floatBubble1 {
-  0%,
-  100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-12px) scale(1.08);
-  }
-}
-
 /* === Unified Bold Title Component (Layanan/UMKM pages) === */
 .header-title {
   position: relative;
@@ -1629,6 +1531,9 @@ h2.section-title::before,
 
 /* 📱 Mobile-specific adjustments (max-width: 480px) */
 @media (max-width: 480px) {
+
+  
+
   /* Stack header overlay and create a 3rem gap so main-title sits below header-top */
   .layanan-page .header-overlay {
     display: grid !important;
@@ -1826,16 +1731,6 @@ h2.section-title::before,
     left: 38% !important;
   }
 
-  .layanan-page .hiasan-kue {
-    width: 50px !important;
-    left: 38% !important;
-  }
-
-  .layanan-page .hiasan-bubble2 {
-    width: 70px !important;
-    left: 38% !important;
-  }
-
   .layanan-page .sun {
     width: 80px !important;
     height: 80px !important;
@@ -1849,8 +1744,10 @@ h2.section-title::before,
 
   .layanan-page .cta-waves {
     position: relative;
-    z-index: 0;
-    top: 90px !important;
+
+    z-index: 5;
+    top: 88px;
+  
   }
   .cta-waves svg {
     margin-top: -7px !important;
@@ -1876,33 +1773,6 @@ h2.section-title::before,
     bottom: 12px !important;
     border-radius: 8px !important;
   }
-
-  .layanan-page .footer-container {
-    padding: 0 12px !important;
-    height: 110vh !important;
-  }
-
-  .layanan-page .footer-columns {
-    grid-template-columns: 1fr !important;
-    gap: 8px !important;
-    padding-bottom: 20px !important;
-  }
-
-  .layanan-page .footer-column h3 {
-    font-size: 1.3rem !important;
-    margin-bottom: 6px !important;
-  }
-
-  .layanan-page .footer-column a {
-    font-size: 0.95rem !important;
-  }
-
-  .layanan-page .footer-bottom {
-    font-size: 0.8rem !important;
-    padding-top: 15px !important;
-    text-align: center !important;
-  }
-
   /* Header content layout for very small screens */
   .header-content {
     grid-template-columns: 1fr !important;
@@ -2000,35 +1870,6 @@ h2.section-title::before,
     font-size: 0.95rem;
   }
 
-  /* Footer */
-  .layanan-page .footer-container {
-    padding: 0 8px;
-  }
-  .layanan-page .footer-columns {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .layanan-page .footer-column h3 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    text-align: center;
-  }
-  .layanan-page .footer-column li {
-    margin-bottom: 8px;
-  }
-  .layanan-page .footer-column a {
-    font-size: 1.05rem;
-  }
-  .layanan-page .footer-bottom {
-    text-align: center;
-    font-size: 0.85rem;
-    padding-top: 10px;
-  }
-  .layanan-page .cta-waves {
-    z-index: 5;
-    top: 180px;
-  }
-
   /* Hiasan (bubble/snack) */
   .layanan-page .hiasan {
     --bubble-size: 84px;
@@ -2092,23 +1933,6 @@ h2.section-title::before,
   .layanan-page .header-btn {
     padding: 10px 18px;
     min-width: 140px;
-  }
-
-  /* Footer */
-  .layanan-page .footer-container {
-    padding: 0 24px;
-  }
-  .layanan-page .footer-columns {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 22px;
-  }
-  .layanan-page .footer-column h3 {
-    font-size: 1.6rem;
-    text-align: center;
-  }
-  .layanan-page .footer-bottom {
-    text-align: center;
-    font-size: 0.95rem;
   }
 
   /* Hiasan size for tablet */
