@@ -1819,6 +1819,7 @@ h2.section-title::before,
     max-width: 260px !important;
   }
 }
+
 /* 📱 Responsive adjustments for phones (max 600px) */
 @media (max-width: 768px) {
   .layanan-page .header-overlay {
@@ -1868,13 +1869,13 @@ h2.section-title::before,
     min-width: 100px;
     font-size: 0.95rem;
   }
-
-  /* Hiasan (bubble/snack) */
-  .layanan-page .hiasan {
-    --bubble-size: 84px;
-    --snack-size: 68px;
-    --bubble-left: calc(50% - (var(--bubble-size) / 2));
-    --bubble-bottom: -8%;
+  .layanan-page .cta-waves {
+    z-index: 5;
+    margin-top: -97vh;
+    padding: auto;
+  }
+  .layanan-page .footer-container{
+    margin: 5vh;
   }
 }
 
