@@ -1744,10 +1744,9 @@ h2.section-title::before,
 
   .layanan-page .cta-waves {
     position: relative;
-
     z-index: 5;
     top: 88px;
-  
+
   }
   .cta-waves svg {
     margin-top: -7px !important;
@@ -1934,7 +1933,13 @@ h2.section-title::before,
     padding: 10px 18px;
     min-width: 140px;
   }
-
+    .layanan-page .site-footer{
+    margin-top: 5vw;
+  }
+.layanan-page .cta-waves {
+    z-index: 5;
+    top: 180px;
+  }
   /* Hiasan size for tablet */
   .layanan-page .hiasan {
     --bubble-left: 42%;
