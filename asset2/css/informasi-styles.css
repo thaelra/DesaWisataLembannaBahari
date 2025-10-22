@@ -42,17 +42,6 @@
     padding: 15px 25px;
 }
 
-.mobile-nav-icon{
-    width: 40px !important;
-    height: 40px !important;
-}
-@media (max-width: 500px) {
-    .mobile-nav-icon{
-    width: 30px !important;
-    height: 30px !important;
-}
-}
-
 @media (max-width: 970px) {
     .has-submenu a{
         font-size: 0.9rem;
