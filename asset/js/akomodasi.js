@@ -176,49 +176,35 @@ function setupAkomodasiToolbar() {
     const filterSelect = document.getElementById('filterSelect');
     const filterAllBtn = document.getElementById('filterAllBtn');
     const searchInput = document.getElementById('akomodasiSearchInput');
-    const sortByPriceBtn = document.getElementById('sortByPriceBtn');
 
     let currentFilter = 'all';
     let currentSearchQuery = '';
-    let currentSortOrder = 'asc'; // 'asc' atau 'desc'
 
-    const applyFiltersAndSort = () => {
+    const applyFiltersAndSearch = () => {
         let filteredData = window.akomodasiData.filter(item => {
             const matchesType = (currentFilter === 'all' || item.type === currentFilter);
             const matchesSearch = (item.name.toLowerCase().includes(currentSearchQuery) || item.desc.toLowerCase().includes(currentSearchQuery));
             return matchesType && matchesSearch;
         });
 
-        if (currentSortOrder === 'asc') {
-            filteredData.sort((a, b) => a.price - b.price);
-        } else {
-            filteredData.sort((a, b) => b.price - a.price);
-        }
-
         buildAkomodasiCards(document.getElementById('akTrack'), filteredData);
-        setupAkomodasiSlider(); // Reset slider setelah filter/sort
+        setupAkomodasiSlider(); // Reset slider setelah filter/search
     };
 
     filterSelect.addEventListener('change', (e) => {
         currentFilter = e.target.value;
-        applyFiltersAndSort();
+        applyFiltersAndSearch();
     });
 
     filterAllBtn.addEventListener('click', () => {
         filterSelect.value = 'all';
         currentFilter = 'all';
-        applyFiltersAndSort();
+        applyFiltersAndSearch();
     });
 
     searchInput.addEventListener('input', (e) => {
         currentSearchQuery = e.target.value.toLowerCase();
-        applyFiltersAndSort();
-    });
-
-    sortByPriceBtn.addEventListener('click', () => {
-        currentSortOrder = (currentSortOrder === 'asc' ? 'desc' : 'asc');
-        sortByPriceBtn.innerHTML = `<i class="fas fa-sort-amount-${currentSortOrder === 'asc' ? 'down' : 'up'}"></i> Urutkan Harga`;
-        applyFiltersAndSort();
+        applyFiltersAndSearch();
     });
 }
 

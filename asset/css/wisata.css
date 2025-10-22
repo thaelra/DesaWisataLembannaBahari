@@ -919,7 +919,7 @@ animation: fadeIn 0.3s ease;
         font-size: 0;
         text-decoration: none;
         z-index: 15;
-        pointer-events: none;
+        pointer-events: auto;
     }
 
     .menu-wisata li a::after {
@@ -989,6 +989,7 @@ animation: fadeIn 0.3s ease;
     line-height: 1.15;
     letter-spacing: 0.5px;
     max-width: min(1100px, 92vw);
+    width: 100%;                   /* ensure titles expand to full container width */
     display: flex;                 /* center title with side lines */
     align-items: center;
     justify-content: center;
@@ -1305,6 +1306,19 @@ animation: fadeIn 0.3s ease;
     z-index: 1;
 }
 
+.kuliner-subtitle {
+    text-align: center;
+    font-family: 'Karma', serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--secondary-color);
+    margin: -10px auto 60px;
+    max-width: 800px;
+    font-weight: 400;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+}
+
 .atraksi-container {
     width: 100%;
     max-width: 1200px;
@@ -1540,6 +1554,66 @@ animation: fadeIn 0.3s ease;
 }
 
 /* Responsive Design */
+/* Medium screens: 600px to 968px - Better organized layout */
+@media (min-width: 600px) and (max-width: 968px) {
+    .atraksi-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        align-items: center;
+        padding: 0 20px;
+    }
+    
+    .atraksi-reverse .atraksi-content {
+        direction: ltr;
+    }
+    
+    .atraksi-image-wrapper {
+        aspect-ratio: 16/10; /* More landscape orientation for better space usage */
+        max-width: 85%;
+        margin: 0 auto;
+        border-radius: 16px;
+    }
+    
+    .atraksi-info {
+        padding: 20px 10px;
+        text-align: center;
+        max-width: 85%;
+        margin: 0 auto;
+    }
+    
+    .atraksi-item {
+        margin-bottom: 70px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .atraksi-number {
+        font-size: clamp(3.5rem, 7vw, 5rem);
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .atraksi-details {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 20px 0;
+    }
+    
+    .detail-item {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+    
+    .atraksi-btn {
+        margin: 20px auto 0;
+        display: block;
+        width: fit-content;
+    }
+}
+
 @media (max-width: 968px) {
     .atraksi-content {
         grid-template-columns: 1fr;
@@ -1558,6 +1632,33 @@ animation: fadeIn 0.3s ease;
         font-size: clamp(3rem, 8vw, 5rem);
         top: -20px;
     }
+
+    /* Switch order for Pas sapu Munne and Pattoengan items - target by position in HTML */
+    .atraksi-item:nth-child(2) .atraksi-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .atraksi-item:nth-child(2) .atraksi-info {
+        order: 2;
+    }
+    
+    .atraksi-item:nth-child(2) .atraksi-image-wrapper {
+        order: 1;
+    }
+    
+    .atraksi-item:nth-child(3) .atraksi-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .atraksi-item:nth-child(3) .atraksi-info {
+        order: 2;
+    }
+    
+    .atraksi-item:nth-child(3) .atraksi-image-wrapper {
+        order: 1;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1566,6 +1667,11 @@ animation: fadeIn 0.3s ease;
     }
     
     .atraksi-subtitle {
+        margin-bottom: 40px;
+        padding: 0 20px;
+    }
+
+    .kuliner-subtitle {
         margin-bottom: 40px;
         padding: 0 20px;
     }
@@ -2167,7 +2273,7 @@ animation: fadeIn 0.3s ease;
     }
 }
 
-.wisata-section .card-image { position: relative; height: 100%; } /* Gambar mengisi tinggi kartu */
+.wisata-section .card-image { position: relative; height: 100%; width: 100%;} /* Gambar mengisi tinggi kartu */
 .wisata-section .card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .wisata-section .card-image.loading { background: #e5edf7; }
 
@@ -2875,28 +2981,9 @@ animation: fadeIn 0.3s ease;
         rgba(243, 243, 224, 0.07) 100%);
 }
 
-.kuliner-title{
-    text-align: center;
-    color: var(--secondary-color);
-    font-family: 'Playfair Display SC', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    letter-spacing: 0.5px;
-    position: static;
-    z-index: auto;
-    margin-bottom: 24px;
-    text-shadow: none;
-}
 
-.kuliner-title span {
-    position: static;
-    display: inline;
-    padding: 0;
-    background: none;
-    background-clip: initial;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-    animation: none;
-}
+
+
 
 @keyframes culinaryShimmer {
     0%, 100% { 
@@ -2909,20 +2996,7 @@ animation: fadeIn 0.3s ease;
     }
 }
 
-.kuliner-title span::before,
-.kuliner-title span::after {
-    content: none;
-}
 
-.kuliner-title span::before { 
-    left: -150px; 
-    animation-delay: 0s;
-}
-
-.kuliner-title span::after { 
-    right: -150px; 
-    animation-delay: 1.5s;
-}
 
 @keyframes culinaryLineGlow {
     0%, 100% { 
@@ -2935,9 +3009,7 @@ animation: fadeIn 0.3s ease;
     }
 }
 
-.kuliner-title {
-    margin-bottom: 24px;
-}
+
 
 /* Container untuk grid + arrow */
 .kuliner-viewport {
@@ -3038,7 +3110,7 @@ animation: fadeIn 0.3s ease;
     width: calc(100% - 20px); /* Sesuaikan lebar grid agar ada sedikit padding */
     max-width: 900px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(12, 1fr); /* Use 12-column grid for responsive control */
     gap: 24px;
     align-items: stretch;
 }
@@ -3048,14 +3120,14 @@ animation: fadeIn 0.3s ease;
     .kuliner-viewport { max-width: 98vw; }
     .kuliner-viewport .kuliner-prev { left: 0; width: 36px; height: 36px; }
     .kuliner-viewport .kuliner-next { right: 0; width: 36px; height: 36px; }
-    .kuliner-page .cards-grid-kuliner { margin: 0; width: calc(100% - 12px); } /* Sesuaikan padding */
+    .kuliner-page .cards-grid-kuliner { margin: 0; width: calc(100% - 12px); grid-template-columns: repeat(12, 1fr); } /* Sesuaikan padding */
 }
 
 @media (max-width: 600px) {
     .kuliner-viewport { max-width: 100vw; }
     .kuliner-viewport .kuliner-prev { left: 0; width: 32px; height: 32px; }
     .kuliner-viewport .kuliner-next { right: 0; width: 32px; height: 32px; }
-    .kuliner-page .cards-grid-kuliner { margin: 0; width: calc(100% - 12px); } /* Sesuaikan padding */
+    .kuliner-page .cards-grid-kuliner { margin: 0; width: calc(100% - 12px); grid-template-columns: repeat(12, 1fr); } /* Sesuaikan padding */
 }
 /* Grid card kuliner selalu di tengah */
 .cards-grid-kuliner {
@@ -3069,9 +3141,17 @@ animation: fadeIn 0.3s ease;
     align-items: stretch;
 }
 /* Make each card responsive in the 12-col grid */
-.cards-grid-kuliner > .card-kuliner { grid-column: span 4; } /* 3 per row on desktop */
-@media (max-width: 1024px){ .cards-grid-kuliner > .card-kuliner { grid-column: span 6; } } /* 2 per row */
-@media (max-width: 640px){ .cards-grid-kuliner { gap: 16px; } .cards-grid-kuliner > .card-kuliner { grid-column: span 12; } } /* 1 per row */
+.cards-grid-kuliner > .card-kuliner { grid-column: span 12; } /* 1 per row on mobile by default */
+
+/* 2 columns at 600px+ */
+@media (min-width: 600px) {
+    .cards-grid-kuliner > .card-kuliner { grid-column: span 6; } /* 2 per row */
+}
+
+/* 3 columns at 1280px+ */
+@media (min-width: 1280px) {
+    .cards-grid-kuliner > .card-kuliner { grid-column: span 4; } /* 3 per row */
+}
 
 /* Enhanced Kuliner Cards with Food-Themed Design */
 .card-kuliner{
@@ -4084,7 +4164,7 @@ animation: fadeIn 0.3s ease;
 
 /* Responsive tweak */
 @media (max-width: 480px){
-  .cards-grid-kuliner{ grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .cards-grid-kuliner{ gap: 16px; }
   .kuliner-prev, .kuliner-next{ width: 36px; height: 36px; }
 }
 
@@ -5225,22 +5305,4 @@ h1, h2, h3 {
   color: #92400e;
   background: linear-gradient(135deg, #fffdf5 0%, #fff7e5 100%);
   padding: 8px 12px;
-  border-radius: 12px;
-  border: 2px solid #f59e0b;
-  box-shadow: 0 10px 24px rgba(180, 83, 9, 0.18), inset 0 1px 0 rgba(255,255,255,.8);
-  z-index: 6;
-}
-@media (max-width: 1024px){
-  .kuliner-section::before{ display: none; }
-}
-
-/* 2) Section heading enhancement with horizontal line */
-.kuliner-title{ position: relative; }
-.kuliner-title::after{
-    content: "";
-    height: 2px;
-    background: currentColor;
-    opacity: .25;
-    flex: 1;
-    max-width: 160px;
-}
+  bo

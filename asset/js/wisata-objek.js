@@ -125,7 +125,7 @@ function initializeWisataObjek() {
                 try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
                 delete modal.dataset.slideInterval;
             }
-            closeModal();
+            closeWisataModal();
         });
     }
 
@@ -362,4 +362,18 @@ function initializeImageRotation(card) {
         });
         currentIndex = 0;
     });
+}
+
+// Function to close the wisata modal specifically
+function closeWisataModal() {
+    const modal = document.getElementById('wisataModal');
+    if (modal) {
+        // Clear any slideshow interval
+        if (modal.dataset.slideInterval) {
+            try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
+            delete modal.dataset.slideInterval;
+        }
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
 }

@@ -142,9 +142,9 @@
 }
 
 /* Enhanced Mobile Responsive Design for Kuliner Cards */
-@media (max-width: 768px) {
+@media (max-width: 599px) {
     .cards-grid-kuliner {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(12, 1fr);
         gap: 20px;
         padding: 0 12px;
     }
@@ -208,7 +208,7 @@
 
 @media (max-width: 480px) {
     .cards-grid-kuliner {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(12, 1fr);
         gap: 16px;
         padding: 0 8px;
     }
@@ -506,6 +506,14 @@
 
     .cards-grid-kuliner, .cards-grid-sewa {
         gap: 16px;
+    }
+    
+    /* Maintain responsive kuliner grid columns */
+    .cards-grid-kuliner {
+        grid-template-columns: repeat(12, 1fr);
+    }
+    
+    .cards-grid-sewa {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
     h1, h2, h3 {
@@ -544,8 +552,16 @@
     
     .cards-grid-kuliner, .cards-grid-sewa {
         gap: 12px;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         padding: 0 12px;
+    }
+    
+    /* Maintain responsive kuliner grid columns for small screens */
+    .cards-grid-kuliner {
+        grid-template-columns: repeat(12, 1fr);
+    }
+    
+    .cards-grid-sewa {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     h1, h2, h3 {
         font-size: clamp(1.2rem, 3vw, 1.8rem);

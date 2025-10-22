@@ -521,6 +521,9 @@ window.SEWA_WHATSAPP_NUMBER = '6282291494298';
 function initWisata() {
     console.log('Initializing wisata page...');
     
+    // Initialize smooth scrolling for menu-wisata
+    initializeMenuWisataNavigation();
+    
     // Initialize all sections
     if (typeof initializeWisataObjek === 'function') {
         initializeWisataObjek();
@@ -543,4 +546,96 @@ function initWisata() {
     }
     
     console.log('Wisata page initialized successfully');
+}
+
+// Initialize menu-wisata navigation with smooth scrolling
+function initializeMenuWisataNavigation() {
+    const menuWisata = document.querySelector('.menu-wisata');
+    if (!menuWisata) return;
+    
+    const menuLinks = menuWisata.querySelectorAll('a[href^="#"]');
+    console.log('Found menu-wisata links:', menuLinks.length);
+    
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                console.log('Navigating to:', targetId);
+                
+                // Calculate offset to account for fixed navigation
+                const offset = 100; // Adjust this value as needed for your design
+                const elementPosition = targetElement.offsetTop;
+                const scrollPosition = elementPosition - offset;
+                
+                // Smooth scroll to the target section
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active menu state
+                updateActiveMenuState(link);
+            } else {
+                console.warn('Target element not found:', targetId);
+            }
+        });
+    });
+    
+    // Initialize scroll spy for active menu highlighting
+    window.addEventListener('scroll', updateMenuHighlight);
+    updateMenuHighlight(); // Initialize on load
+}
+
+// Update active menu state
+function updateActiveMenuState(activeLink) {
+    const menuWisata = document.querySelector('.menu-wisata');
+    if (!menuWisata) return;
+    
+    // Remove active class from all menu items
+    menuWisata.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+    
+    // Add active class to the clicked menu item
+    const activeLi = activeLink.closest('li');
+    if (activeLi) {
+        activeLi.classList.add('active');
+    }
+}
+
+// Update menu highlight based on scroll position
+function updateMenuHighlight() {
+    const menuWisata = document.querySelector('.menu-wisata');
+    if (!menuWisata) return;
+    
+    const menuLinks = menuWisata.querySelectorAll('a[href^="#"]');
+    const sections = Array.from(menuLinks).map(link => {
+        const targetId = link.getAttribute('href');
+        return {
+            link: link,
+            element: document.querySelector(targetId),
+            li: link.closest('li')
+        };
+    }).filter(item => item.element);
+    
+    let currentSection = null;
+    const scrollPosition = window.scrollY + 150; // Offset for header
+    
+    // Find the current section based on scroll position
+    sections.forEach(section => {
+        if (section.element.offsetTop <= scrollPosition && 
+            section.element.offsetTop + section.element.offsetHeight > scrollPosition) {
+            currentSection = section;
+        }
+    });
+    
+    // Update active states
+    sections.forEach(section => {
+        section.li.classList.remove('active');
+    });
+    
+    if (currentSection) {
+        currentSection.li.classList.add('active');
+    }
 }
