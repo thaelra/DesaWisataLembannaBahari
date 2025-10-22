@@ -4500,7 +4500,6 @@ rousel-inner img {
     
     .footer-column a {
         display: block;
-        padding: 4px 8px;
         border-radius: 8px;
         transition: all 0.3s ease;
     }

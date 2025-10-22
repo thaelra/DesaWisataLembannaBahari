@@ -1054,6 +1054,9 @@ body {
   outline: none;
 }
 
+.footer-column a, .footer-bottom p{ 
+  font-family: 'Karma', serif !important;
+}
 /* 📱 Responsive */
 @media (max-width: 768px) {
   .layanan-features {
@@ -1528,6 +1531,12 @@ h2.section-title::before,
 
 /* 📱 Mobile-specific adjustments (max-width: 480px) */
 @media (max-width: 480px) {
+
+  .layanan-page .cta-waves {
+    z-index: 5;
+    top: 180px;
+  }
+
   /* Stack header overlay and create a 3rem gap so main-title sits below header-top */
   .layanan-page .header-overlay {
     display: grid !important;
@@ -1775,33 +1784,6 @@ h2.section-title::before,
     bottom: 12px !important;
     border-radius: 8px !important;
   }
-
-  .layanan-page .footer-container {
-    padding: 0 12px !important;
-    height: 110vh !important;
-  }
-
-  .layanan-page .footer-columns {
-    grid-template-columns: 1fr !important;
-    gap: 8px !important;
-    padding-bottom: 20px !important;
-  }
-
-  .layanan-page .footer-column h3 {
-    font-size: 1.3rem !important;
-    margin-bottom: 6px !important;
-  }
-
-  .layanan-page .footer-column a {
-    font-size: 0.95rem !important;
-  }
-
-  .layanan-page .footer-bottom {
-    font-size: 0.8rem !important;
-    padding-top: 15px !important;
-    text-align: center !important;
-  }
-
   /* Header content layout for very small screens */
   .header-content {
     grid-template-columns: 1fr !important;
