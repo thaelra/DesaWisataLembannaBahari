@@ -1532,10 +1532,7 @@ h2.section-title::before,
 /* 📱 Mobile-specific adjustments (max-width: 480px) */
 @media (max-width: 480px) {
 
-  .layanan-page .cta-waves {
-    z-index: 5;
-    top: 180px;
-  }
+  
 
   /* Stack header overlay and create a 3rem gap so main-title sits below header-top */
   .layanan-page .header-overlay {
@@ -1734,16 +1731,6 @@ h2.section-title::before,
     left: 38% !important;
   }
 
-  .layanan-page .hiasan-kue {
-    width: 50px !important;
-    left: 38% !important;
-  }
-
-  .layanan-page .hiasan-bubble2 {
-    width: 70px !important;
-    left: 38% !important;
-  }
-
   .layanan-page .sun {
     width: 80px !important;
     height: 80px !important;
@@ -1757,8 +1744,10 @@ h2.section-title::before,
 
   .layanan-page .cta-waves {
     position: relative;
-    z-index: 0;
-    top: 90px !important;
+
+    z-index: 5;
+    top: 88px;
+  
   }
   .cta-waves svg {
     margin-top: -7px !important;
