@@ -1928,17 +1928,12 @@ h2.section-title::before,
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.25rem;
   }
-
   .layanan-page .header-btn {
     padding: 10px 18px;
     min-width: 140px;
   }
-    .layanan-page .site-footer{
-    margin-top: 5vw;
-  }
 .layanan-page .cta-waves {
     z-index: 5;
-    top: 180px;
   }
   /* Hiasan size for tablet */
   .layanan-page .hiasan {
