@@ -242,6 +242,7 @@
     opacity: 0.8;
 }
 
+
 /* ===== BERITA CAROUSEL STYLES ===== */
 /* Expand container width on Informasi page */
 .info-main .container {
@@ -511,6 +512,50 @@
     opacity: 0.8;
 }
 
+/* Event Status Badges */
+.event-status {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.event-status.today {
+    background: linear-gradient(135deg, #ff4757, #ff3742);
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+.event-status.tomorrow {
+    background: linear-gradient(135deg, #ffa502, #ff9500);
+    color: white;
+}
+
+.event-status.soon {
+    background: linear-gradient(135deg, #3742fa, #2f3542);
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+}
+
+
+
+/* Dynamic agenda card styling */
+.agenda-card.dynamic-agenda {
+    position: relative;
+}
+
 .agenda-image {
     position: relative;
     height: 250px;
@@ -532,38 +577,6 @@
     padding: 2rem;
 }
 
-.agenda-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.agenda-time,
-.agenda-location {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #666;
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-}
-
-.agenda-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-    font-family: 'Playfair Display', serif;
-}
-
-.agenda-description {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    font-family: 'Inter', sans-serif;
-}
 
 .agenda-detail-btn {
     display: flex;
@@ -1446,10 +1459,6 @@ h1.page-title::before,
 
     .date-year {
         font-size: 1rem;
-    }
-
-    .agenda-image {
-        height: 320px;
     }
 
     .agenda-content {

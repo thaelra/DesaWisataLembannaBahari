@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-  initFloatingCards();
-  initParallax();
-  initScrollToTop();
-  initAnimations();
-  initTabs();
+  // Check if functions exist before calling them to prevent errors
+  if (typeof initFloatingCards === 'function') initFloatingCards();
+  if (typeof initParallax === 'function') initParallax();
+  if (typeof initScrollToTop === 'function') initScrollToTop();
+  if (typeof initAnimations === 'function') initAnimations();
+  if (typeof initTabs === 'function') initTabs();
   initScrollProgressBar();
   initButtonRipple();
 });
@@ -119,15 +120,22 @@ function initButtonRipple() {
         grid.insertAdjacentElement('afterend', btn);
 
         btn.addEventListener('click', () => {
-          const expanded = pane.classList.toggle('expanded');
-          btn.setAttribute('aria-expanded', String(expanded));
-          btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
+          try {
+            const expanded = pane.classList.toggle('expanded');
+            btn.setAttribute('aria-expanded', String(expanded));
+            btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
 
-          if (!expanded) {
-            // when collapsing, scroll pane into view so header doesn't cover it
-            const rect = pane.getBoundingClientRect();
-            const offsetTop = window.pageYOffset + rect.top - 80;
-            window.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
+            if (!expanded) {
+              // when collapsing, scroll pane into view so header doesn't cover it
+              const rect = pane.getBoundingClientRect();
+              const offsetTop = window.pageYOffset + rect.top - 80;
+              window.scrollTo({ 
+                top: Math.max(0, offsetTop), 
+                behavior: 'smooth' 
+              });
+            }
+          } catch (error) {
+            console.error('Error in facilities toggle button:', error);
           }
         });
       } else {

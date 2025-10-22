@@ -511,10 +511,7 @@
     h1, h2, h3 {
         font-size: clamp(1.5rem, 4vw, 2rem);
     }
-    button {
-        min-height: 44px;
-        min-width: 44px;
-    }
+
     .menu-wisata svg{
         width: 40px;
         height: 40px;
@@ -556,10 +553,7 @@
     p, li {
         font-size: 0.9rem;
     }
-    button {
-        min-height: 44px;
-        min-width: 44px;
-    }
+
     .cta-waves { height: 80px; }
     .cta-wave svg { height: 80px; }
     
@@ -682,12 +676,12 @@
     
     /* Mobile dots styling - smaller size and reduced gap */
     .akc-dots {
-        gap: 6px;
+        gap: 4px;
         margin: 8px 0 0;
     }
     .akc-dots .dot{ 
-        width: 8px;
-        height: 8px;
+        width: 6px !important;
+        height: 6px !important;
         border-radius: 50%; 
         background: #cbd5e1; 
         border: none; 
@@ -702,11 +696,169 @@
     }
 
 }
+
+/* Enhanced responsivity for screens 420px and smaller */
+@media (max-width: 420px) {
+    .ak-viewport {
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto;
+        padding: 4px;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .ak-viewport .ak-track {
+        display: grid !important;
+        grid-template-columns: repeat(1, 1fr) !important; /* Single column for very small screens */
+        grid-gap: 8px;
+        width: 100%;
+        padding: 0;
+        max-width: 100%;
+        margin: 0 auto;
+        transform: none !important;
+        justify-items: center; /* Center the single card */
+    }
+    
+    .card-akomodasi {
+        width: 280px; /* Slightly wider for better content display */
+        max-width: calc(100vw - 32px); /* Ensure it fits with padding */
+        height: 380px;
+        border-radius: 12px;
+        margin: 0 auto;
+    }
+    
+    .ak-card {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--third-color);
+        background-color: var(--white-color);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        overflow: hidden;
+        margin: 0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .ak-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .ak-card-image {
+        width: 100%;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+    }
+    
+    .ak-card-image img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .ak-card-details {
+        padding: 12px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .ak-card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+        line-height: 1.3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    .ak-card-price {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        margin: 8px 0;
+    }
+    
+    .ak-card-description {
+        font-size: 0.85rem;
+        color: #666;
+        line-height: 1.4;
+        margin-bottom: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    
+    /* Hide navigation arrows on very small screens */
+    .ak-prev,
+    .ak-next {
+        display: none;
+    }
+    
+    /* Adjust filter toolbar for small screens */
+    .toolbar-akomodasi {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .toolbar-akomodasi button,
+    .toolbar-akomodasi input,
+    .toolbar-akomodasi select {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+}
+
 @media (max-width: 380px){
-    .card-akomodasi{
-        width: 150px;
-        height: 300px;
-        border-radius: 10px;
+    .card-akomodasi {
+        width: 260px; /* Slightly smaller than 420px breakpoint but not drastically */
+        max-width: calc(100vw - 24px); /* Even more conservative padding for very small screens */
+        height: 360px;
+        border-radius: 12px;
+    }
+    
+    .ak-card-image img {
+        height: 140px; /* Slightly smaller image */
+    }
+    
+    .ak-card-details {
+        padding: 10px; /* Slightly less padding */
+    }
+    
+    .ak-card-title {
+        font-size: 1rem; /* Slightly smaller title */
+        margin-bottom: 6px;
+    }
+    
+    .ak-card-price {
+        font-size: 0.95rem;
+        margin: 6px 0;
+    }
+    
+    .ak-card-description {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 2; /* Fewer lines for very small screens */
+    }
+    
+    /* Further optimize toolbar for very small screens */
+    .toolbar-akomodasi button,
+    .toolbar-akomodasi input,
+    .toolbar-akomodasi select {
+        font-size: 0.85rem;
+        padding: 8px 10px;
     }
 }
 

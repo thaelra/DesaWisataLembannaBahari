@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Input Agenda - Desa Wisata Lembanna</title>
+    <meta name="description" content="Sistem manajemen agenda untuk Desa Wisata Andalan Lembanna, Bulukumba, Sulawesi Selatan.">
+    <link rel="stylesheet" href="asset2/css/styles.css">
+    <link rel="stylesheet" href="asset2/css/informasi-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Enhanced Agenda Management Styles */
+        .agenda-management-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%);
+        }
+
+        .management-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(19, 62, 135, 0.1);
+        }
+
+        .management-header h1 {
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .management-header p {
+            font-size: 1.1rem;
+            color: #666;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Tab System */
+        .management-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(19, 62, 135, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(19, 62, 135, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Form Styles */
+        .enhanced-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group label i {
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px solid rgba(19, 62, 135, 0.15);
+            background: #f8fbff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(19, 62, 135, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* File Upload Enhancement */
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload-input {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+            border: 2px dashed rgba(19, 62, 135, 0.3);
+            border-radius: 12px;
+            background: #f8fbff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--primary-color);
+            background: white;
+        }
+
+        .file-upload-label i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .file-upload-text {
+            font-family: 'Inter', sans-serif;
+            color: var(--primary-color);
+        }
+
+        .image-preview {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .image-preview img {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Action Buttons */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Agenda List Table */
+        .agenda-table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .agenda-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .agenda-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .agenda-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .agenda-table tr:hover {
+            background: #f8fbff;
+        }
+
+        .agenda-thumbnail {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .agenda-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn.edit {
+            background: #ffc107;
+            color: white;
+        }
+
+        .action-btn.delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Message System */
+        .message {
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f1b2b7;
+        }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(19, 62, 135, 0.1);
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            font-family: 'Inter', sans-serif;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .agenda-management-container {
+                padding: 1rem;
+            }
+
+            .management-header h1 {
+                font-size: 2rem;
+            }
+
+            .management-tabs {
+                flex-direction: column;
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Navigation Back Button */
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(19, 62, 135, 0.1);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(19, 62, 135, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="informasi.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Kembali ke Informasi
+        </a>
+    </div>
+
+    <div class="agenda-management-container">
+        <!-- Header -->
+        <div class="management-header">
+            <h1><i class="fas fa-calendar-plus"></i> Sistem Manajemen Agenda</h1>
+            <p>Kelola agenda kegiatan Desa Wisata Lembanna dengan mudah dan efisien</p>
+        </div>
+
+        <!-- Statistics Dashboard -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalAgendas">0</div>
+                <div class="stat-label">Total Agenda</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="upcomingAgendas">0</div>
+                <div class="stat-label">Agenda Mendatang</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="thisMonthAgendas">0</div>
+                <div class="stat-label">Agenda Bulan Ini</div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="management-tabs">
+            <button class="tab-btn active" data-tab="add">
+                <i class="fas fa-plus-circle"></i>
+                Tambah Agenda
+            </button>
+            <button class="tab-btn" data-tab="list">
+                <i class="fas fa-list"></i>
+                Daftar Agenda
+            </button>
+        </div>
+
+        <!-- Add/Edit Agenda Tab -->
+        <div id="add-tab" class="tab-content active">
+            <h2><i class="fas fa-calendar-plus"></i> <span id="formTitle">Tambah Agenda Baru</span></h2>
+            
+            <div id="messageContainer"></div>
+
+            <form id="agendaForm" class="enhanced-form">
+                <input type="hidden" id="editingId" value="">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="title">
+                            <i class="fas fa-heading"></i>
+                            Judul Agenda
+                        </label>
+                        <input type="text" id="title" name="title" placeholder="Masukkan judul agenda" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">
+                            <i class="fas fa-tags"></i>
+                            Kategori
+                        </label>
+                        <select id="category" name="category" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="Festival">Festival</option>
+                            <option value="Kegiatan Budaya">Kegiatan Budaya</option>
+                            <option value="Pelatihan">Pelatihan</option>
+                            <option value="Rapat">Rapat</option>
+                            <option value="Gotong Royong">Gotong Royong</option>
+                            <option value="Olahraga">Olahraga</option>
+                            <option value="Keagamaan">Keagamaan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">
+                            <i class="fas fa-calendar-alt"></i>
+                            Tanggal
+                        </label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">
+                        <i class="fas fa-align-left"></i>
+                        Deskripsi
+                    </label>
+                    <textarea id="description" name="description" placeholder="Masukkan deskripsi lengkap agenda" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-image"></i>
+                        Gambar Agenda
+                    </label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="image" name="image" accept="image/*" class="file-upload-input" required>
+                        <label for="image" class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="file-upload-text">
+                                <div>Klik untuk pilih gambar</div>
+                                <small>Format: JPG, PNG, GIF (Max: 5MB)</small>
+                            </div>
+                        </label>
+                    </div>
+                    <div id="imagePreview" class="image-preview">
+                        <img id="previewImg" src="" alt="Preview">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">
+                        <i class="fas fa-times"></i>
+                        Batal
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-save"></i>
+                        Simpan Agenda
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Agenda List Tab -->
+        <div id="list-tab" class="tab-content">
+            <h2><i class="fas fa-list"></i> Daftar Agenda</h2>
+            
+            <div class="agenda-table-wrapper">
+                <table class="agenda-table">
+                    <thead>
+                        <tr>
+                            <th>Gambar</th>
+                            <th>Judul</th>
+                            <th>Kategori</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="agendaTableBody">
+                        <!-- Dynamic content -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the agenda management script -->
+    <script src="agenda-management.js"></script>
+</body>
+</html>

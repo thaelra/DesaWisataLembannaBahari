@@ -1720,6 +1720,7 @@ body.profil-nav-floating .profil-main {
     opacity: 0.8;
     padding-top: 30px;
     border-top: 1px solid rgba(232, 232, 232, 0.15);
+     text-align: center;
 }
 
     .visi-desc, .misi-list {
@@ -1834,14 +1835,28 @@ body.profil-nav-floating .profil-main {
     outline-offset: -6px;
     position: relative;
 }
+/* Desktop only facilities-pane styling */
+@media (min-width: 901px) {
+    .facilities-pane {
+        background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+        border: 1px solid rgba(19,62,135,0.20);
+        border-radius: 16px;
+        padding: 16px 16px 14px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        max-height: 640px; /* match map height */
+        overflow: auto; /* prevent overflow collision */
+        outline: 2px solid rgba(255,255,255,0.6);
+        outline-offset: -6px;
+    }
+}
+
+/* Base facilities-pane styling for all devices */
 .facilities-pane {
     background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
     border: 1px solid rgba(19,62,135,0.20);
     border-radius: 16px;
     padding: 16px 16px 14px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    max-height: 640px; /* match map height */
-    overflow: auto; /* prevent overflow collision */
     outline: 2px solid rgba(255,255,255,0.6);
     outline-offset: -6px;
 }
@@ -1870,7 +1885,7 @@ body.profil-nav-floating .profil-main {
 .facilities-pane .facility-title { 
     margin-bottom: 12px; 
     font-size: 1.1rem;
-    color: var(--white-color);
+    color: var(--primary-color);
     position: relative;
     padding-bottom: 8px;
 }

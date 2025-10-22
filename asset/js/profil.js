@@ -826,41 +826,48 @@ document.addEventListener('DOMContentLoaded', function () {
         const initFacilitiesToggle = () => {
             const pane = document.querySelector('.facilities-pane');
             if (!pane) return;
+            
             const grid = pane.querySelector('.facility-grid');
             let btn = pane.querySelector('.facilities-toggle-btn');
             const isMobile = window.innerWidth <= 900;
 
             if (isMobile) {
+                // Ensure pane starts collapsed on mobile
+                pane.classList.remove('expanded');
+                
                 if (!btn) {
                     btn = document.createElement('button');
                     btn.type = 'button';
                     btn.className = 'facilities-toggle-btn';
                     btn.setAttribute('aria-expanded', 'false');
-                    btn.setAttribute('aria-controls', 'facilityGrid');
+                    btn.setAttribute('aria-controls', grid.id || 'facilityGrid');
                     btn.textContent = 'Tampilkan semua';
-                    if (grid && grid.parentNode === pane) {
-                        grid.insertAdjacentElement('afterend', btn);
-                    } else {
-                        pane.appendChild(btn);
-                    }
-                    // Keep button visible at bottom of the pane on mobile
-                    btn.style.position = 'sticky';
-                    btn.style.bottom = '8px';
-                    btn.style.display = 'block';
-                    btn.style.margin = '10px auto 0';
-                    btn.style.zIndex = '2';
+                    // insert after the grid for natural flow
+                    grid.insertAdjacentElement('afterend', btn);
 
                     btn.addEventListener('click', () => {
-                        const expanded = pane.classList.toggle('expanded');
-                        btn.setAttribute('aria-expanded', String(expanded));
-                        btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
+                        try {
+                            const expanded = pane.classList.toggle('expanded');
+                            btn.setAttribute('aria-expanded', String(expanded));
+                            btn.textContent = expanded ? 'Sembunyikan' : 'Tampilkan semua';
 
-                        if (!expanded) {
-                            const rect = pane.getBoundingClientRect();
-                            const offsetTop = window.pageYOffset + rect.top - 80; // keep pane in view when collapsing
-                            window.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
+                            if (!expanded) {
+                                // when collapsing, scroll pane into view so header doesn't cover it
+                                const rect = pane.getBoundingClientRect();
+                                const offsetTop = window.pageYOffset + rect.top - 80;
+                                window.scrollTo({ 
+                                    top: Math.max(0, offsetTop), 
+                                    behavior: 'smooth' 
+                                });
+                            }
+                        } catch (error) {
+                            console.error('Error in facilities toggle button:', error);
                         }
                     });
+                } else {
+                    // Ensure button state matches collapsed state on mobile
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.textContent = 'Tampilkan semua';
                 }
             } else {
                 if (btn) btn.remove();
