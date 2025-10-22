@@ -5194,7 +5194,6 @@ animation: fadeIn 0.3s ease;
     .footer-columns {
         grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
     }
 
     .footer-bottom {
