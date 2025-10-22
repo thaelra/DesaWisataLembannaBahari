@@ -693,6 +693,8 @@ style.innerHTML = `
     }
 
     /* Mobile responsive */
+
+
     @media (max-width: 900px) {
         #scrollToTopBtn {
             bottom: 20px;
@@ -722,6 +724,17 @@ style.innerHTML = `
     width: 100px;
         height: 100px;
 }
+    }
+
+         @media (max-width: 430px) {
+        #scrollToTopBtn {
+            bottom: 20px;
+            right: 20px;
+            bottom: 120px;
+            width: 55px;
+            height: 55px;
+            font-size: 18px;
+        }
     }
 `;
 document.head.appendChild(style);
