@@ -1531,9 +1531,6 @@ h2.section-title::before,
 
 /* 📱 Mobile-specific adjustments (max-width: 480px) */
 @media (max-width: 480px) {
-
-  
-
   /* Stack header overlay and create a 3rem gap so main-title sits below header-top */
   .layanan-page .header-overlay {
     display: grid !important;
@@ -1822,6 +1819,50 @@ h2.section-title::before,
 
 /* 📱 Responsive adjustments for phones (max 600px) */
 @media (max-width: 768px) {
+  /* Make sure main content sits above the decorative background */
+  .layanan-page .main-content {
+    position: relative !important;
+    z-index: 20 !important;
+    margin-top: 0 !important;
+    padding-bottom: 120px !important; /* Add space before footer */
+  }
+
+   /* Make the wave container visible and properly placed */
+  .layanan-page .cta-waves {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: 120px !important;
+    margin-top: 0 !important;
+    margin-bottom: -10px !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    z-index: 5 !important;
+    transform: none !important;
+  }
+
+  /* Fix the SVG wave visibility */
+  .layanan-page .cta-waves svg {
+    display: block !important;
+    width: 200% !important;
+    height: 120px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Ensure decoration section doesn’t hide it */
+  .layanan-page .hiasan {
+    position: relative !important;
+    overflow: visible !important;
+    z-index: 1 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Footer spacing to prevent overlap */
+  .layanan-page footer,
+  .layanan-page .footer-container {
+    position: relative !important;
+    z-index: 10 !important;
+  }
   .layanan-page .header-overlay {
     padding: 12px 14px;
   }
